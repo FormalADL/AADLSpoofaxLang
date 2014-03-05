@@ -1,0 +1,43 @@
+module Types
+		
+exports
+	sorts 
+		Abstract
+		Data
+		Subprogram
+        SubprogramGroup
+        SubprogramGroup
+        Thread
+        ThreadGroup
+        Process
+        System
+        Memory
+        Bus
+        Processor
+        Device
+        VirtualProcessor
+        VirtualBus
+        
+  context-free start-symbols
+  
+
+  context-free syntax
+    
+     
+    "abstract"                           -> Abstract{cons("abstract")}
+    
+    "data"                               -> Data{cons("data")}
+    "subprogram"                         -> Subprogram{cons("subprogram")}
+    "subprogram group"                   -> SubprogramGroup{cons("subprogram_group")}
+    "thread"                             -> Thread{cons("thread")}
+    "thread group"                       -> ThreadGroup{cons("thread_group")}
+    "process"                            -> Process{cons("process")}
+    
+    "system"                             -> System{cons("system")}
+    
+    "memory"                             -> Memory{cons("memory")}
+    "bus"                                -> Bus{cons("bus")}
+    "processor"                          -> Processor{cons("processor")}  
+    "device"                             -> Device{cons("device")}  
+    "virtual processor"                  -> VirtualProcessor{cons("virtual_processor")}   
+    "virtual bus"                        -> VirtualBus {cons("virtual_bus")}

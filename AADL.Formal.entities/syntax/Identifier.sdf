@@ -1,0 +1,29 @@
+%% Grammar for the AADLLang language
+%% By default, based on an example "entities" syntax
+module Identifier
+
+imports Character  Keywords
+
+exports
+	sorts LetterOrDigit ID Identifier
+
+   lexical syntax
+   	IdentifierLetter               -> LetterOrDigit
+   	Digit                          -> LetterOrDigit
+   	[A-Za-z\_\$][A-Za-z0-9\_\$]*           -> ID
+   
+   	[A-Za-z\_\$][A-Za-z0-9\_\$]*   -> Identifier
+   	Keyword                        -> Identifier {reject}
+   	
+   lexical restrictions
+   	Identifier -/- [a-zA-z0-9]
+   	Identifier -/- [\_]
+   	ID         -/- [a-zA-Z0-9\_]
+   	
+   	
+   	
+   	
+   	
+   	
+   	
+   	

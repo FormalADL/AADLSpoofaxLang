@@ -1,0 +1,97 @@
+module ComponentType
+
+imports Lexical Constant TypeIdentifier Packages
+imports  Prototypes
+imports  FeaturesAndSharedAccess
+imports  FlowSpecifications	
+imports  Modes	
+imports  PropertyAssociations	
+imports  Annex 
+imports Term
+imports Types		
+exports
+	sorts 
+		ComponentCategory 
+		UniqueComponentTypeReference 
+		ComponentType 
+		ComponentTypeExtension
+		SoftwareCategory
+		CompositeCategory
+		ExecutionPlatform
+		UniqueComponentTypeReference
+		Prototypes
+		Features
+
+  context-free start-symbols
+  
+
+  context-free syntax
+  	AbstractComponentCategory            -> ComponentCategory
+  	SoftwareCategory                     -> ComponentCategory
+  	ExecutionPlatformCategory            -> ComponentCategory
+    CompositeCategory                    -> ComponentCategory
+    
+    Abstract                             -> AbstractComponentCategory 
+    
+    Data                                 -> SoftwareCategory
+    Subprogram                           -> SoftwareCategory
+    SubprogramGroup                      -> SoftwareCategory
+    Thread                               -> SoftwareCategory
+    ThreadGroup                          -> SoftwareCategory
+    Process                              -> SoftwareCategory
+    
+    System                               -> CompositeCategory
+    
+    Memory                               -> ExecutionPlatformCategory
+    Bus                                  -> ExecutionPlatformCategory
+    Processor                            -> ExecutionPlatformCategory 
+    Device                               -> ExecutionPlatformCategory 
+    VirtualProcessor                     -> ExecutionPlatformCategory   
+    VirtualBus                           -> ExecutionPlatformCategory 
+    
+    (PackageName "::")? ComponentTypeIdentifier -> UniqueComponentTypeReference{cons("ComponentTypeIdentifier")}    
+    
+    Prototype+                                    -> Prototypes{cons("Prototypes")}
+    NoneStatement                                 -> Prototypes
+    Feature+                                      -> Features{cons("Features")}
+    NoneStatement                                 -> Prototypes
+    FlowSpec+                                     -> FlowSpecs{cons("FlowSpecs")}
+    NoneStatement                                 -> FlowSpecs
+    ComponentTypePropertyAssociation+             -> ComponentTypePropertyAssociations{cons("ComponentTypePropertyAssociations")}
+    ContainedPropertyAssociation+                 -> ContainedPropertyAssociations{cons("ContainedPropertyAssociations")}
+    ComponentTypePropertyAssociations             -> PropertyAssociations
+    ContainedPropertyAssociations                 -> PropertyAssociations
+    NoneStatement                                 -> PropertyAssociations
+    
+    "prototypes" Prototypes                          -> ComponentPrototypes{cons("ComponentPrototypes")}
+    "features" Features                              -> ComponentFeatures {cons("ComponentFeatures")}
+    "flows" FlowSpecs                                -> ComponentFlowSpecs{cons("ComponentFlowSpecs")}
+    "properties" PropertyAssociations                -> ComponentPropertyAssociations{cons("ComponentPropertyAssociations")}
+    
+    ComponentCategory DefiningComponentTypeIdentifier 
+    ComponentPrototypes? 
+    ComponentFeatures? 
+    ComponentFlowSpecs? 
+    ModesSubclause? 
+    ComponentPropertyAssociations? 
+    AnnexSubclause* 
+    "end" DefiningComponentTypeIdentifier ";" -> ComponentType{cons("Component_Type")}
+    
+    ComponentCategory DefiningComponentTypeIdentifier 
+    ComponentPrototypes? 
+    ComponentFeatures? 
+    ComponentFlowSpecs? 
+    RequiresModesSubclause? 
+    ComponentPropertyAssociations? 
+     AnnexSubclause*? 
+     "end" DefiningComponentTypeIdentifier ";" -> ComponentType{cons("Component_Type")}
+    
+     
+  
+    
+    
+    
+    
+    
+    
+    

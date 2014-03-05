@@ -1,0 +1,24 @@
+%% Grammar for the AADLFormalLang language
+%% By default, based on an example "entities" syntax
+module AADLFormalLang
+
+imports Common
+imports Lexical
+imports AADLSpecification
+
+exports
+
+  context-free start-symbols
+  
+    Start
+
+  context-free syntax
+  
+    "module" ID Definition*       -> Start{cons("Module")}
+    
+    ComponentType                 -> Definition
+  	ComponentTypeExtension        -> Definition
+  	ComponentImplementation                 -> Definition
+  	ComponentImplementationExtension        -> Definition
+  	AADLSpecification -> Definition{cons("AADLmodule")}
+  

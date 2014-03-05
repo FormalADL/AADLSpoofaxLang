@@ -1,0 +1,44 @@
+module ComponentTypeExtension
+
+imports Lexical Constant TypeIdentifier ComponentType
+
+exports
+	sorts ComponentTypeExtension
+
+  context-free start-symbols
+  
+
+  context-free syntax
+  	ComponentCategory DefiningComponentTypeIdentifier
+      "extends" UniqueComponentTypeReference
+      PrototypeBindings?
+    ("prototypes" Prototypes)?
+    ("features" Features)?
+    ("flows" FlowSpecs)?
+    ModesSubclause
+    ("properties" ComponentTypePropertyAssociations)?
+    AnnexSubclause*?
+    "end" DefiningComponentTypeIdentifier -> ComponentTypeExtension{cons("Component_Type_Extension")}
+    
+    ComponentCategory DefiningComponentTypeIdentifier
+      "extends" UniqueComponentTypeReference
+      PrototypeBindings?
+    ("prototypes" Prototypes)?
+    ("features" Features)?
+    ("flows" FlowSpecs)?
+    ModesSubclause?
+    ("properties" ComponentTypePropertyAssociations)?
+    AnnexSubclause*?
+    "end" DefiningComponentTypeIdentifier ";" -> ComponentTypeExtension{cons("Component_Type_Extension")}
+    
+    ComponentCategory DefiningComponentTypeIdentifier
+      "extends" UniqueComponentTypeReference
+      PrototypeBindings?
+    ("prototypes" Prototypes)?
+    ("features" Features)?
+    ("flows" FlowSpecs)?
+    RequiresModesSubclause?
+    ("properties" ComponentTypePropertyAssociations)?
+    AnnexSubclause*?
+    "end" DefiningComponentTypeIdentifier ";" -> ComponentTypeExtension{cons("Component_Type_Extension")}
+    

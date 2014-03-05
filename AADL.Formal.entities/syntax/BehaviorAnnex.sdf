@@ -1,0 +1,164 @@
+module BehaviorAnnex
+
+imports Lexical Constant TypeIdentifier
+imports Modes
+imports Term
+
+exports
+	sorts BehaviorAnnex
+  
+
+  context-free syntax
+  	"state" "variables" BehaviorVariableDecl*      -> BehaviorVariableDecls{cons("BehaviorVariableDecls")}
+  	"states" BehaviorState+                        -> BehaviorStates{cons("BehaviorStates")}
+  	"initially" {AssignmentB ";"}+                 -> AssignmentBs{cons("AssignmentBs")}
+  	Mode? "transitions " BehaviorStateTransition+  -> BehaviorStateTransitions{cons("BehaviorStateTransitions")}
+  	
+  	BehaviorVariableDecls?
+  	BehaviorStates?
+  	AssignmentBs?
+  	BehaviorStateTransitions?
+  	CompositeDeclaration*                             -> BehaviorAnnex{cons("BehaviorAnnex")}
+  	
+  	Identifier ":" DataClassifierReference   -> BehaviorVariableDecl{cons("BehaviorVariableDecl")}
+  	
+  	{BehaviorDefiningStateIdentifier ","}* ":" "initial"* "state"     -> BehaviorState{cons("BehaviorState")}
+  	{BehaviorDefiningStateIdentifier ","}* ":" "complete"* "state"    -> BehaviorState{cons("BehaviorState")}
+    {BehaviorDefiningStateIdentifier ","}* ":" "return"* "state"      -> BehaviorState{cons("BehaviorState")}
+    {BehaviorDefiningStateIdentifier ","}* ":" "urgent"* "state"      -> BehaviorState{cons("BehaviorState")}
+    {BehaviorDefiningStateIdentifier ","}* ":" "composite"* "state"   -> BehaviorState{cons("BehaviorState")}
+    {BehaviorDefiningStateIdentifier ","}* ":" "exit"* "state"        -> BehaviorState{cons("BehaviorState")}
+
+    "(" Identifier "in" DataClassifier ")"            -> DataClassifiers{cons("DataClassifiers")}
+    BehaviorTransitionLabel
+        DataClassifiers? ":" -> BehaviorTransitionLabels{cons("BehaviorTransitionLabels")}
+    
+    BehaviorTransitionLabels?
+    ("[" BehaviorExpression"]" )?
+    {SourceStateIdentifier ","}* "-[" BehaviorGuard "]->"
+    DestinationStateIdentifier "{" BehaviorAction* "}" ";" -> BehaviorStateTransition{cons("BehaviorStateTransition")}   
+    
+    BehaviorTransitionLabels?
+    ("[" BehaviorExpression"]" )?
+    {SourceStateIdentifier ","}* "-[" BehaviorGuard "]->"
+    DestinationStateIdentifier "{" BehaviorAction* "}" ";" -> BehaviorStateTransition{cons("BehaviorStateTransition")}   
+    
+    Identifier  -> BehaviorTransitionLabel
+    
+    ("on" BehaviorExpression "-->")? BehaviorEvent ("when" BehaviorExpression)? -> BehaviorGuard{cons("BehaviorGuard")}
+    BehaviorExpression  -> BehaviorGuard{cons("BehaviorGuard")}
+    
+    
+    CalledSubprogram "!" BehaviorParameterBindings?              -> BehaviorEvent{cons("BehaviorEvent")}
+    SourceUniquePortIdentifier "?" BehaviorParameterBindings?    -> BehaviorEvent{cons("BehaviorEvent")}
+    
+    
+    BehaviorExpression ("->" UniquePortIdentifier)? ("," BehaviorExpression ( "->" UniquePortIdentifier)?)* -> BehaviorParameterBindings{cons("BehaviorParameterBindings")}
+    
+    "composite" "history" ("state" StateIdentifier)?
+    "state" BehaviorState*
+    "transitions" BehaviorStateTransition*
+    CompositeDeclaration*
+    "end" StateIdentifier ";"   -> CompositeDeclaration{cons("CompositeDeclaration")}
+    
+    {Disjunction "or"}+                        -> BehaviorExpression{cons("BehaviorExpression")}
+    {NotConjunction "and"}+                    -> Disjunction{cons("Disjunction")}
+    "not" Conjunction                          -> NotConjunction{cons("NotConjunction")}
+    ArithExpression ("<" ArithExpression)?     -> Conjunction{cons("Conjunction")}
+    ArithExpression ("<=" ArithExpression)?    -> Conjunction{cons("Conjunction")}
+    ArithExpression ("=" ArithExpression)?     -> Conjunction{cons("Conjunction")}
+    ArithExpression (">" ArithExpression)?     -> Conjunction{cons("Conjunction")}
+    ArithExpression (">=" ArithExpression)?    -> Conjunction{cons("Conjunction")}
+    ArithExpression ("!=" ArithExpression)?    -> Conjunction{cons("Conjunction")}
+    {AddExpression "+"}+                       -> ArithExpression{cons("ArithExpression")}
+    {AddExpression "-"}+                       -> ArithExpression{cons("ArithExpression")}
+    {BasicExpression "*"}+                     -> AddExpression{cons("AddExpression")}
+    {BasicExpression "/"}+                     -> AddExpression{cons("AddExpression")}
+    
+    UnsignedAadlNumericOrConstant                                                        -> BasicExpression{cons("BasicExpression")}
+    BehaviorVariableIdentifier                                                           -> BasicExpression{cons("BasicExpression")}
+    LoopVariableIdentifier                                                               -> BasicExpression{cons("BasicExpression")}
+    PortIdentifier                                                                       -> BasicExpression{cons("BasicExpression")}
+    PortIdentifier "'" CountFresh                                                        -> BasicExpression{cons("BasicExpression")}
+    DataAccessIdentifier                                                                 -> BasicExpression{cons("BasicExpression")}
+    TimeoutBehaviorExpression                                                            -> BasicExpression{cons("BasicExpression")}
+    DataSubcomponentIdentifier                                                           -> BasicExpression{cons("BasicExpression")}
+    DataSubcomponentIdentifier BehaviorExpression?                                       -> BasicExpression{cons("BasicExpression")}
+    DataAccessIdentifier "." DataSubcomponentIdentifier                                  -> BasicExpression{cons("BasicExpression")}
+    DataSubcomponentIdentifier "." DataSubcomponentIdentifier                            -> BasicExpression{cons("BasicExpression")}
+    DataClassifierReference "." SubprogramIdentifier
+         {BehaviorExpression ","}*                                                       -> BasicExpression{cons("BasicExpression")}
+    DataClassifierReference "." SubprogramIdentifier "?" "(" BehaviorExpression ")"      -> BasicExpression{cons("BasicExpression")}
+    DataClassifierReference "." SubprogramIdentifier "'" ParameterIdentifier             -> BasicExpression{cons("BasicExpression")}
+         "("BehaviorExpression ")"                                                       -> BasicExpression{cons("BasicExpression")}
+    "(" BehaviorExpression ")"                                                           -> BasicExpression{cons("BasicExpression")}
+    AllExists "(" Identifier "in" BehaviorExpression ")" ":" Expression                  -> BasicExpression{cons("BasicExpression")}
+    
+    "count" -> CountFresh{cons("count")}
+    "fresh" -> CountFresh{cons("fresh")}
+    "all"   -> AllExists{cons("all")}
+    "exists"   -> AllExists{cons("exists")}
+    
+    BasicAction                                                         -> BehaviorAction{cons("BehaviorAction")}
+    BehaviorAction BehaviorAction                                       -> BehaviorAction{cons("BehaviorAction")}
+    "if" "(" BehaviorExpression ")" BehaviorAction 
+        Elsif* ("else" BehaviorAction)?
+     "end" "if"                                                         -> BehaviorAction{cons("BehaviorAction")}
+    "for" "(" Identifier "in" IntegerRange ")" "{" BehaviorAction "}"   -> BehaviorAction{cons("BehaviorAction")}
+    "for" "(" Identifier "in" DataClassifier ")" "{" BehaviorAction "}" -> BehaviorAction{cons("BehaviorAction")}
+    
+    "elsif" "(" BehaviorExpression ")" BehaviorAction     -> Elsif{cons("Elsif")}
+    
+    "computation" "(" BehaviorExpression ("," BehaviorExpression)? ")" ";" -> BasicAction{cons("BasicAction")}
+    "delay" "(" BehaviorExpression ("," BehaviorExpression)? ")" ";"       -> BasicAction{cons("BasicAction")}
+    Communication                                                          -> BasicAction{cons("BasicAction")}
+    AssignmentB                                                             -> BasicAction{cons("BasicAction")}
+
+    BehaviorExpression ":=" BehaviorExpression             -> AssignmentB{cons("AssignmentB")}
+    BehaviorExpression "?" BehaviorParameterBindings       -> Communication{cons("Communication")}
+    BehaviorExpression "!" BehaviorParameterBindings       -> Communication{cons("Communication")}
+
+    Identifier     -> DataClassifierReference
+    NumericLiteral -> UnsignedAadlNumericOrConstant
+    Identifier     -> TimeoutBehaviorExpression
+    Identifier     -> Expression
+    BehaviorAnnex  -> AnnexSpecificLanguageConstructs
+    BehaviorAnnex  -> AnnexSpecificReusableConstructs
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

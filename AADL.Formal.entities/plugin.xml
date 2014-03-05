@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?eclipse version="3.0"?>
+
+<plugin>
+       <extension point="org.eclipse.imp.runtime.languageDescription">
+          <language extensions="aad" description="AADLFormalLang" language="AADLFormalLang" derivedFrom="DynamicRoot" validator="AADL.Formal.entities.AADLFormalLangValidator" validatorClass="AADL.Formal.entities.AADLFormalLangValidator"></language>
+       </extension>
+       <extension id="AADL.Formal.entities.parser" name="AADLFormalLang Parser" point="org.eclipse.imp.runtime.parser">
+          <parser class="AADL.Formal.entities.AADLFormalLangParseController" language="AADLFormalLang">
+          </parser>
+       </extension>    
+    </plugin>

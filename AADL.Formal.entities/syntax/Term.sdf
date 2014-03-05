@@ -1,0 +1,91 @@
+module Term
+
+imports Lexical Constant TypeIdentifier
+imports ComponentType
+imports ComponentImplementations
+imports Subprograms
+imports FeatureGroupsAndTypes
+imports Modes
+
+exports
+  
+
+  context-free syntax
+ 
+   UniqueComponentTypeReference                    -> DataUniqueComponentTypeReference
+   UniqueComponentTypeReference                    -> SubprogramGroupUniqueComponentTypeReference
+   UniqueComponentTypeReference                    -> AbstractUniqueComponentTypeReference
+   UniqueComponentClassifierReference              -> SubprogramUniqueComponentClassifierReference
+   UniqueComponentClassifierReference              -> DataUniqueComponentClassifierReference
+   UniqueComponentClassifierReference              -> SubprogramGroupUniqueComponentClassifierReference
+   UniqueComponentClassifierReference              -> BusUniqueComponentClassifierReference
+   UniqueComponentClassifierReference              -> ProcessorUniqueComponentClassifierReference
+   UniqueComponentClassifierReference              -> VirtualProcessorUniqueComponentClassifierReference
+   UniqueComponentClassifierReference              -> VirtualBusUniqueComponentClassifierReference
+   UniqueComponentClassifierReference              -> MemoryUniqueComponentClassifierReference
+   
+   PropertyAssociation                    -> ComponentTypePropertyAssociation{cons("ComponentTypePropertyAssociation")}
+   PropertyAssociation                    -> SubcomponentPropertyAssociation{cons("SubcomponentPropertyAssociation")}
+   PropertyAssociation                    -> PrototypePropertyAssociation{cons("PrototypePropertyAssociation")}
+   PropertyAssociation                    -> CallSequencePropertyAssociation{cons("CallSequencePropertyAssociation")}
+   PropertyAssociation                    -> SubcomponentCallPropertyAssociation{cons("SubcomponentCallPropertyAssociation")}
+   ContainedPropertyAssociation           -> FeatureContainedPropertyAssociation{cons("ModeTransitionPropertyAssciation")}
+   ContainedPropertyAssociation           -> FeatureGroupContainedPropertyAssociation{cons("FeatureContainedPropertyAssociation")}
+   PropertyAssociation                    -> ModePropertyAssciation{cons("ModePropertyAssciation")}
+   PropertyAssociation                    -> ModeTransitionPropertyAssciation{cons("ModeTransitionPropertyAssciation")}
+   
+
+   %%Identifier                  -> ConstantPropertyExpression
+   %%Identifier                  -> ConstantPropertyListValue
+   NumericLiteral                -> ConstantPropertyExpression
+   {NumericLiteral ","}+         -> ConstantPropertyListValue{cons("ConstantPropertyListValue")}
+   
+   Identifier                    -> BooleanPropertyConstantTerm{cons("BooleanPropertyConstantTerm")}  
+   Identifier                    -> StringPropertyConstantTerm{cons("StringPropertyConstantTerm")}
+   Identifier                    -> EnumerationPropertyConstantTerm{cons("EnumerationPropertyConstantTerm")}
+   Identifier                    -> UnitPropertyConstantTerm{cons("UnitPropertyConstantTerm")}
+   Identifier                    -> IntegerRangePropertyConstantTerm{cons("IntegerRangePropertyConstantTerm")}
+   Identifier                    -> RealRangePropertyConstantTerm{cons("RealRangePropertyConstantTerm")}
+   
+   Identifier                    -> RealPropertyConstantTerm{cons("IntegerPropertyConstantTerm")}
+   Identifier                    -> IntegerPropertyConstantTerm{cons("IntegerPropertyConstantTerm")}
+   
+   
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  

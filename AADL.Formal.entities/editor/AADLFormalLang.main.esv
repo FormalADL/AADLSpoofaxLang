@@ -1,0 +1,16 @@
+module AADLFormalLang.main
+
+imports AADLFormalLang-Builders AADLFormalLang-Refactorings AADLFormalLang-Colorer AADLFormalLang-Completions AADLFormalLang-Folding AADLFormalLang-Outliner AADLFormalLang-References AADLFormalLang-Syntax
+
+language General properties
+                  
+  name          : AADLFormalLang
+  id            : AADL.Formal.entities
+  extends       : Root
+                  
+  description   : "Spoofax/IMP-generated editor for the AADLFormalLang language"
+  url           : http://strategoxt.org
+                  
+  extensions    : aad
+  table         : include/AADLFormalLang.tbl
+  start symbols : Start
