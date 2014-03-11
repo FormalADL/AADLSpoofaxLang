@@ -11,10 +11,8 @@ exports
   
 
   context-free syntax
-  	"port"  
-  	   SourcePortConnectionReference 
-  	     ConnectionSymbol
-  	   DestinationPortConnectionReference                       -> PortConnection{cons("PortConnection")}
+  	"port"  SourcePortConnectionReference "->" DestinationPortConnectionReference                       -> PortConnection{cons("PortConnection")}
+  	"port"  SourcePortConnectionReference "<->" DestinationPortConnectionReference                       -> PortConnection{cons("PortConnection")}
   	
   	"port"   -> PortConnectionRefinement{cons("port")}
   	
@@ -30,10 +28,11 @@ exports
   	"processor" "." ProcessorPortIdentifier                              -> PortConnectionReference{cons("ProcessorPortIdentifier")}
   	"self" "." EventOrEventDataSourceIdentifier                          -> PortConnectionReference{cons("EventOrEventDataSourceIdentifier")}
   	
-  	PortConnectionReference               -> SourcePortConnectionReference
-  	PortConnectionReference               -> DestinationPortConnectionReference
+  	PortConnectionReferences               -> SourcePortConnectionReference
+  	PortConnectionReferences               -> DestinationPortConnectionReference
   	
-  	
+  	Identifier     -> PortConnectionReferences 
+  	Identifier "." Identifier -> PortConnectionReferences{cons("ComIdentifier")}
   	
   	
   	

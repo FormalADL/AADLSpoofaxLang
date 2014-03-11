@@ -12,8 +12,8 @@ exports
 
   context-free syntax
   	
-  	"{" CallSequencePropertyAssociation+ "}"                -> CallSequencePropertyAssociations{cons("CallSequencePropertyAssociations")}
-  	"{" SubcomponentCallPropertyAssociation+ "}"            -> SubcomponentCallPropertyAssociations{cons("SubcomponentCallPropertyAssociations")}
+  	"{" PropertyAssociation+ "}"                -> CallSequencePropertyAssociations{cons("CallSequencePropertyAssociations")}
+  	"{" PropertyAssociation+ "}"                -> SubcomponentCallPropertyAssociations{cons("SubcomponentCallPropertyAssociations")}
   	
   	DefiningCallSequenceIdentifier ":"
   	"{" SubprogramCall+ "}"
@@ -24,20 +24,20 @@ exports
   	  SubcomponentCallPropertyAssociations? ";"  -> SubprogramCall{cons("SubprogramCall")}
   	
   	
-  	SubprogramUniqueComponentClassifierReference                                        -> CalledSubprogram{cons("CalledSubprogram")} 
-  	DataUniqueComponentTypeReference "." DataProvidesSubprogramAccessIdentifier         -> CalledSubprogram{cons("CalledSubprogram")} 
-  	SubprogramGroupUniqueComponentTypeReference "." ProvidesSubprogramAccessIdentifier  -> CalledSubprogram{cons("CalledSubprogram")} 
-  	AbstractUniqueComponentTypeReference "." ProvidesSubprogramAccessIdentifier         -> CalledSubprogram{cons("CalledSubprogram")} 
-  	FeatureGroupIdentifier "." RequiresSubprogramAccessIdentifier                       -> CalledSubprogram{cons("CalledSubprogram")} 
-  	ComponentPrototypeIdentifier                                                        -> CalledSubprogram{cons("CalledSubprogram")} 
-  	"processor" "." ProvidesSubprogramAccessIdentifier                                  -> CalledSubprogram{cons("CalledSubprogram")} 
-  	SubprogramSubcomponentIdentifier                                                    -> CalledSubprogram{cons("CalledSubprogram")} 
-  	SubprogramGroupSubcomponentIdentifier "." ProvidesSubprogramAccessIdentifier        -> CalledSubprogram{cons("CalledSubprogram")} 
-  	RequiresSubprogramAccessIdentifier                                                  -> CalledSubprogram{cons("CalledSubprogram")} 
-  	RequiresSubprogramGroupAccessIdentifier "." ProvidesSubprogramAccessIdentifier      -> CalledSubprogram{cons("CalledSubprogram")}                      
+  	%%SubprogramUniqueComponentClassifierReference                                        -> CalledSubprogram{cons("CalledSubprogram")} 
+  	%%DataUniqueComponentTypeReference "." DataProvidesSubprogramAccessIdentifier         -> CalledSubprogram{cons("CalledSubprogram")} 
+  	%%SubprogramGroupUniqueComponentTypeReference "." ProvidesSubprogramAccessIdentifier  -> CalledSubprogram{cons("CalledSubprogram")} 
+  	%%AbstractUniqueComponentTypeReference "." ProvidesSubprogramAccessIdentifier         -> CalledSubprogram{cons("CalledSubprogram")} 
+  	%%FeatureGroupIdentifier "." RequiresSubprogramAccessIdentifier                       -> CalledSubprogram{cons("CalledSubprogram")} 
+  	%%ComponentPrototypeIdentifier                                                        -> CalledSubprogram{cons("CalledSubprogram")} 
+  	%%"processor" "." ProvidesSubprogramAccessIdentifier                                  -> CalledSubprogram{cons("CalledSubprogram")} 
+  	%%SubprogramSubcomponentIdentifier                                                    -> CalledSubprogram{cons("CalledSubprogram")} 
+  	%%SubprogramGroupSubcomponentIdentifier "." ProvidesSubprogramAccessIdentifier        -> CalledSubprogram{cons("CalledSubprogram")} 
+  	%%RequiresSubprogramAccessIdentifier                                                  -> CalledSubprogram{cons("CalledSubprogram")} 
+  	%%RequiresSubprogramGroupAccessIdentifier "." ProvidesSubprogramAccessIdentifier      -> CalledSubprogram{cons("CalledSubprogram")}                      
   	
-  	
-  	
+  	Identifier                        -> CalledSubprogram{cons("CalledSubprogramName")}
+  	Identifier "." Identifier         -> CalledSubprogram{cons("CalledSubprogramName")}
   	
   	
   	

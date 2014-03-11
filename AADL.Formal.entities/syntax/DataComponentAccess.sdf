@@ -12,38 +12,22 @@ exports
   context-free syntax
   	DefiningDataComponentAccessIdentifier ":"
   	  "provides" "data" "access"
-  	  DataUniqueComponentClassifierReference    -> DataAccessSpec{cons("ProvidesDataAccessSpecReference")}
+  	  DataAccessSpecReference    -> DataAccessSpec{cons("ProvidesDataAccessSpecReference")}
   	
   	DefiningDataComponentAccessIdentifier ":"
   	  "requires" "data" "access"
-  	  DataUniqueComponentClassifierReference    -> DataAccessSpec{cons("RequiresDataAccessSpecReference")}
-  	
-  	DefiningDataComponentAccessIdentifier ":"
-  	  "provides" "data" "access"
-  	  PrototypeIdentifier                       -> DataAccessSpec{cons("ProvidesDataAccessSpecIdentifier")}
-  	
-  	DefiningDataComponentAccessIdentifier ":"
-  	  "requires" "data" "access"
-  	  PrototypeIdentifier                       -> DataAccessSpec{cons("RequiresDataAccessSpecIdentifier")}
+  	  DataAccessSpecReference    -> DataAccessSpec{cons("RequiresDataAccessSpecReference")}
   	
   	DefiningDataComponentAccessIdentifier ":" "refined" "to"
   	  "provides" "data" "access"
-  	  DataUniqueComponentClassifierReference    -> DataAccessRefinement{cons("ProvidesDataAccessRefinementReference")}
+  	  DataAccessSpecReference    -> DataAccessRefinement{cons("ProvidesDataAccessRefinementReference")}
   	
   	DefiningDataComponentAccessIdentifier ":" "refined" "to"
   	  "requires" "data" "access"
-  	  DataUniqueComponentClassifierReference    -> DataAccessRefinement{cons("RequiresDataAccessRefinementReference")}
+  	  DataAccessSpecReference    -> DataAccessRefinement{cons("RequiresDataAccessRefinementReference")}
   	
-  	DefiningDataComponentAccessIdentifier ":" "refined" "to"
-  	  "provides" "data" "access"
-  	  PrototypeIdentifier                       -> DataAccessRefinement{cons("ProvidesDataAccessRefinementIdentifier")}
-  	
-  	DefiningDataComponentAccessIdentifier ":" "refined" "to"
-  	  "requires" "data" "access"
-  	  PrototypeIdentifier                       -> DataAccessRefinement{cons("RequiresDataAccessRefinementIdentifier")}
-  	
-  	
-  	
+  	DataUniqueComponentClassifierReference    -> DataAccessSpecReference 
+  	PrototypeIdentifier                       -> DataAccessSpecReference
   	
   	
   	

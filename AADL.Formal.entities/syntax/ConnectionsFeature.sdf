@@ -11,8 +11,8 @@ exports
   
 
   context-free syntax
-  	"feature"  SourceFeatureReference ConnectionSymbol
-  	DestinationFeatureReference                       -> FeatureConnection{cons("FeatureConnection")}
+  	"feature"  SourceFeatureReference "->" DestinationFeatureReference           -> FeatureConnection{cons("FeatureConnection")}
+  	"feature"  SourceFeatureReference "<->" DestinationFeatureReference          -> FeatureConnection{cons("FeatureConnection")}
   	
   	DirectionalConnectionSymbol      -> ConnectionSymbol{cons("DConnectionSymbol")}
   	BidirectionalConnectionSymbol    -> ConnectionSymbol{cons("BConnectionSymbol")}
@@ -27,10 +27,11 @@ exports
   	
   	"feature"     -> FeatureConnectionRefinement{cons("feature")}
   	
-  	FeatureReference                 -> SourceFeatureReference
-  	FeatureReference                 -> DestinationFeatureReference
+  	FeatureReferences                 -> SourceFeatureReference
+  	FeatureReferences                 -> DestinationFeatureReference
   	
-  	
+  	 Identifier     -> FeatureReferences
+  	 Identifier "." Identifier -> FeatureReferences{cons("ComIdentifier")}
   	
   	
   	

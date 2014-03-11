@@ -10,7 +10,7 @@ exports
   
 
   context-free syntax
-  	"{" PrototypePropertyAssociation+ "}"             -> PrototypePropertyAssociations{cons("PrototypePropertyAssociations")}
+  	"{" PropertyAssociation+ "}"             -> PrototypePropertyAssociations{cons("PrototypePropertyAssociations")}
   	"[" "]"                                           -> Brackets{cons("Brackets")}
   	
   	DefiningPrototypeIdentifier ":"
@@ -29,7 +29,8 @@ exports
   	
   	"feature" "group" UniqueFeatureGroupTypeReference?  -> FeatureGroupTypePrototype{cons("FeatureGroupTypePrototype")}
   	
-  	"in" "featute" UniqueComponentClassifierReference?  -> FeaturePrototype{cons("FeaturePrototype")}
+  	"in" "featute" UniqueComponentClassifierReference?   -> FeaturePrototype{cons("InFeaturePrototype")}
+  	"out" "featute" UniqueComponentClassifierReference?  -> FeaturePrototype{cons("OutFeaturePrototype")}
   	
   	DefiningPrototypeIdentifier ":" "refinied" "to"
   	  ComponentPrototype
@@ -64,6 +65,29 @@ exports
   	
   	"feature" "group" FeatureGroupTypePrototypeIdentifier                             -> FeatureGroupTypePrototypeActual{cons("FeatureGroupTypePrototypeActual")}
   	
+  	"in" "event" "port"                          -> FeaturePrototypeActual{cons("InEventPortFeaturePrototypeActual")} 
+  	"out" "event" "port"                         -> FeaturePrototypeActual{cons("OutEventPortFeaturePrototypeActual")}
+  	"in" "out" "event" "port"                    -> FeaturePrototypeActual{cons("InOutEventPortFeaturePrototypeActual")}
+  	"in" "data" "port"                           -> FeaturePrototypeActual{cons("InDataPortFeaturePrototypeActual")} 
+  	"out" "data" "port"                          -> FeaturePrototypeActual{cons("OutDataPortFeaturePrototypeActual")}
+  	"in" "out" "data" "port"                     -> FeaturePrototypeActual{cons("InOutDataPortFeaturePrototypeActual")}
+  	"in" "event" "data" "port"                   -> FeaturePrototypeActual{cons("InEventDataPortFeaturePrototypeActual")} 
+  	"out" "event" "data" "port"                  -> FeaturePrototypeActual{cons("OutEventDataPortFeaturePrototypeActual")}
+  	"in" "out" "event" "data" "port"             -> FeaturePrototypeActual{cons("InOutEvenDatatPortFeaturePrototypeActual")}
+  	
+  	
+  	"requires" "data" "access" UniqueComponentClassifierReference?   -> FeaturePrototypeActual{cons("Requires_Data_Access")} 	
+  	"provides" "data" "access" UniqueComponentClassifierReference?   -> FeaturePrototypeActual{cons("Provides_Data_Access")} 
+  	"requires" "bus" "access" UniqueComponentClassifierReference?    -> FeaturePrototypeActual{cons("Requires_Bus_Access")} 	
+  	"provides" "bus" "access" UniqueComponentClassifierReference?    -> FeaturePrototypeActual{cons("Provides_Bus_Access")} 
+  	"requires" "subprogram" "access" UniqueComponentClassifierReference?   -> FeaturePrototypeActual{cons("Requires_Subprogram_Access")} 	
+  	"provides" "subprogram" "access" UniqueComponentClassifierReference?   -> FeaturePrototypeActual{cons("Provides_Subprogram_Access")} 
+  	"requires" "subprogram" "group" "access" UniqueComponentClassifierReference?   -> FeaturePrototypeActual{cons("Requires_Subprogram_Group_Access")} 	
+  	"provides" "subprogram" "group" "access" UniqueComponentClassifierReference?   -> FeaturePrototypeActual{cons("Provides_Subprogram_Group_Access")} 
+  	
+  	"in" "feature" FeaturePrototypeIdentifier         ->  FeaturePrototypeActual{cons("InFeaturePrototypeActual")}
+  	"out" "feature" FeaturePrototypeIdentifier        ->  FeaturePrototypeActual{cons("OutFeaturePrototypeActual")}
+  	
   	"in"                 -> InOut{cons("In")}
   	"out"                -> InOut{cons("Out")}
   	"in" "out"           -> InOut{cons("In_Out")}
@@ -76,11 +100,4 @@ exports
   	"data"                   -> ModuleType{cons("Data")}
   	"subprogram"             -> ModuleType{cons("Subprogram")}
   	"subprogram" "group"     -> ModuleType{cons("Subprogram_Group")}
-  	
-  	InOut PortTypes "port"    -> FeaturePrototypeActual{cons("Port")} 
-  	"requires" ModuleType "access" UniqueComponentClassifierReference?   -> FeaturePrototypeActual{cons("Requires_Access")} 	
-  	"provides" ModuleType "access" UniqueComponentClassifierReference?   -> FeaturePrototypeActual{cons("Provides_Access")} 
-  	"in" "feature" FeaturePrototypeIdentifier         ->  FeaturePrototypeActual{cons("In_Feature")}
-  	"out" "feature" FeaturePrototypeIdentifier        ->  FeaturePrototypeActual{cons("Out_Feature")}
-  	
   	

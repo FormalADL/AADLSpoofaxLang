@@ -12,19 +12,15 @@ exports
   
 
   context-free syntax
+  	
+  	PropertyTypeDeclaration                  -> PropertyTypes{cons("PropertyTypeDeclaration")}
+  	PropertyDefinitionDeclaration            -> PropertyTypes{cons("PropertyDefinitionDeclaration")}
+  	PropertyConstant                         -> PropertyTypes{cons("PropertyConstant")}
+  	
   	"property" "set"  DefiningPropertySetIdentifier "is"
-  	   ImportDeclaration*
-  	   PropertyTypeDeclaration*
+  	   (ImportDeclaration+)?
+  	   (PropertyTypes+)?
   	"end" DefiningPropertySetIdentifier ";"          -> PropertySet{cons("Property_Set")}
   	
-  	"property" "set"  DefiningPropertySetIdentifier "is"
-  	   ImportDeclaration*
-  	   PropertyDefinitionDeclaration*
-  	"end" DefiningPropertySetIdentifier ";"         -> PropertySet{cons("Property_Set")}
-  	
-  	"property" "set"  DefiningPropertySetIdentifier "is"
-  	   ImportDeclaration*
-  	   PropertyConstant*
-  	"end" DefiningPropertySetIdentifier ";"         -> PropertySet{cons("Property_Set")}
   	
   	

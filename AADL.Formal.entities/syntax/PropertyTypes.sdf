@@ -12,23 +12,25 @@ exports
   context-free syntax
   	 DefiningPropertyTypeIdentifier ":" "type" PropertyType ";" -> PropertyTypeDeclaration{cons("Property_Type_Declaration")}
   	 
-  	 "aadlboolean"                -> PropertyType{cons("Property_Type")}
-  	 "aadlstring"                 -> PropertyType{cons("Property_Type")}
-  	 EnumerationType              -> PropertyType{cons("Property_Type")}
-  	 UnitsType                    -> PropertyType{cons("Property_Type")}
-  	 NumberType                   -> PropertyType{cons("Property_Type")}
-  	 RangeType                    -> PropertyType{cons("Property_Type")}
-  	 ClassifierType               -> PropertyType{cons("Property_Type")}
-  	 ReferenceType                -> PropertyType{cons("Property_Type")}
-  	 RecordType                   -> PropertyType{cons("Property_Type")}
+  	 "aadlboolean"                -> PropertyType{cons("aadlboolean")}
+  	 "aadlstring"                 -> PropertyType{cons("aadlstring")}
+  	 EnumerationType              -> PropertyType{cons("EnumerationType")}
+  	 UnitsType                    -> PropertyType{cons("UnitsType")}
+  	 NumberType                   -> PropertyType{cons("NumberType")}
+  	 RangeType                    -> PropertyType{cons("RangeType")}
+  	 ClassifierType               -> PropertyType{cons("ClassifierType")}
+  	 ReferenceType                -> PropertyType{cons("ReferenceType")}
+  	 RecordType                   -> PropertyType{cons("RecordType")}
   	 
   	 "enumeration" "(" {DefiningEnumerationLiteralIdentifier ","}+ ")"  -> EnumerationType{cons("Enumeration_Type")}
   	 
   	 "units" UnitsList       -> UnitsType{cons("Units_Type")}
   	 "(" DefiningUnitIdentifier ("," DefiningUnitIdentifier "=>" UnitIdentifier "*" NumericLiteral)* ")"   -> UnitsList{cons("Units_List")}
   	 
+  	 %%"units" UnitsDesignator               -> UnitsDesignators{cons("UnitsDesignator")}
+  	 
   	 "aadlreal" RealRange? ("units" UnitsDesignator)?        -> NumberType{cons("Number_Type")}
-  	 "aadinteger" IntegerRange? ("units" UnitsDesignator)?   -> NumberType{cons("Number_Type")}
+  	 "aadlinteger" IntegerRange? ("units" UnitsDesignator)?   -> NumberType{cons("Number_Type")}
   	 
   	 UnitsUniquePropertyTypeIdentifier         -> UnitsDesignator
   	 UnitsList                                 -> UnitsDesignator
@@ -42,15 +44,15 @@ exports
   	 SignedAadlintegerOrConstant                      -> IntegerLowerBound
   	 
   	 SignedAadlreal                      -> SignedAadlrealOrConstant
-  	 Sign? RealPropertyConstantTerm      -> SignedAadlrealOrConstant{cons("SignedAadlrealOrConstant")}
+  	 %%Sign? RealPropertyConstantTerm      -> SignedAadlrealOrConstant{cons("SignedAadlrealOrConstant")}
   	 SignedAadlinteger                   -> SignedAadlintegerOrConstant
-  	 Sign? IntegerPropertyConstantTerm   -> SignedAadlintegerOrConstant{cons("SignedAadlintegerOrConstant")}
+  	 %%Sign? IntegerPropertyConstantTerm   -> SignedAadlintegerOrConstant{cons("SignedAadlintegerOrConstant")}
   	 
   	 "+"        -> Sign{cons("positive")}	 
   	 "-"        -> Sign{cons("negative")}
   	 
-  	 Sign? IntegerLiteral UnitIdentifier?   -> SignedAadlinteger{cons("Signed_Aadlinteger")}
-  	 Sign? RealLiteral UnitIdentifier?      -> SignedAadlreal{cons("Signed_Aadlreal")}
+  	 Sign? IntegerLiteral Identifier?   -> SignedAadlinteger{cons("Signed_Aadlinteger")}
+  	 Sign? RealLiteral Identifier?      -> SignedAadlreal{cons("Signed_Aadlreal")}
   	 
   	 "range" "of" NumberType                            -> RangeType{cons("RangeType")}
   	 "range" "of" NumberUniquePropertyTypeIdentifier    -> RangeType{cons("RangeType")}
@@ -60,20 +62,21 @@ exports
   	 "list" "of"                                        -> ListOf{cons("ListOf")}
   	 
   	 "classifier" ClassifierCategoryReferences? -> ClassifierType{cons("Classifier_Type")}
-  	 ClassifierQualifiedMetaModelIdentifier            ->  ClassifierCategoryReference
+  	 Identifier                                 ->  ClassifierCategoryReference
   	 
   	 ("{"AnnexIdentifier"}""**")? MetaModelClassIdentifier     ->QualifiedMetaModelIdentifier{cons("QualifiedMetaModelIdentifier")} 
   	 Identifier+          -> MetaModelClassIdentifier{cons("MetaModelClassIdentifier")}
   	 
   	 "reference" ReferenceCategorys?   -> ReferenceType{cons("ReferenceType")}
-  	 NamedElementQualifiedMetaModelIdentifier         -> ReferenceCategory
+  	 Identifier                        -> ReferenceCategory
   	 
   	 (PropertySetIdentifier "::")? PropertySetIdentifier -> UniquePropertyTypeIdentifier{cons("UniquePropertyTypeIdentifier")}
   	 
   	 "record" "(" RecordField+ ")"  -> RecordType{cons("RecordType")}
   	 DefiningFieldIdentifier ":" ListOf? PropertyTypeDesignator -> RecordField{cons("RecordField")}
   	 
-  	 UniquePropertyTypeIdentifier        -> PropertyTypeDesignator
+  	 Identifier                          -> PropertyTypeDesignator
   	 PropertyType                        -> PropertyTypeDesignator
-  	 
+  	 (Identifier "::")? Identifier       -> UnitsUniquePropertyTypeIdentifier{cons("UnitsUniquePropertyTypeIdentifier")}
+  	 (Identifier "::")? Identifier       -> NumberUniquePropertyTypeIdentifier{cons("NumberUniquePropertyTypeIdentifier")}
   	 

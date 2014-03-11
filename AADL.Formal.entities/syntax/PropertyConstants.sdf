@@ -14,11 +14,10 @@ exports
    	MultiValuedPropertyConstant          -> PropertyConstant
    	
    	DefiningPropertyConstantIdentifier ":" "constant"
-   	  PropertyTypeDesignator
-   	"=>" ConstantPropertyExpression       -> SingleValuedPropertyConstant{cons("SingleValuedPropertyConstant")}
+   	  PropertyTypeDesignator "=>" ConstantPropertyExpression ";"      -> SingleValuedPropertyConstant{cons("SingleValuedPropertyConstant")}
    	
    	DefiningPropertyConstantIdentifier ":" "constant" ("list" "of")+
-   	  PropertyTypeDesignator "=>" ConstantPropertyListValue      -> MultiValuedPropertyConstant{cons("MultiValuedPropertyConstant")}
+   	  PropertyTypeDesignator "=>" ConstantPropertyListValue ";"       -> MultiValuedPropertyConstant{cons("MultiValuedPropertyConstant")}
    	
    	(ProperSetIdentifier "::")? PropertyConstantIdentifier -> UniquePropertyConstantIdentifier{cons("UniquePropertyConstantIdentifier")}
    	

@@ -11,14 +11,16 @@ exports
   
 
   context-free syntax
-  	"feature" "group"  SourceFeatureGroupReference ConnectionSymbol
-  	DestinationFeatureGroupReference                       -> FeatureGroupConnection{cons("FeatureGroupConnection")}
-  	
+  	"feature" "group"  SourceFeatureGroupReference "->" DestinationFeatureGroupReference                       -> FeatureGroupConnection{cons("FeatureGroupConnection")}
+  	"feature" "group"  SourceFeatureGroupReference "<->" DestinationFeatureGroupReference                       -> FeatureGroupConnection{cons("FeatureGroupConnection")}
   	"feature" "group"    -> FeatureGroupConnectionRefinement{cons("feature_group")}
   	
   	ComponentTypeFeatureGroupIdentifier                                    -> FeatureGroupReference{cons("ComponentTypeFeatureGroupIdentifier")}
   	SubcomponentIdentifier "." FeatureGroupIdentifier                      -> FeatureGroupReference{cons("SubcomponentIdentifier_FeatureGroupIdentifier")}
   	ComponentTypeFeatureGroupIdentifier "." ElementFeatureGroupIdentifier  -> FeatureGroupReference{cons("ComponentTypeFeatureGroupIdentifier_ElementFeatureGroupIdentifier")}
   	
-  	FeatureGroupReference                 -> SourceFeatureGroupReference 
-  	FeatureGroupReference                 -> DestinationFeatureGroupReference
+  	FeatureGroupReferences                 -> SourceFeatureGroupReference 
+  	FeatureGroupReferences                 -> DestinationFeatureGroupReference
+  	
+  	Identifier     -> FeatureGroupReferences 
+  	Identifier "." Identifier -> FeatureGroupReferences{cons("ComIdentifier")}

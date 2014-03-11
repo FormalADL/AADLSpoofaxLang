@@ -10,21 +10,19 @@ exports
   
 
   context-free syntax
-  	DefinitionEndToEndFlowIdentifier ":" "end" "to" "end" "flow"
-  	  StartSubcomponentFlowOrEtefIdentifier
-  	  ("->" ConnectionIdentifier "->" FlowPathSubcomponentFlowOrEtefIdentifier)+
+  	DefinitionEndToEndFlowIdentifier ":" "end" "to" "end" "flow" StartSubcomponentFlowOrEtefIdentifier ("->" ConnectionIdentifier "->" FlowPathSubcomponentFlowOrEtefIdentifier)+
   	  PropertyAssociations?
   	  InModesAndTransitions? ";"                             -> EndToEndFlowSpec{cons("EndToEndFlowSpec")}
   	
   	DefinitionEndToEndFlowIdentifier ":" "refined" "to" "end" "to" "end" "flow"
-  	  PropertyAssociations?
+  	  PropertyAssociations
   	  InModesAndTransitions? ";"                             -> EndToEndFlowSpecRefinement{cons("EndToEndFlowSpecRefinement")}
   	
   	DefinitionEndToEndFlowIdentifier ":" "refined" "to" "end" "to" "end" "flow"
   	  InModesAndTransitions ";"                             -> EndToEndFlowSpecRefinement{cons("EndToEndFlowSpecRefinement")}
   	
   	SubcomponentFlowIdentifier              -> SubcomponentFlowOrEtefIdentifier
-  	EndToEndFlowIdentifier                  -> SubcomponentFlowOrEtefIdentifier
+  	%%EndToEndFlowIdentifier                  -> SubcomponentFlowOrEtefIdentifier
   	
   	
   	

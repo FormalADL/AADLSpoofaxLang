@@ -18,7 +18,7 @@ exports
 
   context-free syntax
   	
-  	"{" FeatureContainedPropertyAssociation+ "}"          ->  FeatureContainedPropertyAssociations{cons("FeatureContainedPropertyAssociations")}
+  	"{" ContainedPropertyAssociation+ "}"          ->  FeatureContainedPropertyAssociations{cons("FeatureContainedPropertyAssociations")}
   	
   	AbstractFeatureSpec
   	ArrayDimension?
@@ -26,19 +26,19 @@ exports
   	
   	PortSpec
   	ArrayDimension?
-  	FeatureContainedPropertyAssociations? ";"    -> Feature{cons("PortSpec")}
+  	FeatureContainedPropertyAssociations? ";"    -> Feature{cons("PortFeatureSpec")}
   	
   	FeatureGroupSpec
   	ArrayDimension?
-  	FeatureContainedPropertyAssociations? ";"    -> Feature{cons("FeatureGroupSpec")}
+  	FeatureContainedPropertyAssociations? ";"    -> Feature{cons("FeatureGroupFeatureSpec")}
   	
   	SubcomponentAccessSpec
   	ArrayDimension?
-  	FeatureContainedPropertyAssociations? ";"    -> Feature{cons("SubcomponentAccessSpec")}
+  	FeatureContainedPropertyAssociations? ";"    -> Feature{cons("SubcomponentAccessFeatureSpec")}
   	
   	ParameterSpec
   	ArrayDimension?
-  	FeatureContainedPropertyAssociations? ";"    -> Feature{cons("ParameterSpec")}
+  	FeatureContainedPropertyAssociations? ";"    -> Feature{cons("ParameterFeatureSpec")}
   	
   	SubprogramAccessSpec            -> SubcomponentAccessSpec
   	SubprogramGroupAccessSpec       -> SubcomponentAccessSpec
@@ -51,19 +51,19 @@ exports
   	
   	PortRefinement
   	ArrayDimension?
-  	FeatureContainedPropertyAssociations? ";"    -> FeatureRefinement{cons("PortRefinement")}
+  	FeatureContainedPropertyAssociations? ";"    -> FeatureRefinement{cons("PortFeatureRefinement")}
   	
   	FeatureGroupRefinement
   	ArrayDimension?
-  	FeatureContainedPropertyAssociations? ";"    -> FeatureRefinement{cons("FeatureGroupRefinement")}
+  	FeatureContainedPropertyAssociations? ";"    -> FeatureRefinement{cons("FeatureGroupFeatureRefinement")}
   	
   	SubcomponentAccessRefinement
   	ArrayDimension?
-  	FeatureContainedPropertyAssociations? ";"    -> FeatureRefinement{cons("SubcomponentAccessRefinement")}
+  	FeatureContainedPropertyAssociations? ";"    -> FeatureRefinement{cons("SubcomponentAccessFeatureRefinement")}
   	
   	ParameterRefinement
   	ArrayDimension?
-  	FeatureContainedPropertyAssociations? ";"    -> FeatureRefinement{cons("ParameterRefinement")}
+  	FeatureContainedPropertyAssociations? ";"    -> FeatureRefinement{cons("ParameterFeatureRefinement")}
   	
   	SubprogramAccessRefinement            -> SubcomponentAccessRefinement
   	SubprogramGroupAccessRefinement       -> SubcomponentAccessRefinement

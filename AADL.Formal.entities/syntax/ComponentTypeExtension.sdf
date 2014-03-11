@@ -9,36 +9,158 @@ exports
   
 
   context-free syntax
-  	ComponentCategory DefiningComponentTypeIdentifier
+  
+    "abstract" DefiningComponentTypeIdentifier 
       "extends" UniqueComponentTypeReference
-      PrototypeBindings?
-    ("prototypes" Prototypes)?
-    ("features" Features)?
-    ("flows" FlowSpecs)?
-    ModesSubclause
-    ("properties" ComponentTypePropertyAssociations)?
-    AnnexSubclause*?
-    "end" DefiningComponentTypeIdentifier -> ComponentTypeExtension{cons("Component_Type_Extension")}
+       PrototypeBindings?
+    ComponentPrototypes? 
+    ComponentFeatures? 
+    ComponentFlowSpecs? 
+    Subclause? 
+    ComponentPropertyAssociations? 
+    %%AnnexSubclause* 
+    "end" DefiningComponentTypeIdentifier ";" -> ComponentTypeExtension{cons("abstract_extension")}
     
-    ComponentCategory DefiningComponentTypeIdentifier
-      "extends" UniqueComponentTypeReference
-      PrototypeBindings?
-    ("prototypes" Prototypes)?
-    ("features" Features)?
-    ("flows" FlowSpecs)?
-    ModesSubclause?
-    ("properties" ComponentTypePropertyAssociations)?
-    AnnexSubclause*?
-    "end" DefiningComponentTypeIdentifier ";" -> ComponentTypeExtension{cons("Component_Type_Extension")}
+    "data" DefiningComponentTypeIdentifier 
+       "extends" UniqueComponentTypeReference
+       PrototypeBindings?
+    ComponentPrototypes? 
+    ComponentFeatures? 
+    ComponentFlowSpecs? 
+    Subclause? 
+    ComponentPropertyAssociations? 
+    %%AnnexSubclause* 
+    "end" DefiningComponentTypeIdentifier ";" -> ComponentTypeExtension{cons("data_extension")}
+  
+    "thread" DefiningComponentTypeIdentifier 
+       "extends" UniqueComponentTypeReference
+       PrototypeBindings?
+    ComponentPrototypes? 
+    ComponentFeatures? 
+    ComponentFlowSpecs? 
+    Subclause? 
+    ComponentPropertyAssociations? 
+    %%AnnexSubclause* 
+    "end" DefiningComponentTypeIdentifier ";" -> ComponentTypeExtension{cons("thread_extension")}
     
-    ComponentCategory DefiningComponentTypeIdentifier
+    "subprogram" DefiningComponentTypeIdentifier
       "extends" UniqueComponentTypeReference
-      PrototypeBindings?
-    ("prototypes" Prototypes)?
-    ("features" Features)?
-    ("flows" FlowSpecs)?
-    RequiresModesSubclause?
-    ("properties" ComponentTypePropertyAssociations)?
-    AnnexSubclause*?
-    "end" DefiningComponentTypeIdentifier ";" -> ComponentTypeExtension{cons("Component_Type_Extension")}
+       PrototypeBindings? 
+    ComponentPrototypes? 
+    ComponentFeatures? 
+    ComponentFlowSpecs? 
+    Subclause? 
+    ComponentPropertyAssociations? 
+    %%AnnexSubclause* 
+    "end" DefiningComponentTypeIdentifier ";" -> ComponentTypeExtension{cons("subprogram_extension")}
+    
+    "subprogram" "group" DefiningComponentTypeIdentifier
+       "extends" UniqueComponentTypeReference
+       PrototypeBindings? 
+    ComponentPrototypes? 
+    ComponentFeatures? 
+    ComponentFlowSpecs? 
+    Subclause? 
+    ComponentPropertyAssociations? 
+    %%AnnexSubclause* 
+    "end" DefiningComponentTypeIdentifier ";" -> ComponentTypeExtension{cons("subprogram_group_extension")}
+    
+    "thread" "group" DefiningComponentTypeIdentifier 
+       "extends" UniqueComponentTypeReference
+       PrototypeBindings?
+    ComponentPrototypes? 
+    ComponentFeatures? 
+    ComponentFlowSpecs? 
+    Subclause? 
+    ComponentPropertyAssociations? 
+    %%AnnexSubclause* 
+    "end" DefiningComponentTypeIdentifier ";" -> ComponentTypeExtension{cons("thread_group_extension")}
+    
+    "process" DefiningComponentTypeIdentifier 
+       "extends" UniqueComponentTypeReference
+       PrototypeBindings?
+    ComponentPrototypes? 
+    ComponentFeatures? 
+    ComponentFlowSpecs? 
+    Subclause? 
+    ComponentPropertyAssociations? 
+    %%AnnexSubclause* 
+    "end" DefiningComponentTypeIdentifier ";" -> ComponentTypeExtension{cons("process_extension")}
+    
+    "memory" DefiningComponentTypeIdentifier 
+       "extends" UniqueComponentTypeReference
+       PrototypeBindings?
+    ComponentPrototypes? 
+    ComponentFeatures? 
+    ComponentFlowSpecs? 
+    Subclause? 
+    ComponentPropertyAssociations? 
+    %%AnnexSubclause* 
+    "end" DefiningComponentTypeIdentifier ";" -> ComponentTypeExtension{cons("memory_extension")}
+    
+    "processor" DefiningComponentTypeIdentifier 
+       "extends" UniqueComponentTypeReference
+       PrototypeBindings?
+    ComponentPrototypes? 
+    ComponentFeatures? 
+    ComponentFlowSpecs? 
+    Subclause? 
+    ComponentPropertyAssociations? 
+    %%AnnexSubclause* 
+    "end" DefiningComponentTypeIdentifier ";" -> ComponentTypeExtension{cons("processor_extension")}
+    
+    "bus" DefiningComponentTypeIdentifier 
+       "extends" UniqueComponentTypeReference
+       PrototypeBindings?
+    ComponentPrototypes? 
+    ComponentFeatures? 
+    ComponentFlowSpecs? 
+    Subclause? 
+    ComponentPropertyAssociations? 
+    %%AnnexSubclause* 
+    "end" DefiningComponentTypeIdentifier ";" -> ComponentTypeExtension{cons("bus_extension")}
+    
+    "device" DefiningComponentTypeIdentifier 
+       "extends" UniqueComponentTypeReference
+       PrototypeBindings?
+    ComponentPrototypes? 
+    ComponentFeatures? 
+    ComponentFlowSpecs? 
+    Subclause? 
+    ComponentPropertyAssociations? 
+    %%AnnexSubclause* 
+    "end" DefiningComponentTypeIdentifier ";" -> ComponentTypeExtension{cons("device_extension")}
+    
+    "virtual" "processor" DefiningComponentTypeIdentifier
+       "extends" UniqueComponentTypeReference
+       PrototypeBindings? 
+    ComponentPrototypes? 
+    ComponentFeatures? 
+    ComponentFlowSpecs? 
+    Subclause? 
+    ComponentPropertyAssociations? 
+    %%AnnexSubclause* 
+    "end" DefiningComponentTypeIdentifier ";" -> ComponentTypeExtension{cons("virtual_processor_extension")}
+    
+    "virtual" "bus" DefiningComponentTypeIdentifier 
+       "extends" UniqueComponentTypeReference
+       PrototypeBindings?
+    ComponentPrototypes? 
+    ComponentFeatures? 
+    ComponentFlowSpecs? 
+    Subclause? 
+    ComponentPropertyAssociations? 
+    %%AnnexSubclause* 
+    "end" DefiningComponentTypeIdentifier ";" -> ComponentTypeExtension{cons("virtual_bus_extension")}
+    
+    "system" DefiningComponentTypeIdentifier 
+       "extends" UniqueComponentTypeReference
+       PrototypeBindings?
+    ComponentPrototypes? 
+    ComponentFeatures? 
+    ComponentFlowSpecs? 
+    Subclause? 
+    ComponentPropertyAssociations? 
+    %%AnnexSubclause* 
+    "end" DefiningComponentTypeIdentifier ";" -> ComponentTypeExtension{cons("system_extension")}
     

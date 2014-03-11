@@ -1,11 +1,9 @@
 module String
 
-imports Character
+imports Character Identifier
 
 exports
 
    lexical syntax
-   	[\ ]                -> StringElement
-   	GraphicCharacter    -> StringElement
    	
-   	"StringElement*"    -> StringLiteral
+   	"\"" Identifier "\""   -> StringLiteral

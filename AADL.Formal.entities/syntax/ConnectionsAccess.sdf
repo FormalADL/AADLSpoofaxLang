@@ -13,9 +13,19 @@ exports
   
 
   context-free syntax
-  	 ModuleType "access" SourceAccessReference ConnectionSymbol  DestinationAccessReference   -> AccessConnection{cons("AccessConnection")}
-  	 
-  	 ModuleType "access"   -> AccessConnectionRefinement{cons("access")}
+  	 "bus" "access" SourceAccessReference "->" DestinationAccessReference   -> AccessConnection{cons("AccessbusConnection")}
+  	 "bus" "access" SourceAccessReference "<->" DestinationAccessReference   -> AccessConnection{cons("AccessbusConnection")}
+  	 "subprogram" "access" SourceAccessReference "->" DestinationAccessReference   -> AccessConnection{cons("AccesssubprogramConnection")}
+  	 "subprogram" "access" SourceAccessReference "<->" DestinationAccessReference   -> AccessConnection{cons("AccesssubprogramConnection")}
+  	 "data" "access" SourceAccessReference "->" DestinationAccessReference   -> AccessConnection{cons("AccessdataConnection")}
+  	 "data" "access" SourceAccessReference "<->" DestinationAccessReference   -> AccessConnection{cons("AccessdataConnection")}
+  	 "subprogram" "group" "access" SourceAccessReference "->" DestinationAccessReference   -> AccessConnection{cons("AccesssubprogramgroupConnection")}
+  	 "subprogram" "group" "access" SourceAccessReference "<->" DestinationAccessReference   -> AccessConnection{cons("AccesssubprogramgroupConnection")}
+  	
+  	 "bus" "access"   -> AccessConnectionRefinement{cons("busaccess")}
+  	 "subprogram" "access"   -> AccessConnectionRefinement{cons("subprogramaccess")}
+  	 "subprogram" "group" "access"   -> AccessConnectionRefinement{cons("subprogramgroupaccess")}
+  	 "data" "access"   -> AccessConnectionRefinement{cons("dataaccess")}
   	 
   	 RequiresAccessIdentifier                                         -> AccessReference{cons("RequiresAccessIdentifier")}
   	 ProvidesAccessIdentifier                                         -> AccessReference{cons("ProvidesAccessIdentifier")}
@@ -27,11 +37,11 @@ exports
   	 SubcomponentIdentifier                                           -> AccessReference{cons("SubcomponentIdentifier")}
   	 "processor" "." ProvidesSubprogramAccessIdentifier               -> AccessReference{cons("processor_ProvidesSubprogramAccessIdentifier")}
   	 
-  	 AccessReference           -> SourceAccessReference
-  	 AccessReference           -> DestinationAccessReference
+  	 AccessReferences           -> SourceAccessReference
+  	 AccessReferences           -> DestinationAccessReference
   	 
-  	 
-  	 
+  	 Identifier     -> AccessReferences
+  	 Identifier "." Identifier -> AccessReferences{cons("ComIdentifier")}
   	 
   	 
   	 

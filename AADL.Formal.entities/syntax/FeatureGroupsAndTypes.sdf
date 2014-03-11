@@ -13,89 +13,53 @@ exports
 
   context-free syntax
   	
-  	FeatureGroupContainedPropertyAssociation+                   -> FeatureGroupContainedPropertyAssociations{cons("FeatureGroupContainedPropertyAssociations")}
-  	"feature" "group" DefiningIdentifier
-  	("prototypes" Prototypes)?
-  	("features" Features)?
-  	("inverse" "of" UniqueFeatureGroupTypeReference)?
-  	("properties" FeatureGroupContainedPropertyAssociations)?
-  	AnnexSubclause*
-  	"end" DefiningIdentifier                                -> FeatureGroupType{cons("FeatureGroupType")}
+  	
+  	
+  	"properties" ContainedPropertyAssociation+                   -> FeatureGroupContainedPropertyAssociations{cons("FeatureGroupContainedPropertyAssociations")}
+  	"properties" NoneStatement                                               -> FeatureGroupContainedPropertyAssociations{cons("FeatureGroupContainedPropertyAssociations")}
+  	"inverse" "of" UniqueFeatureGroupTypeReference              -> INUniqueFeatureGroupTypeReference{cons("Inverse_Of")}
   	
   	"feature" "group" DefiningIdentifier
-  	("prototypes" NoneStatement)?
-  	("features" Features)?
-  	("inverse" "of" UniqueFeatureGroupTypeReference)?
-  	("properties" FeatureGroupContainedPropertyAssociations)?
-  	AnnexSubclause*
+  	ComponentPrototypes? 
+    ComponentFeatures? 
+  	INUniqueFeatureGroupTypeReference?
+  	FeatureGroupContainedPropertyAssociations?
+  	%%AnnexSubclause*
   	"end" DefiningIdentifier                                -> FeatureGroupType{cons("FeatureGroupType")}
   	
-  	"feature" "group" DefiningIdentifier
-  	("prototypes" Prototypes)?
-  	("features" Features)?
-  	("inverse" "of" UniqueFeatureGroupTypeReference)?
-  	("properties" NoneStatement)?
-  	AnnexSubclause*
-  	"end" DefiningIdentifier                                -> FeatureGroupType{cons("FeatureGroupType")}
+  	"prototypes" Prototype+                       -> Prototypess{cons("Prototypes")}
+  	"prototypes" PrototypeRefinement+             -> Prototypess{cons("Prototypes")}
+  	"prototypes" NoneStatement                    -> Prototypess{cons("Prototypes")}
   	
-  	"feature" "group" DefiningIdentifier
-  	("prototypes" NoneStatement)?
-  	("features" Features)?
-  	("inverse" "of" UniqueFeatureGroupTypeReference)?
-  	("properties" NoneStatement)?
-  	AnnexSubclause*
-  	"end" DefiningIdentifier                                -> FeatureGroupType{cons("FeatureGroupType")}
-  	
-  	Prototype+                       -> Prototypess{cons("Prototypess")}
-  	PrototypeRefinement+             -> Prototypess{cons("Prototypess")}
-  	NoneStatement                    -> Prototypess{cons("Prototypess")}
-  	
-  	Feature+                         -> Featuress{cons("Featuress")}
-  	FeatureRefinement+               -> Featuress{cons("Featuress")}
+  	"features" Feature+                         -> Featuress{cons("Features")}
+  	"features" FeatureRefinement+               -> Featuress{cons("Features")}
   	
   	"feature" "group" DefiningIdentifier
   	"extends" UniqueFeatureGroupTypeReference
   	   PrototypeBindings?
-  	("prototypes" Prototypess)?
-  	("features" Featuress)?
-  	("inverse" "of" UniqueFeatureGroupTypeReference)?
-  	("properties" FeatureGroupContainedPropertyAssociations)?
-  	AnnexSubclause*
-  	"end" DefiningIdentifier                                -> FeatureGroupTypeExtension{cons("FeatureGroupTypeExtension")}
-  	
-  	"feature" "group" DefiningIdentifier
-  	"extends" UniqueFeatureGroupTypeReference
-  	   PrototypeBindings?
-  	("prototypes" Prototypess)?
-  	("features" Featuress)?
-  	("inverse" "of" UniqueFeatureGroupTypeReference)?
-  	("properties" NoneStatement)?
-  	AnnexSubclause*
+  	Prototypess?
+  	Featuress?
+  	INUniqueFeatureGroupTypeReference?
+  	FeatureGroupContainedPropertyAssociations?
+  	%%AnnexSubclause*
   	"end" DefiningIdentifier                                -> FeatureGroupTypeExtension{cons("FeatureGroupTypeExtension")}
   	
   	"in"      ->Inout{cons("Inout")}
   	"out"     ->Inout{cons("Inout")}
   	"inverse" "of" UniqueFeatureGroupTypeReference -> UniqueFeatureGroupTypeReferences{cons("UniqueFeatureGroupTypeReferences")}
   	"inverse" "of" PrototypeIdentifier             -> PrototypeIdentifiers{cons("PrototypeIdentifiers")}
-  	PrototypeIdentifier                            -> PrototypeIdentifiers{cons("PrototypeIdentifiers")}
-  	UniqueFeatureGroupTypeReference                -> UniqueFeatureGroupTypeReferences{cons("UniqueFeatureGroupTypeReferences")}
+  	PrototypeIdentifier                            -> UniqueFeatureGroupType{cons("UniqueFeatureGroupType")}
+  	UniqueFeatureGroupTypeReference                -> UniqueFeatureGroupType{cons("UniqueFeatureGroupType")}
   	
   	
   	DefiningFeatureGroupIdentifier ":"
   	Inout? "feature" "group"
-  	UniqueFeatureGroupTypeReferences?       -> FeatureGroupSpec{cons("InFeatureGroupSpecU")}
-  	
-  	DefiningFeatureGroupIdentifier ":"
-  	Inout? "feature" "group"
-  	PrototypeIdentifiers?       -> FeatureGroupSpec{cons("InFeatureGroupSpecP")}
+  	UniqueFeatureGroupType?       -> FeatureGroupSpec{cons("InFeatureGroupSpecU")}
   	
   	DefiningFeatureGroupIdentifier ":" "refined" "to"
   	Inout? "feature" "group"
-  	UniqueFeatureGroupTypeReferences?       -> FeatureGroupRefinement{cons("InFeatureGroupRefinementU")}
+  	UniqueFeatureGroupType?       -> FeatureGroupRefinement{cons("InFeatureGroupRefinementU")}
   	
-  	DefiningFeatureGroupIdentifier ":" "refined" "to"
-  	Inout? "feature" "group"
-  	PrototypeIdentifier?       -> FeatureGroupRefinement{cons("InFeatureGroupRefinementP")}
   	
   	(PackageName "::") FeatureGroupTypeIdentifier       -> UniqueFeatureGroupTypeReference{cons("UniqueFeatureGroupTypeReference")}
   	

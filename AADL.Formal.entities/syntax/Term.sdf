@@ -24,15 +24,15 @@ exports
    UniqueComponentClassifierReference              -> VirtualBusUniqueComponentClassifierReference
    UniqueComponentClassifierReference              -> MemoryUniqueComponentClassifierReference
    
-   PropertyAssociation                    -> ComponentTypePropertyAssociation{cons("ComponentTypePropertyAssociation")}
-   PropertyAssociation                    -> SubcomponentPropertyAssociation{cons("SubcomponentPropertyAssociation")}
-   PropertyAssociation                    -> PrototypePropertyAssociation{cons("PrototypePropertyAssociation")}
-   PropertyAssociation                    -> CallSequencePropertyAssociation{cons("CallSequencePropertyAssociation")}
-   PropertyAssociation                    -> SubcomponentCallPropertyAssociation{cons("SubcomponentCallPropertyAssociation")}
-   ContainedPropertyAssociation           -> FeatureContainedPropertyAssociation{cons("ModeTransitionPropertyAssciation")}
-   ContainedPropertyAssociation           -> FeatureGroupContainedPropertyAssociation{cons("FeatureContainedPropertyAssociation")}
-   PropertyAssociation                    -> ModePropertyAssciation{cons("ModePropertyAssciation")}
-   PropertyAssociation                    -> ModeTransitionPropertyAssciation{cons("ModeTransitionPropertyAssciation")}
+   %%PropertyAssociation                    -> ComponentTypePropertyAssociation{cons("ComponentTypePropertyAssociation")}
+   %%PropertyAssociation                    -> SubcomponentPropertyAssociation{cons("SubcomponentPropertyAssociation")}
+   %%PropertyAssociation                    -> PrototypePropertyAssociation{cons("PrototypePropertyAssociation")}
+   %%PropertyAssociation                    -> CallSequencePropertyAssociation{cons("CallSequencePropertyAssociation")}
+   %%PropertyAssociation                    -> SubcomponentCallPropertyAssociation{cons("SubcomponentCallPropertyAssociation")}
+   %%ContainedPropertyAssociation           -> FeatureContainedPropertyAssociation{cons("ModeTransitionPropertyAssciation")}
+   %%ContainedPropertyAssociation           -> FeatureGroupContainedPropertyAssociation{cons("FeatureContainedPropertyAssociation")}
+   %%PropertyAssociation                    -> ModePropertyAssciation{cons("ModePropertyAssciation")}
+   %%PropertyAssociation                    -> ModeTransitionPropertyAssciation{cons("ModeTransitionPropertyAssciation")}
    
 
    %%Identifier                  -> ConstantPropertyExpression
@@ -41,7 +41,7 @@ exports
    {NumericLiteral ","}+         -> ConstantPropertyListValue{cons("ConstantPropertyListValue")}
    
    Identifier                    -> BooleanPropertyConstantTerm{cons("BooleanPropertyConstantTerm")}  
-   Identifier                    -> StringPropertyConstantTerm{cons("StringPropertyConstantTerm")}
+   %%Identifier                    -> StringPropertyConstantTerm{cons("StringPropertyConstantTerm")}
    Identifier                    -> EnumerationPropertyConstantTerm{cons("EnumerationPropertyConstantTerm")}
    Identifier                    -> UnitPropertyConstantTerm{cons("UnitPropertyConstantTerm")}
    Identifier                    -> IntegerRangePropertyConstantTerm{cons("IntegerRangePropertyConstantTerm")}

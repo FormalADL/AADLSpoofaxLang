@@ -18,10 +18,8 @@ exports
   	Identifier                     -> PrototypeIdentifier
   	Identifier                     -> DefiningPropertyTypeIdentifier
   	Identifier                     -> DefiningEnumerationLiteralIdentifier
-  	Identifier                     -> UnitsUniquePropertyTypeIdentifier
   	Identifier                     -> DefiningUnitIdentifier
   	Identifier                     -> UnitIdentifier
-  	Identifier                     -> NumberUniquePropertyTypeIdentifier
   	Identifier                     -> ClassifierQualifiedMetaModelIdentifier
   	Identifier                     -> NamedElementQualifiedMetaModelIdentifier
   	Identifier                     -> AnnexIdentifier

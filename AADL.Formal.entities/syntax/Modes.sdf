@@ -21,8 +21,8 @@ exports
   	"requires" "modes" "(" Mode+ ")"           -> RequiresSubclause{cons("RequireMode")}
   	
   	"initial"                          -> Initial{cons("Initial")}
-  	"{" ModePropertyAssciation+ "}"    -> ModePropertyAssciations{cons("ModePropertyAssciations")}
-  	"{" ModeTransitionPropertyAssciation+ "}"   -> ModeTransitionPropertyAssciations{cons("ModeTransitionPropertyAssciations")}
+  	"{" PropertyAssociation+ "}"    -> ModePropertyAssciations{cons("ModePropertyAssciations")}
+  	"{" PropertyAssociation+ "}"    -> ModeTransitionPropertyAssciations{cons("ModeTransitionPropertyAssciations")}
   	
   	DefiningModeIdentifier ":" Initial? "mode"
   	  ModePropertyAssciations? ";"     -> Mode{cons("Mode")}

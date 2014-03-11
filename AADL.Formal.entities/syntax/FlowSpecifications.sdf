@@ -30,27 +30,26 @@ exports
   	  PropertyAssociations? InModes? ";"   -> FlowPathSpec{cons("FlowPathSpec")}
   	
   	DefiningFlowIdentifier ":" "refined" "to" "flow" "source" 
-  	  PropertyAssociations? InModesAndTransitions? ";"   -> FlowSourceSpecRefinement{cons("FlowSourceSpecRefinement")}
+  	  PropertyAssociations InModesAndTransitions? ";"   -> FlowSourceSpecRefinement{cons("FlowSourceSpecRefinement")}
   	DefiningFlowIdentifier ":" "refined" "to" "flow" "source" 
-  	  InModesAndTransitions? ";"   -> FlowSourceSpecRefinement{cons("FlowSourceSpecRefinement")}
+  	  InModesAndTransitions ";"   -> FlowSourceSpecRefinement{cons("FlowSourceSpecRefinement")}
   	
   	DefiningFlowIdentifier ":" "refined" "to" "flow" "sink" 
-  	  PropertyAssociations? InModesAndTransitions? ";"   -> FlowSinkSpecRefinement{cons("FlowSinkSpecRefinement")}
+  	  PropertyAssociations InModesAndTransitions? ";"   -> FlowSinkSpecRefinement{cons("FlowSinkSpecRefinement")}
   	DefiningFlowIdentifier ":" "refined" "to" "flow" "sink" 
-  	  InModesAndTransitions? ";"   -> FlowSinkSpecRefinement{cons("FlowSinkSpecRefinement")}
+  	  InModesAndTransitions ";"   -> FlowSinkSpecRefinement{cons("FlowSinkSpecRefinement")}
   	
   	DefiningFlowIdentifier ":" "refined" "to" "flow" "path" 
-  	  PropertyAssociations? InModesAndTransitions? ";"   -> FlowSourceSpecRefinement{cons("FlowPathSpecRefinement")}
+  	  PropertyAssociations InModesAndTransitions? ";"   -> FlowSourceSpecRefinement{cons("FlowPathSpecRefinement")}
   	DefiningFlowIdentifier ":" "refined" "to" "flow" "path" 
-  	  InModesAndTransitions? ";"   -> FlowPathSpecRefinement{cons("FlowPathSpecRefinement")}
+  	  InModesAndTransitions ";"   -> FlowPathSpecRefinement{cons("FlowPathSpecRefinement")}
   	
   	
   	
   	FeatureIdentifier                                   -> FlowfeatureIdentifier
-  	FeatureGroupIdentifier                              -> FlowfeatureIdentifier
-  	FeatureGroupIdentifier "." FeatureIdentifier        -> FlowfeatureIdentifier{cons("Com")}
   	FeatureGroupIdentifier "." FeatureGroupIdentifier   -> FlowfeatureIdentifier{cons("Com")}
-  	
+  	%%FeatureGroupIdentifier                              -> FlowfeatureIdentifier
+  	%%FeatureGroupIdentifier "." FeatureIdentifier        -> FlowfeatureIdentifier{cons("Com")}
   	
   	
   	

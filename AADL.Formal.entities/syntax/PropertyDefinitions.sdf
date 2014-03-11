@@ -15,25 +15,25 @@ exports
   	
   	DefiningPropertyNameIdentifier ":"
   	  Inherit?
-  	  SingleValuedProperty
-  	  "applies" "to" "(" {PropertyOwner ","}+ ")" ";"  -> PropertyDefinitionDeclaration{cons("PropertyDefinitionDeclaration")}
+  	  SingleValuedProperty "applies" "to" "(" {PropertyOwner ","}+ ")" ";"  -> PropertyDefinitionDeclaration{cons("PropertyDefinitionDeclaration")}
   	  
   	DefiningPropertyNameIdentifier ":"
   	  Inherit?
-  	  MultiValuedProperty
-  	  "applies" "to" "(" {PropertyOwner ","}+ ")" ";"  -> PropertyDefinitionDeclaration{cons("PropertyDefinitionDeclaration")}
+  	  MultiValuedProperty "applies" "to" PropertyOwner ";"  -> PropertyDefinitionDeclaration{cons("PropertyDefinitionDeclaration")}
   	  
-  	  PropertyTypeDesignator ("=>" DefaultPropertyExpression)? -> SingleValuedProperty{cons("SingleValuedProperty")}
-  	  ("list" "of")+ PropertyTypeDesignator ("=>" DefaultPropertyListValue)? -> MultiValuedProperty{cons("MultiValuedProperty")}
+  	  "=>" DefaultPropertyExpression                -> DefaultPropertyExpressions{cons("DefaultPropertyExpressions")}
+  	  PropertyTypeDesignator DefaultPropertyExpressions?                -> SingleValuedProperty{cons("SingleValuedProperty")}
+  	  ("list" "of")+ PropertyTypeDesignator DefaultPropertyExpressions?-> MultiValuedProperty{cons("MultiValuedProperty")}
   	  
-  	  NamedElementQualifiedMetaModelIdentifier  -> PropertyOwner
-  	  UniqueClassifierReference                 -> PropertyOwner
+  	  %%NamedElementQualifiedMetaModelIdentifier  -> PropertyOwner
+  	  Identifier                 -> PropertyOwner
+  	  Keyword                    -> PropertyOwner
   	  
-  	  UniqueComponentClassifierReference           -> UniqueClassifierReference 
-  	  UniqueFeatureGroupTypeReference              -> UniqueClassifierReference 
+  	  %%UniqueComponentClassifierReference           -> UniqueClassifierReference 
+  	  %%UniqueFeatureGroupTypeReference              -> UniqueClassifierReference 
   	  
-  	  Identifier                     -> DefaultPropertyExpression
-  	  Identifier                     -> DefaultPropertyListValue
+  	  PropertyExpression                     -> DefaultPropertyExpression
+  	  Identifier                             -> DefaultPropertyListValue
  
   	  
   	  

@@ -50,12 +50,12 @@ exports
   	ImportDeclaration                             -> NameVisibilityDeclaration
   	AliasDeclaration                              -> NameVisibilityDeclaration
   	
-  	"with" {PackageName ","}+ ";"                     -> ImportDeclaration{cons("Import_Declaration")}
-    "with" PackageName ","
-  	   {PropertySetIdentifier ","}* ";"           -> ImportDeclaration{cons("Import_Declaration")}	
-    "with" PropertySetIdentifier ","
-  	   {PackageName ","}* ";"                     -> ImportDeclaration{cons("Import_Declaration")}	
-  	"with" {PropertySetIdentifier ","}+ ";"           -> ImportDeclaration{cons("Import_Declaration")}  
+  	"with" {Identifier ","}+ ";"                     -> ImportDeclaration{cons("Import_Declaration")}
+    %%"with" PackageName ","
+  	   %%{PropertySetIdentifier ","}* ";"           -> ImportDeclaration{cons("Import_Declaration")}	
+    %%"with" PropertySetIdentifier ","
+  	   %%{PackageName ","}* ";"                     -> ImportDeclaration{cons("Import_Declaration")}	
+  	%%"with" {PropertySetIdentifier ","}+ ";"           -> ImportDeclaration{cons("Import_Declaration")}  
   	   
   	 DefiningIdentifier "renames" "package" PackageName ";"  -> AliasDeclaration{cons("Alias_Declaration")}
   	 DefiningIdentifier? "renames"

@@ -51,44 +51,159 @@ exports
     
     (PackageName "::")? ComponentTypeIdentifier -> UniqueComponentTypeReference{cons("ComponentTypeIdentifier")}    
     
-    Prototype+                                    -> Prototypes{cons("Prototypes")}
-    NoneStatement                                 -> Prototypes
-    Feature+                                      -> Features{cons("Features")}
-    NoneStatement                                 -> Prototypes
-    FlowSpec+                                     -> FlowSpecs{cons("FlowSpecs")}
-    NoneStatement                                 -> FlowSpecs
-    ComponentTypePropertyAssociation+             -> ComponentTypePropertyAssociations{cons("ComponentTypePropertyAssociations")}
-    ContainedPropertyAssociation+                 -> ContainedPropertyAssociations{cons("ContainedPropertyAssociations")}
-    ComponentTypePropertyAssociations             -> PropertyAssociations
-    ContainedPropertyAssociations                 -> PropertyAssociations
-    NoneStatement                                 -> PropertyAssociations
+    "prototypes" Prototype+                                    -> ComponentPrototypes{cons("Prototypes")}
+    "prototypes" NoneStatement                                 -> ComponentPrototypes{cons("Prototypes")}
+    "features" Feature+                                        -> ComponentFeatures{cons("Features")}
+    "features" NoneStatement                                   -> ComponentFeatures{cons("Features")}
+    "flows" FlowSpec+                                          -> ComponentFlowSpecs{cons("Flow")}
+    "flows" NoneStatement                                      -> ComponentFlowSpecs{cons("Flow")}
+    "properties" ComponentPropertys+                          -> ComponentPropertyAssociations{cons("properties")}
+    %%"properties" PropertyAssociation+                          -> ComponentPropertyAssociations{cons("properties")}
+    %%"properties" ContainedPropertyAssociation+                 -> ComponentPropertyAssociations{cons("properties")}
+     PropertyAssociation                                       -> ComponentPropertys
+     ContainedPropertyAssociation                              -> ComponentPropertys
+    "properties" NoneStatement                                 -> ComponentPropertyAssociations{cons("properties")}
     
-    "prototypes" Prototypes                          -> ComponentPrototypes{cons("ComponentPrototypes")}
-    "features" Features                              -> ComponentFeatures {cons("ComponentFeatures")}
-    "flows" FlowSpecs                                -> ComponentFlowSpecs{cons("ComponentFlowSpecs")}
-    "properties" PropertyAssociations                -> ComponentPropertyAssociations{cons("ComponentPropertyAssociations")}
+    %%"prototypes" Prototypes                          -> ComponentPrototypes{cons("ComponentPrototypes")}
+    %%"features" Features                              -> ComponentFeatures {cons("ComponentFeatures")}
+    %%"flows" FlowSpecs                                -> ComponentFlowSpecs{cons("ComponentFlowSpecs")}
+    ModesSubclause                                   -> Subclause
+    RequiresModesSubclause                           -> Subclause
     
-    ComponentCategory DefiningComponentTypeIdentifier 
+    "abstract" DefiningComponentTypeIdentifier 
     ComponentPrototypes? 
     ComponentFeatures? 
     ComponentFlowSpecs? 
-    ModesSubclause? 
+    Subclause? 
     ComponentPropertyAssociations? 
-    AnnexSubclause* 
-    "end" DefiningComponentTypeIdentifier ";" -> ComponentType{cons("Component_Type")}
+    %%AnnexSubclause* 
+    "end" DefiningComponentTypeIdentifier ";" -> ComponentType{cons("abstract")}
     
-    ComponentCategory DefiningComponentTypeIdentifier 
+    "data" DefiningComponentTypeIdentifier 
     ComponentPrototypes? 
     ComponentFeatures? 
     ComponentFlowSpecs? 
-    RequiresModesSubclause? 
+    Subclause? 
     ComponentPropertyAssociations? 
-     AnnexSubclause*? 
-     "end" DefiningComponentTypeIdentifier ";" -> ComponentType{cons("Component_Type")}
-    
-     
+    %%AnnexSubclause* 
+    "end" DefiningComponentTypeIdentifier ";" -> ComponentType{cons("data")}
   
+    "thread" DefiningComponentTypeIdentifier 
+    ComponentPrototypes? 
+    ComponentFeatures? 
+    ComponentFlowSpecs? 
+    Subclause? 
+    ComponentPropertyAssociations? 
+    %%AnnexSubclause* 
+    "end" DefiningComponentTypeIdentifier ";" -> ComponentType{cons("thread")}
     
+    "thread" DefiningComponentTypeIdentifier 
+    ComponentPrototypes? 
+    ComponentFeatures? 
+    ComponentFlowSpecs? 
+    Subclause? 
+    ComponentPropertyAssociations? 
+    %%AnnexSubclause* 
+    "end" DefiningComponentTypeIdentifier ";" -> ComponentType{cons("thread")}
+    
+    "subprogram" DefiningComponentTypeIdentifier 
+    ComponentPrototypes? 
+    ComponentFeatures? 
+    ComponentFlowSpecs? 
+    Subclause? 
+    ComponentPropertyAssociations? 
+    %%AnnexSubclause* 
+    "end" DefiningComponentTypeIdentifier ";" -> ComponentType{cons("subprogram")}
+    
+    "subprogram" "group" DefiningComponentTypeIdentifier 
+    ComponentPrototypes? 
+    ComponentFeatures? 
+    ComponentFlowSpecs? 
+    Subclause? 
+    ComponentPropertyAssociations? 
+    %%AnnexSubclause* 
+    "end" DefiningComponentTypeIdentifier ";" -> ComponentType{cons("subprogram_group")}
+    
+    "thread" "group" DefiningComponentTypeIdentifier 
+    ComponentPrototypes? 
+    ComponentFeatures? 
+    ComponentFlowSpecs? 
+    Subclause? 
+    ComponentPropertyAssociations? 
+    %%AnnexSubclause* 
+    "end" DefiningComponentTypeIdentifier ";" -> ComponentType{cons("thread_group")}
+    
+    "process" DefiningComponentTypeIdentifier 
+    ComponentPrototypes? 
+    ComponentFeatures? 
+    ComponentFlowSpecs? 
+    Subclause? 
+    ComponentPropertyAssociations? 
+    %%AnnexSubclause* 
+    "end" DefiningComponentTypeIdentifier ";" -> ComponentType{cons("process")}
+    
+    "memory" DefiningComponentTypeIdentifier 
+    ComponentPrototypes? 
+    ComponentFeatures? 
+    ComponentFlowSpecs? 
+    Subclause? 
+    ComponentPropertyAssociations? 
+    %%AnnexSubclause* 
+    "end" DefiningComponentTypeIdentifier ";" -> ComponentType{cons("memory")}
+    
+    "processor" DefiningComponentTypeIdentifier 
+    ComponentPrototypes? 
+    ComponentFeatures? 
+    ComponentFlowSpecs? 
+    Subclause? 
+    ComponentPropertyAssociations? 
+    %%AnnexSubclause* 
+    "end" DefiningComponentTypeIdentifier ";" -> ComponentType{cons("processor")}
+    
+    "bus" DefiningComponentTypeIdentifier 
+    ComponentPrototypes? 
+    ComponentFeatures? 
+    ComponentFlowSpecs? 
+    Subclause? 
+    ComponentPropertyAssociations? 
+    %%AnnexSubclause* 
+    "end" DefiningComponentTypeIdentifier ";" -> ComponentType{cons("bus")}
+    
+    "device" DefiningComponentTypeIdentifier 
+    ComponentPrototypes? 
+    ComponentFeatures? 
+    ComponentFlowSpecs? 
+    Subclause? 
+    ComponentPropertyAssociations? 
+    %%AnnexSubclause* 
+    "end" DefiningComponentTypeIdentifier ";" -> ComponentType{cons("device")}
+    
+    "virtual" "processor" DefiningComponentTypeIdentifier 
+    ComponentPrototypes? 
+    ComponentFeatures? 
+    ComponentFlowSpecs? 
+    Subclause? 
+    ComponentPropertyAssociations? 
+    %%AnnexSubclause* 
+    "end" DefiningComponentTypeIdentifier ";" -> ComponentType{cons("virtual_processor")}
+    
+    "virtual" "bus" DefiningComponentTypeIdentifier 
+    ComponentPrototypes? 
+    ComponentFeatures? 
+    ComponentFlowSpecs? 
+    Subclause? 
+    ComponentPropertyAssociations? 
+    %%AnnexSubclause* 
+    "end" DefiningComponentTypeIdentifier ";" -> ComponentType{cons("virtual_bus")}
+    
+    "system" DefiningComponentTypeIdentifier 
+    ComponentPrototypes? 
+    ComponentFeatures? 
+    ComponentFlowSpecs? 
+    Subclause? 
+    ComponentPropertyAssociations? 
+    %%AnnexSubclause* 
+    "end" DefiningComponentTypeIdentifier ";" -> ComponentType{cons("system")}
     
     
     

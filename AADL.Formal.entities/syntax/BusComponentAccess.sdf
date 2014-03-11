@@ -11,33 +11,21 @@ exports
   context-free syntax
   	DefiningDataComponentAccessIdentifier ":"
   	  "provides" "bus" "access"
-  	  BusUniqueComponentClassifierReference    -> BusAccessSpec{cons("ProvidesBusAccessSpecReference")}
+  	  BusAccessSpecReference    -> BusAccessSpec{cons("ProvidesBusAccessSpec")}
   	
   	DefiningDataComponentAccessIdentifier ":"
   	  "requires" "bus" "access"
-  	  BusUniqueComponentClassifierReference    -> BusAccessSpec{cons("RequiresBusAccessSpecReference")}
-  	
-  	DefiningDataComponentAccessIdentifier ":"
-  	  "provides" "bus" "access"
-  	  PrototypeIdentifier                       -> BusAccessSpec{cons("ProvidesBusAccessSpecIdentifier")}
-  	
-  	DefiningDataComponentAccessIdentifier ":"
-  	  "requires" "bus" "access"
-  	  PrototypeIdentifier                       -> BusAccessSpec{cons("RequiresBusAccessSpecIdentifier")}
+  	  BusAccessSpecReference    -> BusAccessSpec{cons("RequiresBusAccessSpec")}
   	
   	DefiningDataComponentAccessIdentifier ":" "refined" "to"
   	  "provides" "bus" "access"
-  	  BusUniqueComponentClassifierReference    -> BusAccessRefinement{cons("ProvidesBusAccessRefinementReference")}
+  	  BusAccessSpecReference    -> BusAccessRefinement{cons("ProvidesBusAccessRefinement")}
   	
   	DefiningDataComponentAccessIdentifier ":" "refined" "to"
   	  "requires" "bus" "access"
-  	  BusUniqueComponentClassifierReference    -> BusAccessRefinement{cons("RequiresBusAccessRefinementReference")}
+  	  BusAccessSpecReference    -> BusAccessRefinement{cons("RequiresBusAccessRefinement")}
   	
-  	DefiningDataComponentAccessIdentifier ":" "refined" "to"
-  	  "provides" "bus" "access"
-  	  PrototypeIdentifier                       -> BusAccessRefinement{cons("ProvidesBusAccessRefinementIdentifier")}
+  	BusUniqueComponentClassifierReference    -> BusAccessSpecReference
+  	PrototypeIdentifier                      -> BusAccessSpecReference
   	
-  	DefiningDataComponentAccessIdentifier ":" "refined" "to"
-  	  "requires" "bus" "access"
-  	  PrototypeIdentifier                       -> BusAccessRefinement{cons("RequiresBusAccessRefinementIdentifier")}
   	

@@ -15,53 +15,396 @@ exports
   
 
   context-free syntax
-  	Prototype+                          -> PrototypeMedium{cons("Prototype_Medium")}
-  	NoneStatement                       -> PrototypeMedium
-    Subcomponent+                       -> SubcomponentMedium{cons("Subcomponent_Medium")}
-    NoneStatement                       -> SubcomponentMedium
-    SubprogramCallSequence+             -> SubprogramCallSequenceMedium{cons("SubprogramCallSequence_Medium")}
-    NoneStatement                       -> SubprogramCallSequenceMedium
-    Connection+                         -> ConnectionMedium{cons("Connection_Medium")}
-   	NoneStatement                       -> ConnectionMedium
-    FlowImplementation+                 -> FlowsMedium{cons("Flows_Medium")}
-    EndToEndFlowSpec+                   -> FlowsMedium{cons("Flows_Medium")}
-   	NoneStatement                       -> FlowsMedium
-    PropertyAssociation+                -> PropertiesMedium{cons("Properties_Medium")}
-    ContainedPropertyAssociation+       -> PropertiesMedium{cons("Properties_Medium")}
-   	NoneStatement                       -> PropertiesMedium
+  	"prototypes" Prototype+                          -> PrototypeMediumCom{cons("Prototypes")}
+  	"prototypes" NoneStatement                       -> PrototypeMediumCom{cons("Prototypes")}
+  	
+    "subcomponents" Subcomponent+                       -> SubcomponentMediumCom{cons("Subcomponents")}
+    "subcomponents" NoneStatement                       -> SubcomponentMediumCom{cons("Subcomponents")}
+    
+    "call" SubprogramCallSequence+             -> SubprogramCallSequenceMediumCom{cons("SubprogramCallSequences")}
+    "call" NoneStatement                       -> SubprogramCallSequenceMediumCom{cons("SubprogramCallSequences")}
+    
+    "connections" Connection+                         -> ConnectionMediumCom{cons("Connections")}
+   	"connections" NoneStatement                       -> ConnectionMediumCom{cons("Connections")}
    	
-  	ComponentCategory "implememtation" DefiningComplementationImplementationName
-  	  PrototypeBindings?
-  	("prototypes" PrototypeMedium)?
-  	("subcomponent" SubcomponentMedium)?
-  	("call" SubprogramCallSequenceMedium)?
-  	("connections" ConnectionMedium)?
-  	("flows" FlowsMedium)?
-  	ModesSubclause?
-  	("properties" PropertiesMedium)?
-  	AnnexSubclause*?
-  	"end" DefiningComplementationImplementationName ";" -> ComponentImplementation{cons("Component_Implementation")}
-  	
-  	
-  	ComponentCategory "implememtation" DefiningComplementationImplementationName
-  	"extends" UniqueComponentImplementationReference
-  	  PrototypeBindings?
-  	("prototypes" PrototypeMedium)?
-  	("subcomponent" SubcomponentMedium)?
-  	("call" SubprogramCallSequenceMedium)?
-  	("connections" ConnectionMedium)?
-  	("flows" FlowsMedium)?
-  	ModesSubclause?
-  	("properties" PropertiesMedium)?
-  	AnnexSubclause*?
-  	"end" DefiningComplementationImplementationName ";" -> ComponentImplementationExtension{cons("Component_Implementation_Exension")}
-  	
+    "flows" FlowImplementation+                 -> FlowsMediumCom{cons("Flowss")}
+    "flows" EndToEndFlowSpec+                   -> FlowsMediumCom{cons("Flowss")}
+   	"flows" NoneStatement                       -> FlowsMediumCom{cons("Flowss")}
+   	
+   	 PropertyAssociation                                       -> ComponentPropertys
+     ContainedPropertyAssociation                              -> ComponentPropertys
+     "properties" ComponentPropertys+                          -> PropertiesMediumCom{cons("Propertiess")}
+    %%"properties" PropertyAssociation+                -> PropertiesMediumCom{cons("Propertiess")}
+    %%"properties" ContainedPropertyAssociation+       -> PropertiesMediumCom{cons("Propertiess")}
+   	"properties" NoneStatement                       -> PropertiesMediumCom{cons("Propertiess")}
+   	
   	ComponentTypeIdentifier "." ComponentImplementationIdentifier  -> ComponentImplementationName{cons("ComponentImplementationName")}
   	ComponentImplementationName                                    -> DefiningComplementationImplementationName
   	
   	(PackageName "::")? ComponentImplementationName  -> UniqueComponentImplementationReference{cons("UniqueComponentImplementationReference")}
   	
+  	"abstract" "implementation" DefiningComplementationImplementationName
+  	  PrototypeBindings?
+    PrototypeMediumCom?
+  	SubcomponentMediumCom?
+  	SubprogramCallSequenceMediumCom?
+  	ConnectionMediumCom?
+  	FlowsMediumCom?
+  	ModesSubclause?
+  	PropertiesMediumCom?
+  	%%AnnexSubclause*
+  	"end" DefiningComplementationImplementationName ";" -> ComponentImplementation{cons("abstract_implementation")}
   	
+  	
+  	"abstract" "implementation" DefiningComplementationImplementationName
+  	"extends" UniqueComponentImplementationReference
+  	  PrototypeBindings?
+  	PrototypeMediumCom?
+  	SubcomponentMediumCom?
+  	SubprogramCallSequenceMediumCom?
+  	ConnectionMediumCom?
+  	FlowsMediumCom?
+  	ModesSubclause?
+  	PropertiesMediumCom?
+  	%%AnnexSubclause*
+  	"end" DefiningComplementationImplementationName ";" -> ComponentImplementationExtension{cons("abstract_implementation_exension")}
+  	
+  	"data" "implementation" DefiningComplementationImplementationName
+  	  PrototypeBindings?
+    PrototypeMediumCom?
+  	SubcomponentMediumCom?
+  	SubprogramCallSequenceMediumCom?
+  	ConnectionMediumCom?
+  	FlowsMediumCom?
+  	ModesSubclause?
+  	PropertiesMediumCom?
+  	%%AnnexSubclause*
+  	"end" DefiningComplementationImplementationName ";" -> ComponentImplementation{cons("data_implementation")}
+  	
+  	
+  	"data" "implementation" DefiningComplementationImplementationName
+  	"extends" UniqueComponentImplementationReference
+  	  PrototypeBindings?
+  	PrototypeMediumCom?
+  	SubcomponentMediumCom?
+  	SubprogramCallSequenceMediumCom?
+  	ConnectionMediumCom?
+  	FlowsMediumCom?
+  	ModesSubclause?
+  	PropertiesMediumCom?
+  	%%AnnexSubclause*
+  	"end" DefiningComplementationImplementationName ";" -> ComponentImplementationExtension{cons("data_implementation_exension")}
+  	
+  	"subprogram" "implementation" DefiningComplementationImplementationName
+  	  PrototypeBindings?
+    PrototypeMediumCom?
+  	SubcomponentMediumCom?
+  	SubprogramCallSequenceMediumCom?
+  	ConnectionMediumCom?
+  	FlowsMediumCom?
+  	ModesSubclause?
+  	PropertiesMediumCom?
+  	%%AnnexSubclause*
+  	"end" DefiningComplementationImplementationName ";" -> ComponentImplementation{cons("subprogram_implementation")}
+  	
+  	
+  	"subprogram" "implementation" DefiningComplementationImplementationName
+  	"extends" UniqueComponentImplementationReference
+  	  PrototypeBindings?
+  	PrototypeMediumCom?
+  	SubcomponentMediumCom?
+  	SubprogramCallSequenceMediumCom?
+  	ConnectionMediumCom?
+  	FlowsMediumCom?
+  	ModesSubclause?
+  	PropertiesMediumCom?
+  	%%AnnexSubclause*
+  	"end" DefiningComplementationImplementationName ";" -> ComponentImplementationExtension{cons("subprogram_implementation_exension")}
+  	
+  	"subprogram" "group" "implementation" DefiningComplementationImplementationName
+  	  PrototypeBindings?
+    PrototypeMediumCom?
+  	SubcomponentMediumCom?
+  	SubprogramCallSequenceMediumCom?
+  	ConnectionMediumCom?
+  	FlowsMediumCom?
+  	ModesSubclause?
+  	PropertiesMediumCom?
+  	%%AnnexSubclause*
+  	"end" DefiningComplementationImplementationName ";" -> ComponentImplementation{cons("subprogram_group_implementation")}
+  	
+  	
+  	"subprogram" "group" "implementation" DefiningComplementationImplementationName
+  	"extends" UniqueComponentImplementationReference
+  	  PrototypeBindings?
+  	PrototypeMediumCom?
+  	SubcomponentMediumCom?
+  	SubprogramCallSequenceMediumCom?
+  	ConnectionMediumCom?
+  	FlowsMediumCom?
+  	ModesSubclause?
+  	PropertiesMediumCom?
+  	%%AnnexSubclause*
+  	"end" DefiningComplementationImplementationName ";" -> ComponentImplementationExtension{cons("subprogram_group_implementation_exension")}
+  	
+  	"thread" "implementation" DefiningComplementationImplementationName
+  	  PrototypeBindings?
+    PrototypeMediumCom?
+  	SubcomponentMediumCom?
+  	SubprogramCallSequenceMediumCom?
+  	ConnectionMediumCom?
+  	FlowsMediumCom?
+  	ModesSubclause?
+  	PropertiesMediumCom?
+  	%%AnnexSubclause*
+  	"end" DefiningComplementationImplementationName ";" -> ComponentImplementation{cons("thread_implementation")}
+  	
+  	
+  	"thread" "implementation" DefiningComplementationImplementationName
+  	"extends" UniqueComponentImplementationReference
+  	  PrototypeBindings?
+  	PrototypeMediumCom?
+  	SubcomponentMediumCom?
+  	SubprogramCallSequenceMediumCom?
+  	ConnectionMediumCom?
+  	FlowsMediumCom?
+  	ModesSubclause?
+  	PropertiesMediumCom?
+  	%%AnnexSubclause*
+  	"end" DefiningComplementationImplementationName ";" -> ComponentImplementationExtension{cons("thread_implementation_exension")}
+  	
+  	"thread" "group" "implementation" DefiningComplementationImplementationName
+  	  PrototypeBindings?
+    PrototypeMediumCom?
+  	SubcomponentMediumCom?
+  	SubprogramCallSequenceMediumCom?
+  	ConnectionMediumCom?
+  	FlowsMediumCom?
+  	ModesSubclause?
+  	PropertiesMediumCom?
+  	%%AnnexSubclause*
+  	"end" DefiningComplementationImplementationName ";" -> ComponentImplementation{cons("thread_group_implementation")}
+  	
+  	"thread" "group" "implementation" DefiningComplementationImplementationName
+  	"extends" UniqueComponentImplementationReference
+  	  PrototypeBindings?
+  	PrototypeMediumCom?
+  	SubcomponentMediumCom?
+  	SubprogramCallSequenceMediumCom?
+  	ConnectionMediumCom?
+  	FlowsMediumCom?
+  	ModesSubclause?
+  	PropertiesMediumCom?
+  	%%AnnexSubclause*
+  	"end" DefiningComplementationImplementationName ";" -> ComponentImplementationExtension{cons("thread_group_implementation_exension")}
+  	
+  	"process" "implementation" DefiningComplementationImplementationName
+  	  PrototypeBindings?
+    PrototypeMediumCom?
+  	SubcomponentMediumCom?
+  	SubprogramCallSequenceMediumCom?
+  	ConnectionMediumCom?
+  	FlowsMediumCom?
+  	ModesSubclause?
+  	PropertiesMediumCom?
+  	%%AnnexSubclause*
+  	"end" DefiningComplementationImplementationName ";" -> ComponentImplementation{cons("process_implementation")}
+  	
+  	
+  	"process" "implementation" DefiningComplementationImplementationName
+  	"extends" UniqueComponentImplementationReference
+  	  PrototypeBindings?
+  	PrototypeMediumCom?
+  	SubcomponentMediumCom?
+  	SubprogramCallSequenceMediumCom?
+  	ConnectionMediumCom?
+  	FlowsMediumCom?
+  	ModesSubclause?
+  	PropertiesMediumCom?
+  	%%AnnexSubclause*
+  	"end" DefiningComplementationImplementationName ";" -> ComponentImplementationExtension{cons("process_implementation_exension")}
+  	
+  	"memory" "implementation" DefiningComplementationImplementationName
+  	  PrototypeBindings?
+    PrototypeMediumCom?
+  	SubcomponentMediumCom?
+  	SubprogramCallSequenceMediumCom?
+  	ConnectionMediumCom?
+  	FlowsMediumCom?
+  	ModesSubclause?
+  	PropertiesMediumCom?
+  	%%AnnexSubclause*
+  	"end" DefiningComplementationImplementationName ";" -> ComponentImplementation{cons("memory_implementation")}
+  	
+  	
+  	"memory" "implementation" DefiningComplementationImplementationName
+  	"extends" UniqueComponentImplementationReference
+  	  PrototypeBindings?
+  	PrototypeMediumCom?
+  	SubcomponentMediumCom?
+  	SubprogramCallSequenceMediumCom?
+  	ConnectionMediumCom?
+  	FlowsMediumCom?
+  	ModesSubclause?
+  	PropertiesMediumCom?
+  	%%AnnexSubclause*
+  	"end" DefiningComplementationImplementationName ";" -> ComponentImplementationExtension{cons("memory_implementation_exension")}
+  	
+  	"processor" "implementation" DefiningComplementationImplementationName
+  	  PrototypeBindings?
+    PrototypeMediumCom?
+  	SubcomponentMediumCom?
+  	SubprogramCallSequenceMediumCom?
+  	ConnectionMediumCom?
+  	FlowsMediumCom?
+  	ModesSubclause?
+  	PropertiesMediumCom?
+  	%%AnnexSubclause*
+  	"end" DefiningComplementationImplementationName ";" -> ComponentImplementation{cons("processor_implementation")}
+  	
+  	
+  	"processor" "implementation" DefiningComplementationImplementationName
+  	"extends" UniqueComponentImplementationReference
+  	  PrototypeBindings?
+  	PrototypeMediumCom?
+  	SubcomponentMediumCom?
+  	SubprogramCallSequenceMediumCom?
+  	ConnectionMediumCom?
+  	FlowsMediumCom?
+  	ModesSubclause?
+  	PropertiesMediumCom?
+  	%%AnnexSubclause*
+  	"end" DefiningComplementationImplementationName ";" -> ComponentImplementationExtension{cons("processor_implementation_exension")}
+  	
+  	"bus" "implementation" DefiningComplementationImplementationName
+  	  PrototypeBindings?
+    PrototypeMediumCom?
+  	SubcomponentMediumCom?
+  	SubprogramCallSequenceMediumCom?
+  	ConnectionMediumCom?
+  	FlowsMediumCom?
+  	ModesSubclause?
+  	PropertiesMediumCom?
+  	%%AnnexSubclause*
+  	"end" DefiningComplementationImplementationName ";" -> ComponentImplementation{cons("bus_implementation")}
+  	
+  	
+  	"bus" "implementation" DefiningComplementationImplementationName
+  	"extends" UniqueComponentImplementationReference
+  	  PrototypeBindings?
+  	PrototypeMediumCom?
+  	SubcomponentMediumCom?
+  	SubprogramCallSequenceMediumCom?
+  	ConnectionMediumCom?
+  	FlowsMediumCom?
+  	ModesSubclause?
+  	PropertiesMediumCom?
+  	%%AnnexSubclause*
+  	"end" DefiningComplementationImplementationName ";" -> ComponentImplementationExtension{cons("bus_implementation_exension")}
+  	
+  	"device" "implementation" DefiningComplementationImplementationName
+  	  PrototypeBindings?
+    PrototypeMediumCom?
+  	SubcomponentMediumCom?
+  	SubprogramCallSequenceMediumCom?
+  	ConnectionMediumCom?
+  	FlowsMediumCom?
+  	ModesSubclause?
+  	PropertiesMediumCom?
+  	%%AnnexSubclause*
+  	"end" DefiningComplementationImplementationName ";" -> ComponentImplementation{cons("device_implementation")}
+  	
+  	
+  	"device" "implementation" DefiningComplementationImplementationName
+  	"extends" UniqueComponentImplementationReference
+  	  PrototypeBindings?
+  	PrototypeMediumCom?
+  	SubcomponentMediumCom?
+  	SubprogramCallSequenceMediumCom?
+  	ConnectionMediumCom?
+  	FlowsMediumCom?
+  	ModesSubclause?
+  	PropertiesMediumCom?
+  	%%AnnexSubclause*
+  	"end" DefiningComplementationImplementationName ";" -> ComponentImplementationExtension{cons("device_implementation_exension")}
+  	
+  	"virtual" "processor" "implementation" DefiningComplementationImplementationName
+  	  PrototypeBindings?
+    PrototypeMediumCom?
+  	SubcomponentMediumCom?
+  	SubprogramCallSequenceMediumCom?
+  	ConnectionMediumCom?
+  	FlowsMediumCom?
+  	ModesSubclause?
+  	PropertiesMediumCom?
+  	%%AnnexSubclause*
+  	"end" DefiningComplementationImplementationName ";" -> ComponentImplementation{cons("virtual_processor_implementation")}
+  	
+  	
+  	"virtual" "processor" "implementation" DefiningComplementationImplementationName
+  	"extends" UniqueComponentImplementationReference
+  	  PrototypeBindings?
+  	PrototypeMediumCom?
+  	SubcomponentMediumCom?
+  	SubprogramCallSequenceMediumCom?
+  	ConnectionMediumCom?
+  	FlowsMediumCom?
+  	ModesSubclause?
+  	PropertiesMediumCom?
+  	%%AnnexSubclause*
+  	"end" DefiningComplementationImplementationName ";" -> ComponentImplementationExtension{cons("virtual_processor_implementation_exension")}
+  	
+  	"virtual" "bus" "implementation" DefiningComplementationImplementationName
+  	  PrototypeBindings?
+    PrototypeMediumCom?
+  	SubcomponentMediumCom?
+  	SubprogramCallSequenceMediumCom?
+  	ConnectionMediumCom?
+  	FlowsMediumCom?
+  	ModesSubclause?
+  	PropertiesMediumCom?
+  	%%AnnexSubclause*
+  	"end" DefiningComplementationImplementationName ";" -> ComponentImplementation{cons("virtual_bus_implementation")}
+  	
+  	
+  	"virtual" "bus" "implementation" DefiningComplementationImplementationName
+  	"extends" UniqueComponentImplementationReference
+  	  PrototypeBindings?
+  	PrototypeMediumCom?
+  	SubcomponentMediumCom?
+  	SubprogramCallSequenceMediumCom?
+  	ConnectionMediumCom?
+  	FlowsMediumCom?
+  	ModesSubclause?
+  	PropertiesMediumCom?
+  	%%AnnexSubclause*
+  	"end" DefiningComplementationImplementationName ";" -> ComponentImplementationExtension{cons("virtual_bus_implementation_exension")}
+  	
+  	"system" "implementation" DefiningComplementationImplementationName
+  	  PrototypeBindings?
+    PrototypeMediumCom?
+  	SubcomponentMediumCom?
+  	SubprogramCallSequenceMediumCom?
+  	ConnectionMediumCom?
+  	FlowsMediumCom?
+  	ModesSubclause?
+  	PropertiesMediumCom?
+  	%%AnnexSubclause*
+  	"end" DefiningComplementationImplementationName ";" -> ComponentImplementation{cons("system_implementation")}
+  	
+  	
+  	"system" "implementation" DefiningComplementationImplementationName
+  	"extends" UniqueComponentImplementationReference
+  	  PrototypeBindings?
+  	PrototypeMediumCom?
+  	SubcomponentMediumCom?
+  	SubprogramCallSequenceMediumCom?
+  	ConnectionMediumCom?
+  	FlowsMediumCom?
+  	ModesSubclause?
+  	PropertiesMediumCom?
+  	%%AnnexSubclause*
+  	"end" DefiningComplementationImplementationName ";" -> ComponentImplementationExtension{cons("abstract_implementation_exension")}
   	
   	
   	

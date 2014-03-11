@@ -10,23 +10,31 @@ exports
 
   context-free syntax
   	DefiningParameterIdentifier ":"
-  	  InOut "parameter"
-  	  DataUniqueComponentClassifierReference    -> ParameterSpec{cons("ParameterSpecReference")}
+  	  "in" "parameter"
+  	  ParameterSpecReference    -> ParameterSpec{cons("InParameterSpec")}
+  	  
+  	DefiningParameterIdentifier ":"
+  	  "out" "parameter"
+  	  ParameterSpecReference    -> ParameterSpec{cons("OutParameterSpec")}
     
     DefiningParameterIdentifier ":"
-  	  InOut "parameter"
-  	  PrototypeIdentifier                       -> ParameterSpec{cons("ParameterSpecIdentifier")}
+  	  "in" "out" "parameter"
+  	  ParameterSpecReference    -> ParameterSpec{cons("InOutParameterSpec")}
+  	  
+    DefiningParameterIdentifier ":" "refined" "to"
+  	  "in" "parameter"
+  	  ParameterSpecReference    -> ParameterRefinement{cons("InParameterRefinement")}
     
     DefiningParameterIdentifier ":" "refined" "to"
-  	  InOut "parameter"
-  	  DataUniqueComponentClassifierReference    -> ParameterRefinement{cons("ParameterRefinementReference")}
+  	  "out" "parameter"
+  	  ParameterSpecReference    -> ParameterRefinement{cons("OutParameterRefinement")}
     
     DefiningParameterIdentifier ":" "refined" "to"
-  	  InOut "parameter"
-  	  PrototypeIdentifier                       -> ParameterRefinement{cons("ParameterRefinementIdentifier")}
-    
-    
-    
+  	  "in" "out" "parameter"
+  	  ParameterSpecReference    -> ParameterRefinement{cons("InOutParameterRefinement")} 
+ 
+    DataUniqueComponentClassifierReference     -> ParameterSpecReference
+    PrototypeIdentifier                        -> ParameterSpecReference
     
     
     

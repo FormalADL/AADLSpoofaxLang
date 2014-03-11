@@ -12,9 +12,8 @@ exports
   
 
   context-free syntax
-  	"parameter"  SourceParameterReference ConnectionSymbol
-  	DestinationParameterReference                       -> ParameterConnection{cons("ParameterConnection")}
-  	
+  	"parameter"  SourceParameterReference "->" DestinationParameterReference                       -> ParameterConnection{cons("ParameterConnection")}
+  	"parameter"  SourceParameterReference "<->" DestinationParameterReference                       -> ParameterConnection{cons("ParameterConnection")}
   	"parameter"    -> ParameterConnectionRefinement{cons("parameter")}
   	
   	ComponentTypeParameterIdentifier ("." DataSubcomponentIdentifier)?   -> ParameterReference{cons("ComponentTypeParameterIdentifier")}
@@ -25,10 +24,11 @@ exports
   	ComponentTypeFeatureGroupIdentifier "." ElementDataAccessIdentifier  -> ParameterReference{cons("ComponentTypeFeatureGroupIdentifier_ElementDataAccessIdentifier")}
   	ComponentTypeFeatureGroupIdentifier "." ElementPortOrParameterIdentifier  -> ParameterReference{cons("ComponentTypeFeatureGroupIdentifier_ElementPortOrParameterIdentifier")}
   	
-  	ParameterReference               -> SourceParameterReference
-  	ParameterReference               -> DestinationParameterReference
+  	ParameterReferences               -> SourceParameterReference
+  	ParameterReferences               -> DestinationParameterReference
   	
-  	
+  	Identifier     -> ParameterReferences 
+  	Identifier "." Identifier -> ParameterReferences{cons("ComIdentifier")}
   	
   	
   	

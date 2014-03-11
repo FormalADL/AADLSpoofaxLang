@@ -18,7 +18,7 @@ exports
    lexical restrictions
    	Identifier -/- [a-zA-z0-9]
    	Identifier -/- [\_]
-   	ID         -/- [a-zA-Z0-9\_]
+   	ID         -/- [a-zA-Z0-9\_\$]
    	
    	
    	

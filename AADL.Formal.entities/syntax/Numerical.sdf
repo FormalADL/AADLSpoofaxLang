@@ -7,7 +7,7 @@ imports Character
 exports
 
    lexical syntax
-   	{Digit "_"}*           -> Numeral
+   	Digit+                        -> Numeral
    	[eE] "+"? Numeral             -> Exponent
    	[eE] "-" Numeral              -> Exponent
    	[eE] "+" Numeral              -> PositiveExponent

@@ -19,56 +19,182 @@ exports
   	UniqueComponentClassifierReference PrototypeBindings -> UniqueComponentClassifierReferences{cons("UniqueComponentClassifierReferences")}
   	ArrayDimensions                                  -> ArrayDimensionses
   	ArrayDimensions ArrayElementImplementationList   -> ArrayDimensionses{cons("ArrayDimensionses")}
-  	"{" SubcomponentPropertyAssociation+ "}"         -> SubcomponentPropertyAssociations{cons("SubcomponentPropertyAssociations")}
+  	"{" PropertyAssociation+ "}"         -> SubcomponentPropertyAssociations{cons("SubcomponentPropertyAssociations")}
   	"{" ContainedPropertyAssociation+ "}"            -> ContainedPropertyAssociations{cons("ContainedPropertyAssociations")}
   	
-  	DefiningSubcomponentIdentifier ":" ComponentCategory
-  	UniqueComponentClassifierReferences?
-  	ArrayDimensionses?
-  	SubcomponentPropertyAssociations?
-  	ComponentInModes?                     -> Subcomponent{cons("Subcomponent")}
+  	SubcomponentPropertyAssociations+                -> PropertyAssociations{cons("PropertyAssociations")}
+  	ContainedPropertyAssociations+                   -> PropertyAssociations{cons("PropertyAssociations")}
   	
-  	DefiningSubcomponentIdentifier ":" ComponentCategory
-  	PrototypeIdentifier?
-  	ArrayDimensionses?
-  	SubcomponentPropertyAssociations?
-  	ComponentInModes?                     -> Subcomponent{cons("Subcomponent")}
+  	UniqueComponentClassifierReferences              -> UniqueComponentClassifier 
+  	%%PrototypeIdentifier                              -> UniqueComponentClassifier
   	
-  	DefiningSubcomponentIdentifier ":" ComponentCategory
-  	UniqueComponentClassifierReferences?
+  	DefiningSubcomponentIdentifier ":" "abstract"
+  	UniqueComponentClassifier?
   	ArrayDimensionses?
-    ContainedPropertyAssociations?
-  	ComponentInModes?                     -> Subcomponent{cons("Subcomponent")}
+  	PropertyAssociations?
+  	ComponentInModes? ";"                    -> Subcomponent{cons("Abstract_Subcomponent")}
   	
-  	DefiningSubcomponentIdentifier ":" ComponentCategory
-  	PrototypeIdentifier?
+  	DefiningSubcomponentIdentifier ":" "refined to" "abstract"
+  	UniqueComponentClassifier?
   	ArrayDimensionses?
-  	ContainedPropertyAssociations?
-  	ComponentInModes?                     -> Subcomponent{cons("Subcomponent")}
+  	PropertyAssociations?
+  	ComponentInModes? ";"                     -> SubcomponentRefinement{cons("Abstract_Subcomponent_Refinement")}
   	
-  	DefiningSubcomponentIdentifier ":" "refined to" ComponentCategory
-  	UniqueComponentClassifierReferences?
+  	DefiningSubcomponentIdentifier ":" "data"
+  	UniqueComponentClassifier?
   	ArrayDimensionses?
-  	SubcomponentPropertyAssociations?
-  	ComponentInModes?                     -> SubcomponentRefinement{cons("Subcomponent_Refinement")}
+  	PropertyAssociations?
+  	ComponentInModes? ";"                    -> Subcomponent{cons("Data_Subcomponent")}
   	
-  	DefiningSubcomponentIdentifier ":" "refined to" ComponentCategory
-  	PrototypeIdentifier?
+  	DefiningSubcomponentIdentifier ":" "refined to" "data"
+  	UniqueComponentClassifier?
   	ArrayDimensionses?
-  	SubcomponentPropertyAssociations?
-  	ComponentInModes?                     -> SubcomponentRefinement{cons("Subcomponent_Refinement")}
+  	PropertyAssociations?
+  	ComponentInModes? ";"                     -> SubcomponentRefinement{cons("Data_Subcomponent_Refinement")}
   	
-  	DefiningSubcomponentIdentifier ":" "refined to" ComponentCategory
-  	UniqueComponentClassifierReferences?
+  	DefiningSubcomponentIdentifier ":" "subprogram"
+  	UniqueComponentClassifier?
   	ArrayDimensionses?
-  	ContainedPropertyAssociations?
-  	ComponentInModes?                     -> SubcomponentRefinement{cons("Subcomponent_Refinement")}
+  	PropertyAssociations?
+  	ComponentInModes? ";"                    -> Subcomponent{cons("Subprogram_Subcomponent")}
   	
-  	DefiningSubcomponentIdentifier ":" "refined to" ComponentCategory
-  	PrototypeIdentifier?
+  	DefiningSubcomponentIdentifier ":" "refined to" "subprogram"
+  	UniqueComponentClassifier?
   	ArrayDimensionses?
-  	ContainedPropertyAssociations?
-  	ComponentInModes?                     -> SubcomponentRefinement{cons("Subcomponent_Refinement")}
+  	PropertyAssociations?
+  	ComponentInModes? ";"                     -> SubcomponentRefinement{cons("Subprogram_Subcomponent_Refinement")}
+  	
+  	DefiningSubcomponentIdentifier ":" "subprogram" "group"
+  	UniqueComponentClassifier?
+  	ArrayDimensionses?
+  	PropertyAssociations?
+  	ComponentInModes? ";"                    -> Subcomponent{cons("Subprogram_Group_Subcomponent")}
+  	
+  	DefiningSubcomponentIdentifier ":" "refined to" "subprogram" "group"
+  	UniqueComponentClassifier?
+  	ArrayDimensionses?
+  	PropertyAssociations?
+  	ComponentInModes? ";"                     -> SubcomponentRefinement{cons("Subprogram_Group_Subcomponent_Refinement")}
+  	
+  	DefiningSubcomponentIdentifier ":" "thread"
+  	UniqueComponentClassifier?
+  	ArrayDimensionses?
+  	PropertyAssociations?
+  	ComponentInModes? ";"                    -> Subcomponent{cons("Thread_Subcomponent")}
+  	
+  	DefiningSubcomponentIdentifier ":" "refined to" "thread"
+  	UniqueComponentClassifier?
+  	ArrayDimensionses?
+  	PropertyAssociations?
+  	ComponentInModes? ";"                     -> SubcomponentRefinement{cons("Thread_Subcomponent_Refinement")}
+  	
+  	DefiningSubcomponentIdentifier ":" "thread" "group"
+  	UniqueComponentClassifier?
+  	ArrayDimensionses?
+  	PropertyAssociations?
+  	ComponentInModes? ";"                    -> Subcomponent{cons("Thread_Group_Subcomponent")}
+  	
+  	DefiningSubcomponentIdentifier ":" "refined to" "thread" "group"
+  	UniqueComponentClassifier?
+  	ArrayDimensionses?
+  	PropertyAssociations?
+  	ComponentInModes? ";"                     -> SubcomponentRefinement{cons("Thread_Group_Subcomponent_Refinement")}
+  	
+  	DefiningSubcomponentIdentifier ":" "process"
+  	UniqueComponentClassifier?
+  	ArrayDimensionses?
+  	PropertyAssociations?
+  	ComponentInModes? ";"                    -> Subcomponent{cons("Process_Subcomponent")}
+  	
+  	DefiningSubcomponentIdentifier ":" "refined to" "process"
+  	UniqueComponentClassifier?
+  	ArrayDimensionses?
+  	PropertyAssociations?
+  	ComponentInModes? ";"                     -> SubcomponentRefinement{cons("Process_Subcomponent_Refinement")}
+  	
+  	DefiningSubcomponentIdentifier ":" "memory"
+  	UniqueComponentClassifier?
+  	ArrayDimensionses?
+  	PropertyAssociations?
+  	ComponentInModes? ";"                    -> Subcomponent{cons("Memory_Subcomponent")}
+  	
+  	DefiningSubcomponentIdentifier ":" "refined to" "memory"
+  	UniqueComponentClassifier?
+  	ArrayDimensionses?
+  	PropertyAssociations?
+  	ComponentInModes? ";"                     -> SubcomponentRefinement{cons("Memory_Subcomponent_Refinement")}
+  	
+  	DefiningSubcomponentIdentifier ":" "processor"
+  	UniqueComponentClassifier?
+  	ArrayDimensionses?
+  	PropertyAssociations?
+  	ComponentInModes? ";"                    -> Subcomponent{cons("Processor_Subcomponent")}
+  	
+  	DefiningSubcomponentIdentifier ":" "refined to" "processor"
+  	UniqueComponentClassifier?
+  	ArrayDimensionses?
+  	PropertyAssociations?
+  	ComponentInModes? ";"                     -> SubcomponentRefinement{cons("Processor_Subcomponent_Refinement")}
+  	
+  	DefiningSubcomponentIdentifier ":" "bus"
+  	UniqueComponentClassifier?
+  	ArrayDimensionses?
+  	PropertyAssociations?
+  	ComponentInModes? ";"                    -> Subcomponent{cons("Bus_Subcomponent")}
+  	
+  	DefiningSubcomponentIdentifier ":" "refined to" "bus"
+  	UniqueComponentClassifier?
+  	ArrayDimensionses?
+  	PropertyAssociations?
+  	ComponentInModes? ";"                     -> SubcomponentRefinement{cons("Bus_Subcomponent_Refinement")}
+  	
+  	DefiningSubcomponentIdentifier ":" "device"
+  	UniqueComponentClassifier?
+  	ArrayDimensionses?
+  	PropertyAssociations?
+  	ComponentInModes? ";"                    -> Subcomponent{cons("Device_Subcomponent")}
+  	
+  	DefiningSubcomponentIdentifier ":" "refined to" "device"
+  	UniqueComponentClassifier?
+  	ArrayDimensionses?
+  	PropertyAssociations?
+  	ComponentInModes? ";"                     -> SubcomponentRefinement{cons("Device_Subcomponent_Refinement")}
+  	
+  	DefiningSubcomponentIdentifier ":" "virtual" "processor"
+  	UniqueComponentClassifier?
+  	ArrayDimensionses?
+  	PropertyAssociations?
+  	ComponentInModes? ";"                    -> Subcomponent{cons("Virtual_Processor_Subcomponent")}
+  	
+  	DefiningSubcomponentIdentifier ":" "refined to" "virtual" "processor"
+  	UniqueComponentClassifier?
+  	ArrayDimensionses?
+  	PropertyAssociations?
+  	ComponentInModes? ";"                     -> SubcomponentRefinement{cons("Virtual_Processor_Subcomponent_Refinement")}
+  	
+  	DefiningSubcomponentIdentifier ":" "virtual" "bus"
+  	UniqueComponentClassifier?
+  	ArrayDimensionses?
+  	PropertyAssociations?
+  	ComponentInModes? ";"                    -> Subcomponent{cons("Virtual_Bus_Subcomponent")}
+  	
+  	DefiningSubcomponentIdentifier ":" "refined to" "virtual" "bus"
+  	UniqueComponentClassifier?
+  	ArrayDimensionses?
+  	PropertyAssociations?
+  	ComponentInModes? ";"                     -> SubcomponentRefinement{cons("Virtual_Bus_Subcomponent_Refinement")}
+  	
+  	DefiningSubcomponentIdentifier ":" "system"
+  	UniqueComponentClassifier?
+  	ArrayDimensionses?
+  	PropertyAssociations?
+  	ComponentInModes? ";"                    -> Subcomponent{cons("System_Subcomponent")}
+  	
+  	DefiningSubcomponentIdentifier ":" "refined to" "system"
+  	UniqueComponentClassifier?
+  	ArrayDimensionses?
+  	PropertyAssociations?
+  	ComponentInModes? ";"                     -> SubcomponentRefinement{cons("System_Refinement")}
   	
   	UniqueComponentTypeReference             -> UniqueComponentClassifierReference
   	UniqueComponentImplementationReference   -> UniqueComponentClassifierReference

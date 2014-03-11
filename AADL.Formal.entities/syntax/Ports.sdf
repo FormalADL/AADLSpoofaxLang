@@ -10,14 +10,42 @@ exports
   
 
   context-free syntax
-  	DefiningPortIdentifier ":" InOut PortType     -> PortSpec{cons("PortSpec")}
-  	DefiningPortIdentifier ":" "refined" "to" InOut PortType     -> PortRefinement{cons("PortRefinement")}
+  	DefiningPortIdentifier ":" "in" "data" "port" DataUniqueComponentClassifier?                   -> PortSpec{cons("In_Data_Port")}
+  	DefiningPortIdentifier ":" "refined" "to" "in" "data" "port" DataUniqueComponentClassifier?    -> PortRefinement{cons("In_Data_Port_Refinement")}
   	
-  	"data" "port" DataUniqueComponentClassifierReference?         -> PortType{cons("DataReference")}
-  	"data" "port" DataComponentPrototypeIdentifier?                -> PortType{cons("DataIdentifier")}
-  	"event" "data" "port" DataUniqueComponentClassifierReference?  -> PortType{cons("EventDataReference")}
-  	"event" "data" "port" DataComponentPrototypeIdentifier?       -> PortType{cons("EventDataIdentifier")}
-  	"event" "port"                                                -> PortType{cons("EventIdentifier")}
+  	DefiningPortIdentifier ":" "out" "data" "port" DataUniqueComponentClassifier?                   -> PortSpec{cons("Out_Data_Port")}
+  	DefiningPortIdentifier ":" "refined" "to" "out" "data" "port" DataUniqueComponentClassifier?    -> PortRefinement{cons("Out_Data_Port_Refinement")}
+  	
+  	DefiningPortIdentifier ":" "in" "out" "data" "port" DataUniqueComponentClassifier?                   -> PortSpec{cons("In_Out_Data_Port")}
+  	DefiningPortIdentifier ":" "refined" "to" "in" "out" "data" "port" DataUniqueComponentClassifier?    -> PortRefinement{cons("In_Data_Out_Port_Refinement")}
+  	
+  	
+  	DefiningPortIdentifier ":" "in" "event" "data" "port" DataUniqueComponentClassifier?                   -> PortSpec{cons("In_Event_Data_Port")}
+  	DefiningPortIdentifier ":" "refined" "to" "in" "event" "data" "port" DataUniqueComponentClassifier?    -> PortRefinement{cons("In_Event_Data_Port_Refinement")}
+  	
+  	DefiningPortIdentifier ":" "out" "event" "data" "port" DataUniqueComponentClassifier?                   -> PortSpec{cons("Out_Event_Data_Port")}
+  	DefiningPortIdentifier ":" "refined" "to" "out" "event" "data" "port" DataUniqueComponentClassifier?    -> PortRefinement{cons("Out_Event_Data_Port_Refinement")}
+  	
+  	DefiningPortIdentifier ":" "in" "out" "event" "data" "port" DataUniqueComponentClassifier?                   -> PortSpec{cons("In_Out_Event_Data_Port")}
+  	DefiningPortIdentifier ":" "refined" "to" "in" "out" "event" "data" "port" DataUniqueComponentClassifier?    -> PortRefinement{cons("In_Out_Event_Data_Port_Refinement")}
+  	
+  	DefiningPortIdentifier ":" "in" "event" "port" DataUniqueComponentClassifier?                   -> PortSpec{cons("In_Event_Port")}
+  	DefiningPortIdentifier ":" "refined" "to" "in" "event" "port" DataUniqueComponentClassifier?    -> PortRefinement{cons("In_Event_Port_Refinement")}
+  	
+  	DefiningPortIdentifier ":" "out" "event" "port" DataUniqueComponentClassifier?                   -> PortSpec{cons("Out_Event_Port")}
+  	DefiningPortIdentifier ":" "refined" "to" "out" "event" "port" DataUniqueComponentClassifier?    -> PortRefinement{cons("Out_Event_Port_Refinement")}
+  	
+  	DefiningPortIdentifier ":" "in" "out" "event" "port" DataUniqueComponentClassifier?                   -> PortSpec{cons("In__Out_Event_Port")}
+  	DefiningPortIdentifier ":" "refined" "to" "in" "out" "event" "port" DataUniqueComponentClassifier?    -> PortRefinement{cons("In_Out_Event_Port_Refinement")}
+  	
+  	
+  	
+  	DataUniqueComponentClassifierReference                        -> DataUniqueComponentClassifier
+  	DataComponentPrototypeIdentifier                              -> DataUniqueComponentClassifier
+  	
+  	%%"data" "port" DataUniqueComponentClassifier?                   -> PortType{cons("DataReference")}
+  	%%"event" "data" "port" DataUniqueComponentClassifierReference?  -> PortType{cons("EventDataReference")}
+  	%%"event" "port"                                                 -> PortType{cons("EventIdentifier")}
   	
   	
   	

@@ -19,6 +19,9 @@ exports
   	[0-9]                                -> Digit
   	[A-Z]                                -> UpperCaseIdentifierLetter
   	[a-z]                                -> LowerCaseIdentifierLetter
+  	[\t\r\n]                             -> FormatEffector
+  	[]                                   -> OtherControlCharacter    
+  context-free syntax
   	UpperCaseIdentifierLetter            -> IdentifierLetter 
     LowerCaseIdentifierLetter            -> IdentifierLetter 
   	
@@ -27,8 +30,6 @@ exports
   	SpaceCharater                  -> GraphicCharacter
   	SpecialCharater                -> GraphicCharacter
   	
-  	[\t\r\n]                           -> FormatEffector
-  	[]                                 -> OtherControlCharacter
   	
   	GraphicCharacter            -> Character
   	FormatEffector              -> Character

@@ -23,18 +23,11 @@ exports
   	InModesAndTransitions? ";"            -> FlowImplementation{cons("FlowImplementation")}
   	
   	
-  	FlowIdentifier ":" "flow" "source"
-  	  (SubcomponentFlowIdentifier "->" ConnectionIdentifier "->")*
-  	  OutFlowFeatureIdentifier                       -> FlowSourceImplementation{cons("FlowSourceImplementation")}
+  	FlowIdentifier ":" "flow" "source" (SubcomponentFlowIdentifier "->" ConnectionIdentifier "->")* OutFlowFeatureIdentifier                       -> FlowSourceImplementation{cons("FlowSourceImplementation")}
   	
-  	FlowIdentifier ":" "flow" "sink"
-  	  InFlowFeatureIdentifier
-  	  (ConnectionIdentifier "->" SubcomponentFlowIdentifier "->")* -> FlowSinkImplementation{cons("FlowSinkImplementation")}
+  	FlowIdentifier ":" "flow" "sink" InFlowFeatureIdentifier ("->" ConnectionIdentifier "->" SubcomponentFlowIdentifier)*                          -> FlowSinkImplementation{cons("FlowSinkImplementation")}
   	
-  	FlowIdentifier ":" "flow" "path"
-  	  InFlowFeatureIdentifier
-  	  (ConnectionIdentifier "->" SubcomponentFlowIdentifier "->")+ "->" ConnectionIdentifier
-  	  OutFlowFeatureIdentifier                       -> FlowPathImplementation{cons("FlowPathImplementation")}
+  	FlowIdentifier ":" "flow" "path" InFlowFeatureIdentifier (ConnectionIdentifier "->" SubcomponentFlowIdentifier "->")+ "->" ConnectionIdentifier "->" OutFlowFeatureIdentifier                       -> FlowPathImplementation{cons("FlowPathImplementation")}
   	
   	SubcomponentIdentifier ("." FlowSpecIdentifier)?  -> SubcomponentFlowIdentifier{cons("SubcomponentFlowIdentifier")}
   	DataComponentReference                            -> SubComponentFlowIdentifier
