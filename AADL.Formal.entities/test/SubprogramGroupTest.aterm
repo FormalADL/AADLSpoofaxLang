@@ -1,0 +1,106 @@
+Module(
+  "SubprogramGroupTest"
+, [ subprogram("filters", None(), None(), None(), None(), None(), "filters")
+  , subprogram_implementation(
+      ComponentImplementationName("filters", "basic")
+    , None()
+    , None()
+    , None()
+    , None()
+    , None()
+    , None()
+    , None()
+    , None()
+    , ComponentImplementationName("filters", "basic")
+    )
+  , subprogram_implementation(
+      ComponentImplementationName("filters", "LowPass")
+    , None()
+    , None()
+    , None()
+    , None()
+    , None()
+    , None()
+    , None()
+    , None()
+    , ComponentImplementationName("filters", "LowPass")
+    )
+  , subprogram_implementation(
+      ComponentImplementationName("filters", "HiPass")
+    , None()
+    , None()
+    , None()
+    , None()
+    , None()
+    , None()
+    , None()
+    , None()
+    , ComponentImplementationName("filters", "HiPass")
+    )
+  , subprogram_group(
+      "filter_library"
+    , None()
+    , Some(
+        Features(
+          [ SubcomponentAccessFeatureSpec(
+              ProvidesSubprogramAccessSpecReference("basic_acc", Some(UniqueComponentImplementationReference(None(), ComponentImplementationName("filters", "basic"))))
+            , None()
+            , None()
+            )
+          , SubcomponentAccessFeatureSpec(
+              ProvidesSubprogramAccessSpecReference("lowP_acc", Some(UniqueComponentImplementationReference(None(), ComponentImplementationName("filters", "LowPass"))))
+            , None()
+            , None()
+            )
+          , SubcomponentAccessFeatureSpec(
+              ProvidesSubprogramAccessSpecReference("hiP_acc", Some(UniqueComponentImplementationReference(None(), ComponentImplementationName("filters", "HiPass"))))
+            , None()
+            , None()
+            )
+          ]
+        )
+      )
+    , None()
+    , None()
+    , None()
+    , "filter_library"
+    )
+  , subprogram_group_implementation(
+      ComponentImplementationName("filter_library", "BLH")
+    , None()
+    , None()
+    , Some(
+        Subcomponents(
+          [ Subprogram_Subcomponent(
+              "basic_filter"
+            , Some(UniqueComponentImplementationReference(None(), ComponentImplementationName("filters", "basic")))
+            , None()
+            , None()
+            , None()
+            )
+          , Subprogram_Subcomponent(
+              "lowP_filter"
+            , Some(UniqueComponentImplementationReference(None(), ComponentImplementationName("filters", "LowPass")))
+            , None()
+            , None()
+            , None()
+            )
+          , Subprogram_Subcomponent(
+              "hiP_filter"
+            , Some(UniqueComponentImplementationReference(None(), ComponentImplementationName("filters", "LowPass")))
+            , None()
+            , None()
+            , None()
+            )
+          ]
+        )
+      )
+    , None()
+    , None()
+    , None()
+    , None()
+    , None()
+    , ComponentImplementationName("filter_library", "BLH")
+    )
+  ]
+)

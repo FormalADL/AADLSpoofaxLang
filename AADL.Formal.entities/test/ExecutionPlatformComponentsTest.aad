@@ -1,0 +1,95 @@
+module ExecutionPlatformComponentsTest
+--This is the test of processor
+processor Intel_Linux
+properties
+Hardware_Source_Language => VHDL;
+Hardware_Description_Source_Text =>
+"intel_vhdl_1, intel_vhdl_2";
+end Intel_Linux;
+
+processor implementation Intel_Linux.impl_01
+subcomponents
+HSRAM: memory RAM.Intel_RAM;
+end Intel_Linux.impl_01;
+
+memory RAM
+end RAM;
+
+memory implementation RAM.Intel_RAM
+end RAM.Intel_RAM;
+-- This is the test of virtual processor
+virtual processor custom
+properties
+Startup_Execution_Time => 15 ns;
+end custom;
+
+virtual processor implementation custom.secure
+subcomponents
+subs12: virtual bus secure.bit_12;
+end custom.secure;
+
+virtual bus secure
+end secure;
+
+virtual bus implementation secure.bit_12
+end secure.bit_12;
+--This is the test of memory
+memory RAM
+features
+bus01: requires bus access s1 :: Memory_bus;
+end RAM;
+
+bus memory_bus
+end memory_bus;
+
+memory implementation RAM.compRAM
+subcomponents
+HSRAM: memory XRAM.HSRAM;
+SRAM: memory XRAM.SRAM;
+end RAM.compRAM;
+
+memory XRAM
+end XRAM;
+
+memory implementation XRAM.SRAM
+end XRAM.SRAM;
+
+memory implementation XRAM.HSRAM
+end XRAM.HSRAM;
+--This is the test of bus
+bus memory_bus
+features
+NBA: requires bus access s1:: network_bus;
+end memory_bus;
+
+bus network_bus
+end network_bus;
+
+processor Intel_linux
+features
+MBA: requires bus access s1:: memory_bus;
+end Intel_linux;
+--This is the test of device
+device speed_sensor
+features
+BA2: requires bus access s1:: marine_bus;
+raw_rate: out data port;
+end speed_sensor; 
+
+bus marine_bus
+end marine_bus;
+
+bus implementation marine_bus.impl
+end marine_bus.impl;
+
+processor speed_processor
+features
+BA1: requires bus access s1:: marine_bus;
+end speed_processor;
+
+
+
+
+
+
+

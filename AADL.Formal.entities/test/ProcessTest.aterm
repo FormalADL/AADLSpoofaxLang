@@ -1,0 +1,63 @@
+Module(
+  "ProcessTest"
+, [ process(
+      "controller"
+    , None()
+    , Some(
+        Features(
+          [ PortFeatureSpec(In_Data_Port("input", None()), None(), None())
+          , PortFeatureSpec(Out_Data_Port("output", None()), None(), None())
+          ]
+        )
+      )
+    , None()
+    , None()
+    , None()
+    , "controller"
+    )
+  , process_implementation(
+      ComponentImplementationName("controller", "speed")
+    , None()
+    , None()
+    , Some(
+        Subcomponents(
+          [ Thread_Subcomponent(
+              "contral_input"
+            , Some(UniqueComponentImplementationReference(None(), ComponentImplementationName("control_in", "speed")))
+            , None()
+            , None()
+            , None()
+            )
+          , Thread_Subcomponent(
+              "contral_output"
+            , Some(ComponentTypeIdentifier(None(), "control_out"))
+            , None()
+            , None()
+            , None()
+            )
+          , Thread_Group_Subcomponent(
+              "contral_threads"
+            , Some(ComponentTypeIdentifier(None(), "control_all"))
+            , None()
+            , None()
+            , None()
+            )
+          , Data_Subcomponent(
+              "point_data_set"
+            , Some(ComponentTypeIdentifier(None(), "setpoint_data"))
+            , None()
+            , None()
+            , None()
+            )
+          ]
+        )
+      )
+    , None()
+    , None()
+    , None()
+    , None()
+    , None()
+    , ComponentImplementationName("controller", "speed")
+    )
+  ]
+)

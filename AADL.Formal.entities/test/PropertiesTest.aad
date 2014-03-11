@@ -1,0 +1,87 @@
+module PropertiesTest
+--This is the test of Property Associatiions
+thread implementation algorithm.impl
+properties
+Period => timing::HiRate;
+PBA::Max_Control_Dimension => PBA::MAX_Size;
+end algorithm.impl;
+
+property set timing is 
+HiRate: constant Time => 5;
+end timing; 
+--This is the test of Contained Property Associatiions
+system cc_complete
+end cc_complete;
+
+system implementation cc_complete.impl
+subcomponents
+brake_pedal: device brake_pedal;
+cruise_control: system cruise_control.impl;
+throttle_actuator: device throttle_actuator;
+connections
+C1: port brake_pedal.brake_event -> cruise_control.brake_event;
+C2: port cruise_control.throttle_actuator -> throttle_actuator.throttle_setting;
+properties
+Compute_Execution_Time => 2 ms .. 15 ms  applies to cruise_control.cruise_low.control_algorithm;
+Required_Connection => false applies to cruise_control.cruise_low.adjust.out_port;
+end cc_complete.impl;
+
+system cruise_control
+features
+break_event: in event data port;
+throttle_setting: out data port;
+properties
+Period => 8 ms;
+end cruise_control;
+
+system implementation cruise_control.impl
+subcomponents
+data_in: process interface;
+control_law: process control.impl;
+connections
+C1: port brake_event -> data_in.break_event;
+C3: port data_in.out_port -> control_law.in_port;
+C5: port control_law.out_port -> throttle_setting;
+end cruise_control.impl;
+
+process control
+features
+in_port: in data port;
+out_port: out data port;
+properties
+Required_Connection => false applies to out_port;
+end control;
+
+process implementation control.impl
+subcomponents
+adjust: thread adjust_sensor_value.impl {Period => 10 ms;};
+control_algorithm: thread algorithm.impl;
+end control.impl;
+
+thread adjust_sensor_value
+features
+in_port: in data port;
+out_port: out data port;
+end adjust_sensor_value;
+
+thread implementation adjust_sensor_value.impl
+end adjust_sensor_value.impl;
+
+thread algorithm
+features
+in_port: in data port;
+out_port: out data port;
+end algorithm;
+
+thread implementation algorithm.impl
+end algorithm.impl;
+
+
+
+
+
+
+
+
+
+

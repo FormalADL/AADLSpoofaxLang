@@ -1,0 +1,42 @@
+Module(
+  "threadtest"
+, [ thread(
+      "control_laws"
+    , None()
+    , Some(
+        Features(
+          [ PortFeatureSpec(In_Data_Port("sensor_data", None()), None(), None())
+          , PortFeatureSpec(Out_Data_Port("cmd", None()), None(), None())
+          ]
+        )
+      )
+    , None()
+    , None()
+    , None()
+    , "control_laws"
+    )
+  , data("static_data", None(), None(), None(), None(), None(), "static_data")
+  , thread_implementation(
+      ComponentImplementationName("control_laws", "speed")
+    , None()
+    , None()
+    , Some(
+        Subcomponents(
+          [Data_Subcomponent(
+             "stability_data"
+           , Some(ComponentTypeIdentifier(None(), "static_data"))
+           , None()
+           , None()
+           , None()
+           )]
+        )
+      )
+    , None()
+    , None()
+    , None()
+    , None()
+    , None()
+    , ComponentImplementationName("control_laws", "speed")
+    )
+  ]
+)

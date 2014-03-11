@@ -1,0 +1,31 @@
+module SubprogramGroupTest
+
+subprogram filters
+end filters;
+
+subprogram implementation filters.basic
+end filters.basic;
+
+subprogram implementation filters.LowPass
+end filters.LowPass;
+
+subprogram implementation filters.HiPass
+end filters.HiPass;
+
+subprogram group filter_library
+features
+basic_acc: provides subprogram access
+filters.basic;
+lowP_acc: provides subprogram access
+filters.LowPass;
+hiP_acc: provides subprogram access
+filters.HiPass;
+end filter_library;
+
+subprogram group implementation
+filter_library.BLH
+subcomponents
+basic_filter: subprogram filters.basic;
+lowP_filter: subprogram filters.LowPass;
+hiP_filter: subprogram filters.LowPass;
+end filter_library.BLH;

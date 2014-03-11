@@ -1,0 +1,39 @@
+Module(
+  "threadpropertiestest"
+, [ thread(
+      "controller"
+    , None()
+    , None()
+    , None()
+    , None()
+    , Some(
+        ComponentPropertyAssociations(
+          amb(
+            [ PropertyAssociations(
+                [ PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Allowed_processor_Binding_Class")
+                  , None()
+                  , ComponentClassifierTerm(ComponentTypeIdentifier(None(), "marine_certified"))
+                  , None()
+                  )
+                ]
+              )
+            , ComponentTypePropertyAssociations(
+                [ ComponentTypePropertyAssociation(
+                    PropertyAssociation(
+                      UniquePropertyIdentifier(None(), "Allowed_processor_Binding_Class")
+                    , None()
+                    , ComponentClassifierTerm(ComponentTypeIdentifier(None(), "marine_certified"))
+                    , None()
+                    )
+                  )
+                ]
+              )
+            ]
+          )
+        )
+      )
+    , "controller"
+    )
+  ]
+)

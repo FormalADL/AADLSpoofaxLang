@@ -1,0 +1,274 @@
+Module(
+  "ExecutionPlatformComponentsTest"
+, [ processor(
+      "Intel_Linux"
+    , None()
+    , None()
+    , None()
+    , None()
+    , Some(
+        properties(
+          [ PropertyAssociation(UniquePropertyIdentifier(None(), "Hardware_Source_Language"), PropertyTerm(None(), "VHDL"), None())
+          , PropertyAssociation(
+              UniquePropertyIdentifier(None(), "Hardware_Description_Source_Text")
+            , StringPropertyConstantTerm(["intel_vhdl_1", "intel_vhdl_2"])
+            , None()
+            )
+          ]
+        )
+      )
+    , "Intel_Linux"
+    )
+  , processor_implementation(
+      ComponentImplementationName("Intel_Linux", "impl_01")
+    , None()
+    , None()
+    , Some(
+        Subcomponents(
+          [ Memory_Subcomponent(
+              "HSRAM"
+            , Some(UniqueComponentImplementationReference(None(), ComponentImplementationName("RAM", "Intel_RAM")))
+            , None()
+            , None()
+            , None()
+            )
+          ]
+        )
+      )
+    , None()
+    , None()
+    , None()
+    , None()
+    , None()
+    , ComponentImplementationName("Intel_Linux", "impl_01")
+    )
+  , memory("RAM", None(), None(), None(), None(), None(), "RAM")
+  , memory_implementation(
+      ComponentImplementationName("RAM", "Intel_RAM")
+    , None()
+    , None()
+    , None()
+    , None()
+    , None()
+    , None()
+    , None()
+    , None()
+    , ComponentImplementationName("RAM", "Intel_RAM")
+    )
+  , virtual_processor(
+      "custom"
+    , None()
+    , None()
+    , None()
+    , None()
+    , Some(
+        properties(
+          [ PropertyAssociation(
+              UniquePropertyIdentifier(None(), "Startup_Execution_Time")
+            , Signed_Aadlinteger(None(), "15", Some("ns"))
+            , None()
+            )
+          ]
+        )
+      )
+    , "custom"
+    )
+  , virtual_processor_implementation(
+      ComponentImplementationName("custom", "secure")
+    , None()
+    , None()
+    , Some(
+        Subcomponents(
+          [ Virtual_Bus_Subcomponent(
+              "subs12"
+            , Some(UniqueComponentImplementationReference(None(), ComponentImplementationName("secure", "bit_12")))
+            , None()
+            , None()
+            , None()
+            )
+          ]
+        )
+      )
+    , None()
+    , None()
+    , None()
+    , None()
+    , None()
+    , ComponentImplementationName("custom", "secure")
+    )
+  , virtual_bus("secure", None(), None(), None(), None(), None(), "secure")
+  , virtual_bus_implementation(
+      ComponentImplementationName("secure", "bit_12")
+    , None()
+    , None()
+    , None()
+    , None()
+    , None()
+    , None()
+    , None()
+    , None()
+    , ComponentImplementationName("secure", "bit_12")
+    )
+  , memory(
+      "RAM"
+    , None()
+    , Some(
+        Features(
+          [ SubcomponentAccessFeatureSpec(
+              RequiresBusAccessSpec("bus01", ComponentTypeIdentifier(Some(Pac_kageName([], "s1")), "Memory_bus"))
+            , None()
+            , None()
+            )
+          ]
+        )
+      )
+    , None()
+    , None()
+    , None()
+    , "RAM"
+    )
+  , bus("memory_bus", None(), None(), None(), None(), None(), "memory_bus")
+  , memory_implementation(
+      ComponentImplementationName("RAM", "compRAM")
+    , None()
+    , None()
+    , Some(
+        Subcomponents(
+          [ Memory_Subcomponent(
+              "HSRAM"
+            , Some(UniqueComponentImplementationReference(None(), ComponentImplementationName("XRAM", "HSRAM")))
+            , None()
+            , None()
+            , None()
+            )
+          , Memory_Subcomponent(
+              "SRAM"
+            , Some(UniqueComponentImplementationReference(None(), ComponentImplementationName("XRAM", "SRAM")))
+            , None()
+            , None()
+            , None()
+            )
+          ]
+        )
+      )
+    , None()
+    , None()
+    , None()
+    , None()
+    , None()
+    , ComponentImplementationName("RAM", "compRAM")
+    )
+  , memory("XRAM", None(), None(), None(), None(), None(), "XRAM")
+  , memory_implementation(
+      ComponentImplementationName("XRAM", "SRAM")
+    , None()
+    , None()
+    , None()
+    , None()
+    , None()
+    , None()
+    , None()
+    , None()
+    , ComponentImplementationName("XRAM", "SRAM")
+    )
+  , memory_implementation(
+      ComponentImplementationName("XRAM", "HSRAM")
+    , None()
+    , None()
+    , None()
+    , None()
+    , None()
+    , None()
+    , None()
+    , None()
+    , ComponentImplementationName("XRAM", "HSRAM")
+    )
+  , bus(
+      "memory_bus"
+    , None()
+    , Some(
+        Features(
+          [ SubcomponentAccessFeatureSpec(
+              RequiresBusAccessSpec("NBA", ComponentTypeIdentifier(Some(Pac_kageName([], "s1")), "network_bus"))
+            , None()
+            , None()
+            )
+          ]
+        )
+      )
+    , None()
+    , None()
+    , None()
+    , "memory_bus"
+    )
+  , bus("network_bus", None(), None(), None(), None(), None(), "network_bus")
+  , processor(
+      "Intel_linux"
+    , None()
+    , Some(
+        Features(
+          [ SubcomponentAccessFeatureSpec(
+              RequiresBusAccessSpec("MBA", ComponentTypeIdentifier(Some(Pac_kageName([], "s1")), "memory_bus"))
+            , None()
+            , None()
+            )
+          ]
+        )
+      )
+    , None()
+    , None()
+    , None()
+    , "Intel_linux"
+    )
+  , device(
+      "speed_sensor"
+    , None()
+    , Some(
+        Features(
+          [ SubcomponentAccessFeatureSpec(
+              RequiresBusAccessSpec("BA2", ComponentTypeIdentifier(Some(Pac_kageName([], "s1")), "marine_bus"))
+            , None()
+            , None()
+            )
+          , PortFeatureSpec(Out_Data_Port("raw_rate", None()), None(), None())
+          ]
+        )
+      )
+    , None()
+    , None()
+    , None()
+    , "speed_sensor"
+    )
+  , bus("marine_bus", None(), None(), None(), None(), None(), "marine_bus")
+  , bus_implementation(
+      ComponentImplementationName("marine_bus", "impl")
+    , None()
+    , None()
+    , None()
+    , None()
+    , None()
+    , None()
+    , None()
+    , None()
+    , ComponentImplementationName("marine_bus", "impl")
+    )
+  , processor(
+      "speed_processor"
+    , None()
+    , Some(
+        Features(
+          [ SubcomponentAccessFeatureSpec(
+              RequiresBusAccessSpec("BA1", ComponentTypeIdentifier(Some(Pac_kageName([], "s1")), "marine_bus"))
+            , None()
+            , None()
+            )
+          ]
+        )
+      )
+    , None()
+    , None()
+    , None()
+    , "speed_processor"
+    )
+  ]
+)

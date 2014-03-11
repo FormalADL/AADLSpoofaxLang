@@ -1,0 +1,22 @@
+module PropertyTypeDeclarationTest
+--This is the test of Property Type Declaration
+property set set_of_faults is
+bit_error: type aadlboolean;
+fault_category: type enumeration
+         (beingn, tolerated, catastrophic);
+fault_condition: type enumeration (okay, error,failed); 
+end set_of_faults;
+
+property set some_types is
+number_of_components: type aadlinteger 0 .. 25;
+metric_length_units: type units
+       (meters, kilometers => meters * 1000); 
+end set_of_faults;
+
+property set some_types is
+with some_types;
+   Depth_units: type units (feet, fathon => feet *6,
+                            shackle => fathom * 15);
+   working_depth: type range of aadlreal units marine_measures::Depth_units;
+   Metric_Length: type aadlreal units some_type::metric_length_units;
+end set_of_faults;

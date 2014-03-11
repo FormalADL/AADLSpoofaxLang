@@ -1,0 +1,26 @@
+module ThreadGroupTest
+
+thread group control
+features
+sensor_data: in data port;
+cmd: out data port;
+properties
+Period => 5 ms;
+end control;
+
+thread group implementation control.speed
+subcomponents
+control_algotihms: thread group
+control_algotihms;
+data_scaling: thread data_scaling;
+control_data: data control_data;
+end control.speed;
+
+data control_data
+end control_data;
+
+data data_scaling
+end data_scaling;
+
+data control_algotihms
+end control_algotihms;

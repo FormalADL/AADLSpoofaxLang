@@ -1,0 +1,16 @@
+module threadtest
+
+thread control_laws
+features
+sensor_data: in data port;
+cmd: out data port;
+end control_laws;
+
+data static_data
+end static_data;
+
+thread implementation control_laws.speed
+subcomponents
+stability_data:data
+static_data;
+end control_laws.speed;

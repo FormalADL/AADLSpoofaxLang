@@ -1,0 +1,15 @@
+module ProcessTest
+
+process controller
+features
+input: in data port;
+output: out data port;
+end controller;
+
+process implementation controller.speed
+subcomponents
+contral_input: thread control_in.speed;
+contral_output: thread control_out;
+contral_threads: thread group control_all;
+point_data_set: data setpoint_data;
+end controller.speed;

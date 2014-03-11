@@ -1,0 +1,73 @@
+Module(
+  "DataTest"
+, [ data("error_data", None(), None(), None(), None(), None(), "error_data")
+  , data(
+      "comm_error"
+    , None()
+    , None()
+    , None()
+    , None()
+    , Some(
+        properties(
+          [ PropertyAssociation(
+              UniquePropertyIdentifier(None(), "Source_data_Size")
+            , None()
+            , Signed_Aadlinteger(None(), "6", Some("bits"))
+            , None()
+            )
+          ]
+        )
+      )
+    , "comm_error"
+    )
+  , data(
+      "processor_error"
+    , None()
+    , None()
+    , None()
+    , None()
+    , Some(
+        properties(
+          [ PropertyAssociation(
+              UniquePropertyIdentifier(None(), "Source_data_Size")
+            , None()
+            , Signed_Aadlinteger(None(), "6", Some("bits"))
+            , None()
+            )
+          ]
+        )
+      )
+    , "processor_error"
+    )
+  , data_implementation(
+      ComponentImplementationName("error_data", "control")
+    , None()
+    , None()
+    , Some(
+        Subcomponents(
+          [ Data_Subcomponent(
+              "Comm_data"
+            , Some(ComponentTypeIdentifier(None(), "comm_error"))
+            , None()
+            , None()
+            , None()
+            )
+          , Data_Subcomponent(
+              "CPU_data"
+            , Some(ComponentTypeIdentifier(None(), "processor_error"))
+            , None()
+            , None()
+            , None()
+            )
+          ]
+        )
+      )
+    , None()
+    , None()
+    , None()
+    , None()
+    , None()
+    , ComponentImplementationName("error_data", "control")
+    )
+  ]
+)

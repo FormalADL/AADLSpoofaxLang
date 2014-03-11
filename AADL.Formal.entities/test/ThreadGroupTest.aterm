@@ -1,0 +1,69 @@
+Module(
+  "ThreadGroupTest"
+, [ thread_group(
+      "control"
+    , None()
+    , Some(
+        Features(
+          [ PortFeatureSpec(In_Data_Port("sensor_data", None()), None(), None())
+          , PortFeatureSpec(Out_Data_Port("cmd", None()), None(), None())
+          ]
+        )
+      )
+    , None()
+    , None()
+    , Some(
+        properties(
+          [ PropertyAssociation(
+              UniquePropertyIdentifier(None(), "Period")
+            , None()
+            , Signed_Aadlinteger(None(), "5", Some("ms"))
+            , None()
+            )
+          ]
+        )
+      )
+    , "control"
+    )
+  , thread_group_implementation(
+      ComponentImplementationName("control", "speed")
+    , None()
+    , None()
+    , Some(
+        Subcomponents(
+          [ Thread_Group_Subcomponent(
+              "control_algotihms"
+            , Some(ComponentTypeIdentifier(None(), "control_algotihms"))
+            , None()
+            , None()
+            , None()
+            )
+          , Thread_Subcomponent(
+              "data_scaling"
+            , Some(ComponentTypeIdentifier(None(), "data_scaling"))
+            , None()
+            , None()
+            , None()
+            )
+          , Data_Subcomponent(
+              "control_data"
+            , Some(ComponentTypeIdentifier(None(), "control_data"))
+            , None()
+            , None()
+            , None()
+            )
+          ]
+        )
+      )
+    , None()
+    , None()
+    , None()
+    , None()
+    , None()
+    , ComponentImplementationName("control", "speed")
+    )
+  , data("control_data", None(), None(), None(), None(), None(), "control_data")
+  , data("data_scaling", None(), None(), None(), None(), None(), "data_scaling")
+  , data("control_algotihms", None(), None(), None(), None(), None(), "control_algotihms")
+  ]
+)

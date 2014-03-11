@@ -1,0 +1,216 @@
+Module(
+  "PropertiesTest"
+, [ thread_implementation(
+      ComponentImplementationName("algorithm", "impl")
+    , None()
+    , None()
+    , None()
+    , None()
+    , None()
+    , None()
+    , None()
+    , Some(
+        Propertiess(
+          [ PropertyAssociation(UniquePropertyIdentifier(None(), "Period"), PropertyTerm("timing", "HiRate"), None())
+          , PropertyAssociation(
+              UniquePropertyIdentifier(Some("PBA"), "Max_Control_Dimension")
+            , PropertyTerm("PBA", "MAX_Size")
+            , None()
+            )
+          ]
+        )
+      )
+    , ComponentImplementationName("algorithm", "impl")
+    )
+  , Property_Set(
+      "timing"
+    , []
+    , [SingleValuedPropertyConstant("HiRate", "Time", "5")]
+    , "timing"
+    )
+  , system("cc_complete", None(), None(), None(), None(), None(), "cc_complete")
+  , system_implementation(
+      ComponentImplementationName("cc_complete", "impl")
+    , None()
+    , None()
+    , Some(
+        Subcomponents(
+          [ Device_Subcomponent(
+              "brake_pedal"
+            , Some(ComponentTypeIdentifier(None(), "brake_pedal"))
+            , None()
+            , None()
+            , None()
+            )
+          , System_Subcomponent(
+              "cruise_control"
+            , Some(UniqueComponentImplementationReference(None(), ComponentImplementationName("cruise_control", "impl")))
+            , None()
+            , None()
+            , None()
+            )
+          , Device_Subcomponent(
+              "throttle_actuator"
+            , Some(ComponentTypeIdentifier(None(), "throttle_actuator"))
+            , None()
+            , None()
+            , None()
+            )
+          ]
+        )
+      )
+    , None()
+    , Some(
+        Connections(
+          [ PortConnection(
+              "C1"
+            , PortConnection(ComIdentifier("brake_pedal", "brake_event"), ComIdentifier("cruise_control", "brake_event"))
+            , None()
+            , None()
+            )
+          , PortConnection(
+              "C2"
+            , PortConnection(ComIdentifier("cruise_control", "throttle_actuator"), ComIdentifier("throttle_actuator", "throttle_setting"))
+            , None()
+            , None()
+            )
+          ]
+        )
+      )
+    , None()
+    , None()
+    , None()
+    , ComponentImplementationName("cc_complete", "impl")
+    )
+  , system(
+      "cruise_control"
+    , None()
+    , Some(
+        Features(
+          [ PortFeatureSpec(In_Event_Data_Port("break_event", None()), None(), None())
+          , PortFeatureSpec(Out_Data_Port("throttle_setting", None()), None(), None())
+          ]
+        )
+      )
+    , None()
+    , None()
+    , Some(
+        properties(
+          [ PropertyAssociation(
+              UniquePropertyIdentifier(None(), "Period")
+            , Signed_Aadlinteger(None(), "8", Some("ms"))
+            , None()
+            )
+          ]
+        )
+      )
+    , "cruise_control"
+    )
+  , system_implementation(
+      ComponentImplementationName("cruise_control", "impl")
+    , None()
+    , None()
+    , Some(
+        Subcomponents(
+          [ Process_Subcomponent(
+              "data_in"
+            , Some(ComponentTypeIdentifier(None(), "interface"))
+            , None()
+            , None()
+            , None()
+            )
+          , Process_Subcomponent(
+              "control_law"
+            , Some(UniqueComponentImplementationReference(None(), ComponentImplementationName("control", "impl")))
+            , None()
+            , None()
+            , None()
+            )
+          ]
+        )
+      )
+    , None()
+    , Some(
+        Connections(
+          [ PortConnection(
+              "C1"
+            , PortConnection("brake_event", ComIdentifier("data_in", "break_event"))
+            , None()
+            , None()
+            )
+          , PortConnection(
+              "C3"
+            , PortConnection(ComIdentifier("data_in", "out_port"), ComIdentifier("control_law", "in_port"))
+            , None()
+            , None()
+            )
+          , PortConnection(
+              "C5"
+            , PortConnection(ComIdentifier("control_law", "out_port"), "throttle_setting")
+            , None()
+            , None()
+            )
+          ]
+        )
+      )
+    , None()
+    , None()
+    , None()
+    , ComponentImplementationName("control", "impl")
+    )
+  , thread(
+      "adjust_sensor_value"
+    , None()
+    , Some(
+        Features(
+          [ PortFeatureSpec(In_Data_Port("in_port", None()), None(), None())
+          , PortFeatureSpec(Out_Data_Port("out_port", None()), None(), None())
+          ]
+        )
+      )
+    , None()
+    , None()
+    , None()
+    , "adjust_sensor_value"
+    )
+  , thread_implementation(
+      ComponentImplementationName("adjust_sensor_value", "impl")
+    , None()
+    , None()
+    , None()
+    , None()
+    , None()
+    , None()
+    , None()
+    , None()
+    , ComponentImplementationName("adjust_sensor_value", "impl")
+    )
+  , thread(
+      "algorithm"
+    , None()
+    , Some(
+        Features(
+          [ PortFeatureSpec(In_Data_Port("in_port", None()), None(), None())
+          , PortFeatureSpec(Out_Data_Port("out_port", None()), None(), None())
+          ]
+        )
+      )
+    , None()
+    , None()
+    , None()
+    , "algorithm"
+    )
+  , thread_implementation(
+      ComponentImplementationName("algorithm", "impl")
+    , None()
+    , None()
+    , None()
+    , None()
+    , None()
+    , None()
+    , None()
+    , None()
+    , ComponentImplementationName("algorithm", "impl")
+    )
+  ]
+)
