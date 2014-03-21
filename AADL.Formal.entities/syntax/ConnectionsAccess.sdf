@@ -13,19 +13,19 @@ exports
   
 
   context-free syntax
-  	 "bus" "access" SourceAccessReference "->" DestinationAccessReference   -> AccessConnection{cons("AccessbusConnection")}
-  	 "bus" "access" SourceAccessReference "<->" DestinationAccessReference   -> AccessConnection{cons("AccessbusConnection")}
+  	 "bus" "access" SourceAccessReference "->" DestinationAccessReference          -> AccessConnection{cons("AccessbusConnection")}
+  	 "bus" "access" SourceAccessReference "<->" DestinationAccessReference         -> AccessConnection{cons("AccessbusConnection")}
   	 "subprogram" "access" SourceAccessReference "->" DestinationAccessReference   -> AccessConnection{cons("AccesssubprogramConnection")}
-  	 "subprogram" "access" SourceAccessReference "<->" DestinationAccessReference   -> AccessConnection{cons("AccesssubprogramConnection")}
-  	 "data" "access" SourceAccessReference "->" DestinationAccessReference   -> AccessConnection{cons("AccessdataConnection")}
-  	 "data" "access" SourceAccessReference "<->" DestinationAccessReference   -> AccessConnection{cons("AccessdataConnection")}
-  	 "subprogram" "group" "access" SourceAccessReference "->" DestinationAccessReference   -> AccessConnection{cons("AccesssubprogramgroupConnection")}
+  	 "subprogram" "access" SourceAccessReference "<->" DestinationAccessReference  -> AccessConnection{cons("AccesssubprogramConnection")}
+  	 "data" "access" SourceAccessReference "->" DestinationAccessReference         -> AccessConnection{cons("AccessdataConnection")}
+  	 "data" "access" SourceAccessReference "<->" DestinationAccessReference        -> AccessConnection{cons("AccessdataConnection")}
+  	 "subprogram" "group" "access" SourceAccessReference "->" DestinationAccessReference    -> AccessConnection{cons("AccesssubprogramgroupConnection")}
   	 "subprogram" "group" "access" SourceAccessReference "<->" DestinationAccessReference   -> AccessConnection{cons("AccesssubprogramgroupConnection")}
   	
-  	 "bus" "access"   -> AccessConnectionRefinement{cons("busaccess")}
-  	 "subprogram" "access"   -> AccessConnectionRefinement{cons("subprogramaccess")}
+  	 "bus" "access"                  -> AccessConnectionRefinement{cons("busaccess")}
+  	 "subprogram" "access"           -> AccessConnectionRefinement{cons("subprogramaccess")}
   	 "subprogram" "group" "access"   -> AccessConnectionRefinement{cons("subprogramgroupaccess")}
-  	 "data" "access"   -> AccessConnectionRefinement{cons("dataaccess")}
+  	 "data" "access"                 -> AccessConnectionRefinement{cons("dataaccess")}
   	 
   	 RequiresAccessIdentifier                                         -> AccessReference{cons("RequiresAccessIdentifier")}
   	 ProvidesAccessIdentifier                                         -> AccessReference{cons("ProvidesAccessIdentifier")}
@@ -40,7 +40,7 @@ exports
   	 AccessReferences           -> SourceAccessReference
   	 AccessReferences           -> DestinationAccessReference
   	 
-  	 Identifier     -> AccessReferences
+  	 Identifier                -> AccessReferences
   	 Identifier "." Identifier -> AccessReferences{cons("ComIdentifier")}
   	 
   	 

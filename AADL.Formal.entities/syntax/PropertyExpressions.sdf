@@ -40,10 +40,12 @@ exports
   	
   	%%Identifier                    -> StringTerm
   	StringLiteral                 -> StringTerm
-  	"\"" {Identifier ","}+ "\""   -> StringPropertyConstantTerm{cons("StringPropertyConstantTerm")}
-  	StringPropertyConstantTerm    -> StringTerm
+  	"\"" {Identifier ","}+ "\""    -> StringPropertyConstantTerm{cons("StringPropertyConstantTerm")}
+  	"\"" {Identifier ","}+ "\""    -> StringTerm{cons("StringTerm")}
+  	
   	
   	"(" {DefiningEnumerationLiteralIdentifier ","}+ ")"            -> EnumerationTerm{cons("EnumerationTerm")}
+  	%%"(" {StringPropertyConstantTerm ","}+ ")"                      -> EnumerationTerm{cons("EnumerationTerm")}
   	%%EnumerationPropertyConstantTerm  -> EnumerationTerm
   	
   	"(" DefiningUnitIdentifier ("," DefiningUnitIdentifier "=>" UnitIdentifier "*" NumericLiteral)* ")"  -> UnitTerm{cons("UnitTerm")}

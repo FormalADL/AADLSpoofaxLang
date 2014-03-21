@@ -57,7 +57,7 @@ exports
     "features" NoneStatement                                   -> ComponentFeatures{cons("Features")}
     "flows" FlowSpec+                                          -> ComponentFlowSpecs{cons("Flow")}
     "flows" NoneStatement                                      -> ComponentFlowSpecs{cons("Flow")}
-    "properties" ComponentPropertys+                          -> ComponentPropertyAssociations{cons("properties")}
+    "properties" ComponentPropertys+                           -> ComponentPropertyAssociations{cons("properties")}
     %%"properties" PropertyAssociation+                          -> ComponentPropertyAssociations{cons("properties")}
     %%"properties" ContainedPropertyAssociation+                 -> ComponentPropertyAssociations{cons("properties")}
      PropertyAssociation                                       -> ComponentPropertys

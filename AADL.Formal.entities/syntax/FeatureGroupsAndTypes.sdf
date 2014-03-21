@@ -15,8 +15,8 @@ exports
   	
   	
   	
-  	"properties" ContainedPropertyAssociation+                   -> FeatureGroupContainedPropertyAssociations{cons("FeatureGroupContainedPropertyAssociations")}
-  	"properties" NoneStatement                                               -> FeatureGroupContainedPropertyAssociations{cons("FeatureGroupContainedPropertyAssociations")}
+  	"properties" ContainedPropertyAssociation+                  -> FeatureGroupContainedPropertyAssociations{cons("FeatureGroupContainedPropertyAssociations")}
+  	"properties" NoneStatement                                  -> FeatureGroupContainedPropertyAssociations{cons("FeatureGroupContainedPropertyAssociations")}
   	"inverse" "of" UniqueFeatureGroupTypeReference              -> INUniqueFeatureGroupTypeReference{cons("Inverse_Of")}
   	
   	"feature" "group" DefiningIdentifier
@@ -44,12 +44,12 @@ exports
   	%%AnnexSubclause*
   	"end" DefiningIdentifier                                -> FeatureGroupTypeExtension{cons("FeatureGroupTypeExtension")}
   	
-  	"in"      ->Inout{cons("Inout")}
-  	"out"     ->Inout{cons("Inout")}
-  	"inverse" "of" UniqueFeatureGroupTypeReference -> UniqueFeatureGroupTypeReferences{cons("UniqueFeatureGroupTypeReferences")}
-  	"inverse" "of" PrototypeIdentifier             -> PrototypeIdentifiers{cons("PrototypeIdentifiers")}
-  	PrototypeIdentifier                            -> UniqueFeatureGroupType{cons("UniqueFeatureGroupType")}
-  	UniqueFeatureGroupTypeReference                -> UniqueFeatureGroupType{cons("UniqueFeatureGroupType")}
+  	"in"      ->Inout{cons("in")}
+  	"out"     ->Inout{cons("out")}
+  	"inverse" "of" UniqueFeatureGroupTypeReference    -> UniqueFeatureGroupTypeReferences{cons("UniqueFeatureGroupTypeReferences")}
+  	"inverse" "of" PrototypeIdentifier                -> PrototypeIdentifiers{cons("PrototypeIdentifiers")}
+  	%%PrototypeIdentifiers                            -> UniqueFeatureGroupType{cons("UniqueFeatureGroupType")}
+  	UniqueFeatureGroupTypeReferences                  -> UniqueFeatureGroupType{cons("UniqueFeatureGroupType")}
   	
   	
   	DefiningFeatureGroupIdentifier ":"
@@ -61,7 +61,7 @@ exports
   	UniqueFeatureGroupType?       -> FeatureGroupRefinement{cons("InFeatureGroupRefinementU")}
   	
   	
-  	(PackageName "::") FeatureGroupTypeIdentifier       -> UniqueFeatureGroupTypeReference{cons("UniqueFeatureGroupTypeReference")}
+  	(PackageName "::")? FeatureGroupTypeIdentifier       -> UniqueFeatureGroupTypeReference{cons("UniqueFeatureGroupTypeReference")}
   	
   	
   	

@@ -40,9 +40,8 @@ exports
   	
   	
   	
-  	DataUniqueComponentClassifierReference                        -> DataUniqueComponentClassifier
-  	DataComponentPrototypeIdentifier                              -> DataUniqueComponentClassifier
-  	
+  	UniqueComponentClassifierReference                        -> DataUniqueComponentClassifier
+  	 
   	%%"data" "port" DataUniqueComponentClassifier?                   -> PortType{cons("DataReference")}
   	%%"event" "data" "port" DataUniqueComponentClassifierReference?  -> PortType{cons("EventDataReference")}
   	%%"event" "port"                                                 -> PortType{cons("EventIdentifier")}

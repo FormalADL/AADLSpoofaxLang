@@ -26,6 +26,6 @@ exports
   	  BusAccessSpecReference    -> BusAccessRefinement{cons("RequiresBusAccessRefinement")}
   	
   	BusUniqueComponentClassifierReference    -> BusAccessSpecReference
-  	PrototypeIdentifier                      -> BusAccessSpecReference
+  	%%PrototypeIdentifier                      -> BusAccessSpecReference
   	
   	

@@ -38,6 +38,7 @@ exports
   	
   	Identifier                        -> CalledSubprogram{cons("CalledSubprogramName")}
   	Identifier "." Identifier         -> CalledSubprogram{cons("CalledSubprogramName")}
+  	"processor" "." Identifier        -> CalledSubprogram{cons("CalledSubprogramName")}
   	
   	
   	

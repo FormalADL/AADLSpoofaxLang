@@ -34,7 +34,7 @@ exports
   	  ParameterSpecReference    -> ParameterRefinement{cons("InOutParameterRefinement")} 
  
     DataUniqueComponentClassifierReference     -> ParameterSpecReference
-    PrototypeIdentifier                        -> ParameterSpecReference
+    %%PrototypeIdentifier                        -> ParameterSpecReference
     
     
     

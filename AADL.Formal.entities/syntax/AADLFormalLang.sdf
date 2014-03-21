@@ -14,10 +14,12 @@ exports
 
   context-free syntax
   
-    "module" Identifier Definition*      -> Start{cons("Module")}
+    "module" Identifier Definition*       -> Start{cons("Module")}
+    %%Definition*       -> Start{cons("Module")}
     ComponentType                         -> Definition
   	ComponentTypeExtension                -> Definition
   	ComponentImplementation               -> Definition
   	ComponentImplementationExtension      -> Definition
   	%%AADLSpecification                     -> Definition
     PropertySet                            -> Definition
+    Packagespec                            -> Definition

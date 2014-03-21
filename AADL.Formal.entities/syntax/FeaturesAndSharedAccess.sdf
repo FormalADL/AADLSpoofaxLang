@@ -19,6 +19,7 @@ exports
   context-free syntax
   	
   	"{" ContainedPropertyAssociation+ "}"          ->  FeatureContainedPropertyAssociations{cons("FeatureContainedPropertyAssociations")}
+  	"{" PropertyAssociation+ "}"                   ->  FeatureContainedPropertyAssociations{cons("FeatureContainedPropertyAssociations")}
   	
   	AbstractFeatureSpec
   	ArrayDimension?

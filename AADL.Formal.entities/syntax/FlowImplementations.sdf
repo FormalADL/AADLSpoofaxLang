@@ -27,15 +27,15 @@ exports
   	
   	FlowIdentifier ":" "flow" "sink" InFlowFeatureIdentifier ("->" ConnectionIdentifier "->" SubcomponentFlowIdentifier)*                          -> FlowSinkImplementation{cons("FlowSinkImplementation")}
   	
-  	FlowIdentifier ":" "flow" "path" InFlowFeatureIdentifier (ConnectionIdentifier "->" SubcomponentFlowIdentifier "->")+ "->" ConnectionIdentifier "->" OutFlowFeatureIdentifier                       -> FlowPathImplementation{cons("FlowPathImplementation")}
+  	FlowIdentifier ":" "flow" "path" InFlowFeatureIdentifier ConnectionIdentifiers? "->" OutFlowFeatureIdentifier                                  -> FlowPathImplementation{cons("FlowPathImplementation")}
   	
-  	SubcomponentIdentifier ("." FlowSpecIdentifier)?  -> SubcomponentFlowIdentifier{cons("SubcomponentFlowIdentifier")}
+  	SubcomponentIdentifier "." FlowSpecIdentifier     -> SubcomponentFlowIdentifier{cons("SubcomponentFlowIdentifier")}
   	DataComponentReference                            -> SubComponentFlowIdentifier
   	
-  	
+  	("->" ConnectionIdentifier "->" SubcomponentFlowIdentifier)+ "->" ConnectionIdentifier -> ConnectionIdentifiers{cons("ConnectionIdentifiers")}
   	DataSubcomponentIdentifier                    -> DataComponentReference
-  	RequiresDataAccessIdentifier                  -> DataComponentReference
-  	ProvidesDataAccessIdentifierIdentifier        -> DataComponentReference
+  	%%RequiresDataAccessIdentifier                  -> DataComponentReference
+  	%%ProvidesDataAccessIdentifierIdentifier        -> DataComponentReference
   	
   	
   	

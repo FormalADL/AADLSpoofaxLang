@@ -27,7 +27,7 @@ exports
   	  DataAccessSpecReference    -> DataAccessRefinement{cons("RequiresDataAccessRefinementReference")}
   	
   	DataUniqueComponentClassifierReference    -> DataAccessSpecReference 
-  	PrototypeIdentifier                       -> DataAccessSpecReference
+  	%%PrototypeIdentifier                       -> DataAccessSpecReference
   	
   	
   	

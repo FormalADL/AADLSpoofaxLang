@@ -19,11 +19,11 @@ exports
   	  
   	DefiningPropertyNameIdentifier ":"
   	  Inherit?
-  	  MultiValuedProperty "applies" "to" PropertyOwner ";"  -> PropertyDefinitionDeclaration{cons("PropertyDefinitionDeclaration")}
+  	  MultiValuedProperty "applies" "to" "(" {PropertyOwner ","}+ ")" ";"  -> PropertyDefinitionDeclaration{cons("PropertyDefinitionDeclaration")}
   	  
   	  "=>" DefaultPropertyExpression                -> DefaultPropertyExpressions{cons("DefaultPropertyExpressions")}
   	  PropertyTypeDesignator DefaultPropertyExpressions?                -> SingleValuedProperty{cons("SingleValuedProperty")}
-  	  ("list" "of")+ PropertyTypeDesignator DefaultPropertyExpressions?-> MultiValuedProperty{cons("MultiValuedProperty")}
+  	  ("list" "of")+ PropertyTypeDesignator DefaultPropertyExpressions? -> MultiValuedProperty{cons("MultiValuedProperty")}
   	  
   	  %%NamedElementQualifiedMetaModelIdentifier  -> PropertyOwner
   	  Identifier                 -> PropertyOwner

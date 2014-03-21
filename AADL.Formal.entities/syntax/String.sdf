@@ -6,4 +6,4 @@ exports
 
    lexical syntax
    	
-   	"\"" Identifier "\""   -> StringLiteral
+   	"\"" GraphicCharacter+ "\""   -> StringLiteral

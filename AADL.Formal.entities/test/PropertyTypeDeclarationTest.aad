@@ -20,3 +20,39 @@ with some_types;
    working_depth: type range of aadlreal units marine_measures::Depth_units;
    Metric_Length: type aadlreal units some_type::metric_length_units;
 end set_of_faults;
+
+property set my_props is
+with marine_measures;
+critical_unit: inherit aadlboolean applies to (all);
+Boat_length: marine_measures :: Metric_length
+   applies to (device, system);
+Maintainers: list of aadlstring => ("Perter", "John", "Dave")
+   applies to (all);
+Shared_memory: list of reference applies to (system);
+end my_props;
+
+package marine_lib
+public with my_props;
+private system basic_dual
+properties
+myprops :: Maintainers => ("John");
+end basic_dual; 
+system implementation basic_dual.impl
+subcomponents
+mem01: memory;
+mem02: memory;
+mem03: memory;
+properties
+myprops :: Shared_Memory => (reference(mem01), reference(mem02));
+end basic_dual.impl;
+device MotorBoat
+properties
+Boat_length => 10.0 meters;
+end MotorBoat;
+end marine_lib;
+
+property set limits_set is
+with set_of_faults, operations_set;
+Max_Threads: constant aadlinteger => 256;
+Minimum_Value: constant aadlreal => 5.0;
+end limits_set;

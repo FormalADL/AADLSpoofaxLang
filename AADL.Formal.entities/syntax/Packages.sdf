@@ -15,23 +15,19 @@ exports
   
 
   context-free syntax
-  	"package" DefiningPackageName
+  	"package" PackageName
   	   "public" PackDeclarations
   	     ("private" PackDeclarations)?
-  	   ("properties" PropertyAssociations)?
-  	"end" DefiningPackageName ";"                  -> Packagespec{cons("Package_spec")}
-   	"package" DefiningPackageName
-  	   "public" PackDeclarations
-  	     ("private" PackDeclarations)?
-  	   ("properties" NoneStatement)?
-  	"end" DefiningPackageName ";"                  -> Packagespec{cons("Package_spec")}
+  	   PropertyAssociations?
+  	"end" PackageName ";"                  -> Packagespec{cons("Packagespec")}
   	
-  	PropertyAssociation+                           -> PropertyAssociations{cons("PropertyAssociations")}
+  	"properties" PropertyAssociation+                           -> PropertyAssociations{cons("PropertyAssociations")}
+  	"properties" NoneStatement                                  -> PropertyAssociations{cons("PropertyAssociations")}
   	
-  	NameVisibilityDeclaration* AADLDeclaration*    -> PackDeclarations{cons("Pack_Declarations")}
+  	NameVisibilityDeclaration* AADLDeclaration*    -> PackDeclarations{cons("PackDeclarations")}
   	
-  	{PackageIdentifier "::"}* PackageIdentifier    -> PackageName{cons("Pac_kageName")}
-  	PackageName                                    -> DefiningPackageName
+  	{Identifier "::"}* Identifier    -> PackageName{cons("PackageNames")}
+  	%%PackageName                                    -> DefiningPackageName
   	
   	ClassifierDeclaration                          -> AADLDeclaration
   	AnnexLibrary                                   -> AADLDeclaration
@@ -50,18 +46,18 @@ exports
   	ImportDeclaration                             -> NameVisibilityDeclaration
   	AliasDeclaration                              -> NameVisibilityDeclaration
   	
-  	"with" {Identifier ","}+ ";"                     -> ImportDeclaration{cons("Import_Declaration")}
+  	"with" {Identifier ","}+ ";"                     -> ImportDeclaration{cons("ImportDeclaration")}
     %%"with" PackageName ","
   	   %%{PropertySetIdentifier ","}* ";"           -> ImportDeclaration{cons("Import_Declaration")}	
     %%"with" PropertySetIdentifier ","
   	   %%{PackageName ","}* ";"                     -> ImportDeclaration{cons("Import_Declaration")}	
   	%%"with" {PropertySetIdentifier ","}+ ";"           -> ImportDeclaration{cons("Import_Declaration")}  
   	   
-  	 DefiningIdentifier "renames" "package" PackageName ";"  -> AliasDeclaration{cons("Alias_Declaration")}
+  	 DefiningIdentifier "renames" "package" PackageName ";"  -> AliasDeclaration{cons("AliasDeclaration")}
   	 DefiningIdentifier? "renames"
-  	   ComponentCategory UniqueComponentTypeReference ";"    -> AliasDeclaration{cons("Alias_Declaration")}
+  	   ComponentCategory UniqueComponentTypeReference ";"    -> AliasDeclaration{cons("AliasDeclaration")}
      DefiningIdentifier? "renames"
-  	   "feature" "group" UniqueFeatureGroupTypeReference ";"    -> AliasDeclaration{cons("Alias_Declaration")}
-  	 "renames" PackageName "::" "all" ";"                       -> AliasDeclaration{cons("Alias_Declaration")}	
+  	   "feature" "group" UniqueFeatureGroupTypeReference ";"    -> AliasDeclaration{cons("AliasDeclaration")}
+  	 "renames" PackageName "::" "all" ";"                       -> AliasDeclaration{cons("AliasDeclaration")}	
   	
   	 

@@ -11,8 +11,8 @@ exports
   
 
   context-free syntax
-  	"annex" AnnexIdentifier "none" InModes? ";"    -> AnnexSubclause{cons("AnnexS_None")}
+  	"annex" AnnexIdentifier "none" InModes? ";"    -> AnnexSubclause{cons("AnnexSNone")}
   	"annex" AnnexIdentifier "{**" AnnexSpecificLanguageConstructs "**}" InModes? ";"    -> AnnexSubclause{cons("AnnexS")}
   	
-  	"annex" AnnexIdentifier "none" ";"    -> AnnexLibrary{cons("AnnexL_None")}
+  	"annex" AnnexIdentifier "none" ";"    -> AnnexLibrary{cons("AnnexLNone")}
   	"annex" AnnexIdentifier "{**" AnnexSpecificReusableConstructs "**}" ";"    -> AnnexLibrary{cons("AnnexL")}

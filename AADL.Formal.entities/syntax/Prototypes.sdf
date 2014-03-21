@@ -10,8 +10,9 @@ exports
   
 
   context-free syntax
-  	"{" PropertyAssociation+ "}"             -> PrototypePropertyAssociations{cons("PrototypePropertyAssociations")}
+  	"{" PropertyAssociation+ "}"                      -> PrototypePropertyAssociations{cons("PrototypePropertyAssociations")}
   	"[" "]"                                           -> Brackets{cons("Brackets")}
+  	
   	
   	DefiningPrototypeIdentifier ":"
   	  ComponentPrototype

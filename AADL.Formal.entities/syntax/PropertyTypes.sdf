@@ -58,24 +58,25 @@ exports
   	 "range" "of" NumberUniquePropertyTypeIdentifier    -> RangeType{cons("RangeType")}
   	 
   	 "(" {ClassifierCategoryReference ","}+ ")"         -> ClassifierCategoryReferences{cons("ClassifierCategoryReferences")}
-  	 "("{ReferenceCategory ","}+")"                     -> ReferenceCategorys{cons("ReferenceCategorys")}
+  	 "(" {ReferenceCategory ","}+ ")"                   -> ReferenceCategorys{cons("ReferenceCategorys")}
   	 "list" "of"                                        -> ListOf{cons("ListOf")}
   	 
   	 "classifier" ClassifierCategoryReferences? -> ClassifierType{cons("Classifier_Type")}
-  	 Identifier                                 ->  ClassifierCategoryReference
+  	 Identifier                                 -> ClassifierCategoryReference
   	 
   	 ("{"AnnexIdentifier"}""**")? MetaModelClassIdentifier     ->QualifiedMetaModelIdentifier{cons("QualifiedMetaModelIdentifier")} 
   	 Identifier+          -> MetaModelClassIdentifier{cons("MetaModelClassIdentifier")}
   	 
-  	 "reference" ReferenceCategorys?   -> ReferenceType{cons("ReferenceType")}
-  	 Identifier                        -> ReferenceCategory
+  	 "reference" "(" {ReferenceCategory ","}+ ")"   -> ReferenceType{cons("ReferenceType")}
+  	 "reference"                                    -> ReferenceType{cons("ReferenceType")}
+  	 Identifier                                     -> ReferenceCategory
   	 
   	 (PropertySetIdentifier "::")? PropertySetIdentifier -> UniquePropertyTypeIdentifier{cons("UniquePropertyTypeIdentifier")}
   	 
   	 "record" "(" RecordField+ ")"  -> RecordType{cons("RecordType")}
   	 DefiningFieldIdentifier ":" ListOf? PropertyTypeDesignator -> RecordField{cons("RecordField")}
   	 
-  	 Identifier                          -> PropertyTypeDesignator
+  	 UniquePropertyTypeIdentifier        -> PropertyTypeDesignator
   	 PropertyType                        -> PropertyTypeDesignator
   	 (Identifier "::")? Identifier       -> UnitsUniquePropertyTypeIdentifier{cons("UnitsUniquePropertyTypeIdentifier")}
   	 (Identifier "::")? Identifier       -> NumberUniquePropertyTypeIdentifier{cons("NumberUniquePropertyTypeIdentifier")}

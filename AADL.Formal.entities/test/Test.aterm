@@ -1,0 +1,2426 @@
+Module(
+  "Test"
+, [ Packagespec(
+      PackageNames([], "cruise_control")
+    , PackDeclarations(
+        [ImportDeclaration(["UC"])]
+      , [ data(
+            "Bool_Type"
+          , None()
+          , None()
+          , None()
+          , None()
+          , Some(
+              properties(
+                [ PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Source_Data_Size")
+                  , Signed_Aadlinteger(None(), "16", Some("Bits"))
+                  , None()
+                  )
+                ]
+              )
+            )
+          , "Bool_Type"
+          )
+        , data(
+            "Float_Type"
+          , None()
+          , None()
+          , None()
+          , None()
+          , Some(
+              properties(
+                [ PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Source_Data_Size")
+                  , Signed_Aadlinteger(None(), "32", Some("Bits"))
+                  , None()
+                  )
+                ]
+              )
+            )
+          , "Float_Type"
+          )
+        , thread(
+            "Button_Panel"
+          , None()
+          , Some(
+              Features(
+                [ PortFeatureSpec(
+                    In_Event_Data_Port("Engspd_Rpm", Some(ComponentTypeIdentifier(None(), "Float_Type")))
+                  , None()
+                  , Some(
+                      FeatureContainedPropertyAssociations(
+                        [ PropertyAssociation(
+                            UniquePropertyIdentifier(None(), "Queue_Size")
+                          , Signed_Aadlinteger(None(), "1", None())
+                          , None()
+                          )
+                        , PropertyAssociation(UniquePropertyIdentifier(None(), "Queue_Processing_Protocol"), PropertyTerm(None(), "FIFO"), None())
+                        ]
+                      )
+                    )
+                  )
+                , PortFeatureSpec(Out_Event_Port("Activate", None()), None(), None())
+                , PortFeatureSpec(Out_Event_Port("Cancel", None()), None(), None())
+                , PortFeatureSpec(
+                    Out_Data_Port("Onnotoff", Some(ComponentTypeIdentifier(None(), "Bool_Type")))
+                  , None()
+                  , None()
+                  )
+                , PortFeatureSpec(
+                    Out_Event_Data_Port("Incspeed", Some(ComponentTypeIdentifier(None(), "Bool_Type")))
+                  , None()
+                  , None()
+                  )
+                , PortFeatureSpec(
+                    Out_Data_Port("Decspd", Some(ComponentTypeIdentifier(None(), "Bool_Type")))
+                  , None()
+                  , None()
+                  )
+                ]
+              )
+            )
+          , Some(
+              Flow([FlowPathSpec("fpb", "Engspd_Rpm", "Incspeed", None(), None())])
+            )
+          , None()
+          , None()
+          , "Button_Panel"
+          )
+        , thread_implementation(
+            ComponentImplementationName("Button_Panel", "Gui")
+          , None()
+          , None()
+          , None()
+          , Some(
+              SubprogramCallSequences(
+                [ SubprogramCallSequence(
+                    "one_calls"
+                  , [SubprogramCall("subp1_1", CalledSubprogramName("subp1_1", "impl"), None())]
+                  , None()
+                  , None()
+                  )
+                ]
+              )
+            )
+          , None()
+          , None()
+          , None()
+          , Some(
+              Propertiess(
+                [ PropertyAssociation(UniquePropertyIdentifier(None(), "Dispatch_Protocol"), PropertyTerm(None(), "Periodic"), None())
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Period")
+                  , Signed_Aadlinteger(None(), "20", Some("Ms"))
+                  , None()
+                  )
+                , PropertyAssociation(UniquePropertyIdentifier(None(), "Compute_Entrypoint_Source_Text"), StringTerm(["Button_Panel_func"]), None())
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Source_Text")
+                  , PropertyListValue([StringTerm(["fButton_Panelcpp"])])
+                  , None()
+                  )
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(Some("UC"), "POSIX_Scheduling_Policy")
+                  , PropertyTerm(None(), "SCHED_RR")
+                  , None()
+                  )
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(Some("UC"), "Priority")
+                  , Signed_Aadlinteger(None(), "20", None())
+                  , None()
+                  )
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Compute_Execution_Time")
+                  , IntegerRangeTerm(
+                      Signed_Aadlinteger(None(), "1", Some("Ms"))
+                    , Signed_Aadlinteger(None(), "10", Some("Ms"))
+                    , None()
+                    )
+                  , None()
+                  )
+                , PropertyAssociation(UniquePropertyIdentifier(None(), "Initialize_Entrypoint_Source_Text"), StringTerm(["Initialize_Button_Panel"]), None())
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Initialize_Execution_Time")
+                  , IntegerRangeTerm(
+                      Signed_Aadlinteger(None(), "6", Some("Ms"))
+                    , Signed_Aadlinteger(None(), "9", Some("Ms"))
+                    , None()
+                    )
+                  , None()
+                  )
+                , PropertyAssociation(UniquePropertyIdentifier(None(), "Finalize_Entrypoint_Source_Text"), StringTerm(["Finalize_Button_Panel"]), None())
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Finalize_Execution_Time")
+                  , IntegerRangeTerm(
+                      Signed_Aadlinteger(None(), "6", Some("Ms"))
+                    , Signed_Aadlinteger(None(), "9", Some("Ms"))
+                    , None()
+                    )
+                  , None()
+                  )
+                ]
+              )
+            )
+          , ComponentImplementationName("Button_Panel", "Gui")
+          )
+        , subprogram("subp1_1", None(), None(), None(), None(), None(), "subp1_1")
+        , subprogram_implementation(
+            ComponentImplementationName("subp1_1", "impl")
+          , None()
+          , None()
+          , None()
+          , Some(
+              SubprogramCallSequences(
+                [ SubprogramCallSequence(
+                    "one_calls"
+                  , [SubprogramCall("subp1_2", CalledSubprogramName("subp1_2", "impl"), None())]
+                  , None()
+                  , None()
+                  )
+                ]
+              )
+            )
+          , None()
+          , None()
+          , None()
+          , Some(
+              Propertiess(
+                [ PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Source_Text")
+                  , PropertyListValue([StringTerm(["subp1_1cpp"])])
+                  , None()
+                  )
+                ]
+              )
+            )
+          , ComponentImplementationName("subp1_1", "impl")
+          )
+        , subprogram("subp1_2", None(), None(), None(), None(), None(), "subp1_2")
+        , subprogram_implementation(
+            ComponentImplementationName("subp1_2", "impl")
+          , None()
+          , None()
+          , None()
+          , None()
+          , None()
+          , None()
+          , None()
+          , Some(
+              Propertiess(
+                [ PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Source_Text")
+                  , PropertyListValue([StringTerm(["subp1_2cpp"])])
+                  , None()
+                  )
+                ]
+              )
+            )
+          , ComponentImplementationName("subp1_2", "impl")
+          )
+        , thread(
+            "Drivermodelogic"
+          , None()
+          , Some(
+              Features(
+                [ SubcomponentAccessFeatureSpec(RequiresDataAccessSpecReference("Breakpedalpressed", ComponentTypeIdentifier(None(), "Bool_Type")), None(), None())
+                , PortFeatureSpec(
+                    In_Data_Port("Clutchpedalpressed", Some(ComponentTypeIdentifier(None(), "Bool_Type")))
+                  , None()
+                  , None()
+                  )
+                , PortFeatureSpec(In_Event_Port("Activate", None()), None(), None())
+                , PortFeatureSpec(In_Event_Port("Cancel", None()), None(), None())
+                , PortFeatureSpec(
+                    In_Data_Port("Onnotoff", Some(ComponentTypeIdentifier(None(), "Bool_Type")))
+                  , None()
+                  , None()
+                  )
+                , PortFeatureSpec(
+                    Out_Data_Port("Cruiseactive", Some(ComponentTypeIdentifier(None(), "Bool_Type")))
+                  , None()
+                  , None()
+                  )
+                ]
+              )
+            )
+          , None()
+          , None()
+          , None()
+          , "Drivermodelogic"
+          )
+        , thread_implementation(
+            ComponentImplementationName("Drivermodelogic", "Simulink")
+          , None()
+          , None()
+          , None()
+          , Some(
+              SubprogramCallSequences(
+                [ SubprogramCallSequence(
+                    "one_calls"
+                  , [SubprogramCall("llamado", CalledSubprogramName("subp2_1", "impl"), None())]
+                  , None()
+                  , None()
+                  )
+                ]
+              )
+            )
+          , Some(
+              Connections(
+                [ ParameterConnection(
+                    "in_valor"
+                  , ParameterConnection("Onnotoff", ComIdentifier("llamado", "in_parameter"))
+                  , None()
+                  , None()
+                  )
+                , AccessConnection(
+                    "referencia"
+                  , AccessdataConnection("Breakpedalpressed", ComIdentifier("llamado", "p1"))
+                  , None()
+                  , None()
+                  )
+                , ParameterConnection(
+                    "out_valor"
+                  , ParameterConnection(ComIdentifier("llamado", "out_parameter"), "Cruiseactive")
+                  , None()
+                  , None()
+                  )
+                ]
+              )
+            )
+          , None()
+          , None()
+          , Some(
+              Propertiess(
+                [ PropertyAssociation(UniquePropertyIdentifier(None(), "Dispatch_Protocol"), PropertyTerm(None(), "Periodic"), None())
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Period")
+                  , Signed_Aadlinteger(None(), "20", Some("Ms"))
+                  , None()
+                  )
+                , PropertyAssociation(UniquePropertyIdentifier(None(), "Compute_Entrypoint_Source_Text"), StringTerm(["Drivermodelogic_func"]), None())
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Source_Text")
+                  , PropertyListValue([StringTerm(["fDrivermodelogiccpp"])])
+                  , None()
+                  )
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(Some("UC"), "POSIX_Scheduling_Policy")
+                  , PropertyTerm(None(), "SCHED_RR")
+                  , None()
+                  )
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(Some("UC"), "Priority")
+                  , Signed_Aadlinteger(None(), "20", None())
+                  , None()
+                  )
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Compute_Execution_Time")
+                  , IntegerRangeTerm(
+                      Signed_Aadlinteger(None(), "2", Some("Ms"))
+                    , Signed_Aadlinteger(None(), "10", Some("Ms"))
+                    , None()
+                    )
+                  , None()
+                  )
+                , PropertyAssociation(UniquePropertyIdentifier(None(), "Initialize_Entrypoint_Source_Text"), StringTerm(["Initialize_Drivermodelogic"]), None())
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Initialize_Execution_Time")
+                  , IntegerRangeTerm(
+                      Signed_Aadlinteger(None(), "5", Some("Ms"))
+                    , Signed_Aadlinteger(None(), "8", Some("Ms"))
+                    , None()
+                    )
+                  , None()
+                  )
+                , PropertyAssociation(UniquePropertyIdentifier(None(), "Finalize_Entrypoint_Source_Text"), StringTerm(["Finalize_Drivermodelogic"]), None())
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Finalize_Execution_Time")
+                  , IntegerRangeTerm(
+                      Signed_Aadlinteger(None(), "5", Some("Ms"))
+                    , Signed_Aadlinteger(None(), "8", Some("Ms"))
+                    , None()
+                    )
+                  , None()
+                  )
+                ]
+              )
+            )
+          , ComponentImplementationName("Drivermodelogic", "Simulink")
+          )
+        , subprogram(
+            "subp2_1"
+          , None()
+          , Some(
+              Features(
+                [ ParameterFeatureSpec(InParameterSpec("in_parameter", ComponentTypeIdentifier(None(), "Bool_Type")), None(), None())
+                , SubcomponentAccessFeatureSpec(RequiresDataAccessSpecReference("p1", ComponentTypeIdentifier(None(), "Bool_Type")), None(), None())
+                , ParameterFeatureSpec(OutParameterSpec("out_parameter", ComponentTypeIdentifier(None(), "Bool_Type")), None(), None())
+                ]
+              )
+            )
+          , None()
+          , None()
+          , None()
+          , "subp2_1"
+          )
+        , subprogram_implementation(
+            ComponentImplementationName("subp2_1", "impl")
+          , None()
+          , None()
+          , None()
+          , None()
+          , None()
+          , None()
+          , None()
+          , Some(
+              Propertiess(
+                [ PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Source_Text")
+                  , PropertyListValue([StringTerm(["subp2_1cpp"])])
+                  , None()
+                  )
+                ]
+              )
+            )
+          , ComponentImplementationName("subp2_1", "impl")
+          )
+        , thread(
+            "Refspd"
+          , None()
+          , Some(
+              Features(
+                [ PortFeatureSpec(In_Event_Port("Activate", None()), None(), None())
+                , PortFeatureSpec(
+                    In_Data_Port("Cruiseactive", Some(ComponentTypeIdentifier(None(), "Bool_Type")))
+                  , None()
+                  , None()
+                  )
+                , PortFeatureSpec(
+                    In_Event_Data_Port("Incspeed", Some(ComponentTypeIdentifier(None(), "Bool_Type")))
+                  , None()
+                  , Some(
+                      FeatureContainedPropertyAssociations(
+                        [ PropertyAssociation(
+                            UniquePropertyIdentifier(None(), "Queue_Size")
+                          , Signed_Aadlinteger(None(), "1", None())
+                          , None()
+                          )
+                        , PropertyAssociation(UniquePropertyIdentifier(None(), "Queue_Processing_Protocol"), PropertyTerm(None(), "FIFO"), None())
+                        ]
+                      )
+                    )
+                  )
+                , PortFeatureSpec(
+                    In_Data_Port("Decspd", Some(ComponentTypeIdentifier(None(), "Bool_Type")))
+                  , None()
+                  , None()
+                  )
+                , PortFeatureSpec(
+                    Out_Event_Data_Port("Refspd_Mph", Some(ComponentTypeIdentifier(None(), "Float_Type")))
+                  , None()
+                  , None()
+                  )
+                ]
+              )
+            )
+          , Some(
+              Flow([FlowPathSpec("fpr", "Incspeed", "Refspd_Mph", None(), None())])
+            )
+          , None()
+          , None()
+          , "Refspd"
+          )
+        , thread_implementation(
+            ComponentImplementationName("Refspd", "Simulink")
+          , None()
+          , None()
+          , None()
+          , None()
+          , None()
+          , None()
+          , None()
+          , Some(
+              Propertiess(
+                [ PropertyAssociation(UniquePropertyIdentifier(None(), "Dispatch_Protocol"), PropertyTerm(None(), "Periodic"), None())
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Period")
+                  , Signed_Aadlinteger(None(), "20", Some("Ms"))
+                  , None()
+                  )
+                , PropertyAssociation(UniquePropertyIdentifier(None(), "Compute_Entrypoint_Source_Text"), StringTerm(["Refspd_func"]), None())
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Source_Text")
+                  , PropertyListValue([StringTerm(["fRefspdcpp"])])
+                  , None()
+                  )
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(Some("UC"), "POSIX_Scheduling_Policy")
+                  , PropertyTerm(None(), "SCHED_RR")
+                  , None()
+                  )
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(Some("UC"), "Priority")
+                  , Signed_Aadlinteger(None(), "20", None())
+                  , None()
+                  )
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Compute_Execution_Time")
+                  , IntegerRangeTerm(
+                      Signed_Aadlinteger(None(), "3", Some("Ms"))
+                    , Signed_Aadlinteger(None(), "10", Some("Ms"))
+                    , None()
+                    )
+                  , None()
+                  )
+                , PropertyAssociation(UniquePropertyIdentifier(None(), "Initialize_Entrypoint_Source_Text"), StringTerm(["Initialize_Refspd"]), None())
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Initialize_Execution_Time")
+                  , IntegerRangeTerm(
+                      Signed_Aadlinteger(None(), "4", Some("Ms"))
+                    , Signed_Aadlinteger(None(), "7", Some("Ms"))
+                    , None()
+                    )
+                  , None()
+                  )
+                , PropertyAssociation(UniquePropertyIdentifier(None(), "Finalize_Entrypoint_Source_Text"), StringTerm(["Finalize_Refspd"]), None())
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Finalize_Execution_Time")
+                  , IntegerRangeTerm(
+                      Signed_Aadlinteger(None(), "4", Some("Ms"))
+                    , Signed_Aadlinteger(None(), "7", Some("Ms"))
+                    , None()
+                    )
+                  , None()
+                  )
+                ]
+              )
+            )
+          , ComponentImplementationName("Refspd", "Simulink")
+          )
+        , thread(
+            "Instrumentpanel"
+          , None()
+          , Some(
+              Features(
+                [ PortFeatureSpec(
+                    In_Data_Port("Autospd_Mph", Some(ComponentTypeIdentifier(None(), "Float_Type")))
+                  , None()
+                  , None()
+                  )
+                , PortFeatureSpec(
+                    In_Event_Data_Port("Refspd_Mph", Some(ComponentTypeIdentifier(None(), "Float_Type")))
+                  , None()
+                  , Some(
+                      FeatureContainedPropertyAssociations(
+                        [ PropertyAssociation(
+                            UniquePropertyIdentifier(None(), "Queue_Size")
+                          , Signed_Aadlinteger(None(), "200", None())
+                          , None()
+                          )
+                        , PropertyAssociation(UniquePropertyIdentifier(None(), "Queue_Processing_Protocol"), PropertyTerm(None(), "FIFO"), None())
+                        ]
+                      )
+                    )
+                  )
+                , SubcomponentAccessFeatureSpec(
+                    RequiresSubprogramAccessSpecReference("call_server", Some(UniqueComponentImplementationReference(None(), ComponentImplementationName("service_it", "impl"))))
+                  , None()
+                  , None()
+                  )
+                ]
+              )
+            )
+          , None()
+          , None()
+          , None()
+          , "Instrumentpanel"
+          )
+        , thread_implementation(
+            ComponentImplementationName("Instrumentpanel", "Gui")
+          , None()
+          , None()
+          , None()
+          , None()
+          , None()
+          , None()
+          , None()
+          , Some(
+              Propertiess(
+                [ PropertyAssociation(UniquePropertyIdentifier(None(), "Dispatch_Protocol"), PropertyTerm(None(), "Periodic"), None())
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Period")
+                  , Signed_Aadlinteger(None(), "20", Some("Ms"))
+                  , None()
+                  )
+                , PropertyAssociation(UniquePropertyIdentifier(None(), "Compute_Entrypoint_Source_Text"), StringTerm(["Instrumentpanel_func"]), None())
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Source_Text")
+                  , PropertyListValue([StringTerm(["fInstrumentpanelcpp"])])
+                  , None()
+                  )
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(Some("UC"), "POSIX_Scheduling_Policy")
+                  , PropertyTerm(None(), "SCHED_RR")
+                  , None()
+                  )
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(Some("UC"), "Priority")
+                  , Signed_Aadlinteger(None(), "20", None())
+                  , None()
+                  )
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Compute_Execution_Time")
+                  , IntegerRangeTerm(
+                      Signed_Aadlinteger(None(), "4", Some("Ms"))
+                    , Signed_Aadlinteger(None(), "10", Some("Ms"))
+                    , None()
+                    )
+                  , None()
+                  )
+                , PropertyAssociation(UniquePropertyIdentifier(None(), "Initialize_Entrypoint_Source_Text"), StringTerm(["Initialize_Instrumentpanel"]), None())
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Initialize_Execution_Time")
+                  , IntegerRangeTerm(
+                      Signed_Aadlinteger(None(), "3", Some("Ms"))
+                    , Signed_Aadlinteger(None(), "6", Some("Ms"))
+                    , None()
+                    )
+                  , None()
+                  )
+                , PropertyAssociation(UniquePropertyIdentifier(None(), "Finalize_Entrypoint_Source_Text"), StringTerm(["Finalize_Instrumentpanel"]), None())
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Finalize_Execution_Time")
+                  , IntegerRangeTerm(
+                      Signed_Aadlinteger(None(), "3", Some("Ms"))
+                    , Signed_Aadlinteger(None(), "6", Some("Ms"))
+                    , None()
+                    )
+                  , None()
+                  )
+                ]
+              )
+            )
+          , ComponentImplementationName("Instrumentpanel", "Gui")
+          )
+        , process(
+            "Hci_Process"
+          , None()
+          , Some(
+              Features(
+                [ SubcomponentAccessFeatureSpec(RequiresDataAccessSpecReference("Breakpedalpressed", ComponentTypeIdentifier(None(), "Bool_Type")), None(), None())
+                , PortFeatureSpec(
+                    In_Data_Port("Clutchpedalpressed", Some(ComponentTypeIdentifier(None(), "Bool_Type")))
+                  , None()
+                  , None()
+                  )
+                , PortFeatureSpec(
+                    In_Data_Port("Autospd_Mph", Some(ComponentTypeIdentifier(None(), "Float_Type")))
+                  , None()
+                  , None()
+                  )
+                , PortFeatureSpec(
+                    In_Event_Data_Port("Engspd_Rpm", Some(ComponentTypeIdentifier(None(), "Float_Type")))
+                  , None()
+                  , None()
+                  )
+                , PortFeatureSpec(
+                    Out_Data_Port("Cruiseactive", Some(ComponentTypeIdentifier(None(), "Bool_Type")))
+                  , None()
+                  , None()
+                  )
+                , PortFeatureSpec(
+                    Out_Event_Data_Port("Refspd_Mph", Some(ComponentTypeIdentifier(None(), "Float_Type")))
+                  , None()
+                  , None()
+                  )
+                ]
+              )
+            )
+          , Some(
+              Flow([FlowPathSpec("fppf", "Engspd_Rpm", "Refspd_Mph", None(), None())])
+            )
+          , None()
+          , None()
+          , "Hci_Process"
+          )
+        , process_implementation(
+            ComponentImplementationName("Hci_Process", "Model")
+          , None()
+          , None()
+          , Some(
+              Subcomponents(
+                [ Thread_Subcomponent(
+                    "Button_Panel"
+                  , Some(UniqueComponentImplementationReference(None(), ComponentImplementationName("Button_Panel", "Gui")))
+                  , None()
+                  , None()
+                  , None()
+                  )
+                , Thread_Subcomponent(
+                    "Drivermodelogic"
+                  , Some(UniqueComponentImplementationReference(None(), ComponentImplementationName("Drivermodelogic", "Simulink")))
+                  , None()
+                  , None()
+                  , None()
+                  )
+                , Thread_Subcomponent(
+                    "Refspd"
+                  , Some(UniqueComponentImplementationReference(None(), ComponentImplementationName("Refspd", "Simulink")))
+                  , None()
+                  , None()
+                  , None()
+                  )
+                , Thread_Subcomponent(
+                    "Instrumentpanel"
+                  , Some(UniqueComponentImplementationReference(None(), ComponentImplementationName("Instrumentpanel", "Gui")))
+                  , None()
+                  , None()
+                  , None()
+                  )
+                ]
+              )
+            )
+          , None()
+          , Some(
+              Connections(
+                [ AccessConnection(
+                    "CBreakpedalpressed"
+                  , AccessdataConnection("Breakpedalpressed", ComIdentifier("Drivermodelogic", "Breakpedalpressed"))
+                  , None()
+                  , None()
+                  )
+                , PortConnection(
+                    "CClutchpedalpressed"
+                  , PortConnection("Clutchpedalpressed", ComIdentifier("Drivermodelogic", "Clutchpedalpressed"))
+                  , None()
+                  , None()
+                  )
+                , PortConnection(
+                    "CAutospd_Mph"
+                  , PortConnection("Autospd_Mph", ComIdentifier("Instrumentpanel", "Autospd_Mph"))
+                  , None()
+                  , None()
+                  )
+                , PortConnection(
+                    "CEngspd_Rpm"
+                  , PortConnection("Engspd_Rpm", ComIdentifier("Button_Panel", "Engspd_Rpm"))
+                  , None()
+                  , None()
+                  )
+                , PortConnection(
+                    "CCruiseactive1"
+                  , PortConnection(ComIdentifier("Drivermodelogic", "Cruiseactive"), "Cruiseactive")
+                  , None()
+                  , None()
+                  )
+                , PortConnection(
+                    "Refspd1"
+                  , PortConnection(ComIdentifier("Refspd", "Refspd_Mph"), "Refspd_Mph")
+                  , None()
+                  , None()
+                  )
+                , PortConnection(
+                    "CCruiseactive2"
+                  , PortConnection(ComIdentifier("Drivermodelogic", "Cruiseactive"), ComIdentifier("Refspd", "Cruiseactive"))
+                  , None()
+                  , None()
+                  )
+                , PortConnection(
+                    "CActivate1"
+                  , PortConnection(ComIdentifier("Button_Panel", "Activate"), ComIdentifier("Drivermodelogic", "Activate"))
+                  , None()
+                  , None()
+                  )
+                , PortConnection(
+                    "CCancel"
+                  , PortConnection(ComIdentifier("Button_Panel", "Cancel"), ComIdentifier("Drivermodelogic", "Cancel"))
+                  , None()
+                  , None()
+                  )
+                , PortConnection(
+                    "COnnotoff"
+                  , PortConnection(ComIdentifier("Button_Panel", "Onnotoff"), ComIdentifier("Drivermodelogic", "Onnotoff"))
+                  , None()
+                  , None()
+                  )
+                , PortConnection(
+                    "CActivate2"
+                  , PortConnection(ComIdentifier("Button_Panel", "Activate"), ComIdentifier("Refspd", "Activate"))
+                  , None()
+                  , None()
+                  )
+                , PortConnection(
+                    "CIncspeed"
+                  , PortConnection(ComIdentifier("Button_Panel", "Incspeed"), ComIdentifier("Refspd", "Incspeed"))
+                  , None()
+                  , None()
+                  )
+                , PortConnection(
+                    "CDecspd"
+                  , PortConnection(ComIdentifier("Button_Panel", "Decspd"), ComIdentifier("Refspd", "Decspd"))
+                  , None()
+                  , None()
+                  )
+                , PortConnection(
+                    "Refspd2"
+                  , PortConnection(ComIdentifier("Refspd", "Refspd_Mph"), ComIdentifier("Instrumentpanel", "Refspd_Mph"))
+                  , None()
+                  , None()
+                  )
+                ]
+              )
+            )
+          , Some(
+              Flowss(
+                [ FlowImplementation(
+                    FlowPathImplementation(
+                      "fppf"
+                    , "Engspd_Rpm"
+                    , Some(
+                        ConnectionIdentifiers(
+                          [ ("CEngspd_Rpm", SubcomponentFlowIdentifier("Button_Panel", "fpb"))
+                          , ("CIncspeed", SubcomponentFlowIdentifier("Refspd", "fpr"))
+                          ]
+                        , "Refspd1"
+                        )
+                      )
+                    , "Refspd_Mph"
+                    )
+                  , None()
+                  , None()
+                  )
+                ]
+              )
+            )
+          , None()
+          , None()
+          , ComponentImplementationName("Hci_Process", "Model")
+          )
+        , system(
+            "Hci"
+          , None()
+          , Some(
+              Features(
+                [ SubcomponentAccessFeatureSpec(RequiresDataAccessSpecReference("Breakpedalpressed", ComponentTypeIdentifier(None(), "Bool_Type")), None(), None())
+                , PortFeatureSpec(
+                    In_Data_Port("Clutchpedalpressed", Some(ComponentTypeIdentifier(None(), "Bool_Type")))
+                  , None()
+                  , None()
+                  )
+                , PortFeatureSpec(
+                    In_Data_Port("Autospd_Mph", Some(ComponentTypeIdentifier(None(), "Float_Type")))
+                  , None()
+                  , None()
+                  )
+                , PortFeatureSpec(
+                    In_Event_Data_Port("Engspd_Rpm", Some(ComponentTypeIdentifier(None(), "Float_Type")))
+                  , None()
+                  , None()
+                  )
+                , PortFeatureSpec(
+                    Out_Data_Port("Cruiseactive", Some(ComponentTypeIdentifier(None(), "Bool_Type")))
+                  , None()
+                  , None()
+                  )
+                , PortFeatureSpec(
+                    Out_Event_Data_Port("Refspd_Mph", Some(ComponentTypeIdentifier(None(), "Float_Type")))
+                  , None()
+                  , None()
+                  )
+                ]
+              )
+            )
+          , Some(
+              Flow([FlowPathSpec("fpsf", "Engspd_Rpm", "Refspd_Mph", None(), None())])
+            )
+          , None()
+          , None()
+          , "Hci"
+          )
+        , system_implementation(
+            ComponentImplementationName("Hci", "Model")
+          , None()
+          , None()
+          , Some(
+              Subcomponents(
+                [ Process_Subcomponent(
+                    "P_Hci_Process"
+                  , Some(UniqueComponentImplementationReference(None(), ComponentImplementationName("Hci_Process", "Model")))
+                  , None()
+                  , None()
+                  , None()
+                  )
+                , Process_Subcomponent(
+                    "server_process"
+                  , Some(UniqueComponentImplementationReference(None(), ComponentImplementationName("server_process", "impl")))
+                  , None()
+                  , None()
+                  , None()
+                  )
+                ]
+              )
+            )
+          , None()
+          , Some(
+              Connections(
+                [ AccessConnection(
+                    "CBreakpedalpressed"
+                  , AccessdataConnection("Breakpedalpressed", ComIdentifier("P_Hci_Process", "Breakpedalpressed"))
+                  , None()
+                  , None()
+                  )
+                , PortConnection(
+                    "CClutchpedalpressed"
+                  , PortConnection("Clutchpedalpressed", ComIdentifier("P_Hci_Process", "Clutchpedalpressed"))
+                  , None()
+                  , None()
+                  )
+                , PortConnection(
+                    "CAutospd_Mph"
+                  , PortConnection("Autospd_Mph", ComIdentifier("P_Hci_Process", "Autospd_Mph"))
+                  , None()
+                  , None()
+                  )
+                , PortConnection(
+                    "CEngspd_Rpm"
+                  , PortConnection("Engspd_Rpm", ComIdentifier("P_Hci_Process", "Engspd_Rpm"))
+                  , None()
+                  , None()
+                  )
+                , PortConnection(
+                    "CCruiseactive"
+                  , PortConnection(ComIdentifier("P_Hci_Process", "Cruiseactive"), "Cruiseactive")
+                  , None()
+                  , None()
+                  )
+                , PortConnection(
+                    "Refspd1"
+                  , PortConnection(ComIdentifier("P_Hci_Process", "Refspd_Mph"), "Refspd_Mph")
+                  , None()
+                  , None()
+                  )
+                ]
+              )
+            )
+          , Some(
+              Flowss(
+                [ FlowImplementation(
+                    FlowPathImplementation(
+                      "fpsf"
+                    , "Engspd_Rpm"
+                    , Some(
+                        ConnectionIdentifiers([("CEngspd_Rpm", SubcomponentFlowIdentifier("P_Hci_Process", "fppf"))], "Refspd1")
+                      )
+                    , "Refspd_Mph"
+                    )
+                  , None()
+                  , None()
+                  )
+                ]
+              )
+            )
+          , None()
+          , Some(
+              Propertiess(
+                [ ContainedPropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Actual_Subprogram_Call")
+                  , ReferenceTerm(ContainedModelElementPath(["server_process", "server_thread", "service"]))
+                  , [ContainedModelElementPath(["P_Hci_Process", "Instrumentpanel", "call_server"])]
+                  , None()
+                  )
+                ]
+              )
+            )
+          , ComponentImplementationName("Hci", "Model")
+          )
+        , process(
+            "server_process"
+          , None()
+          , Some(
+              Features(
+                [SubcomponentAccessFeatureSpec(
+                   ProvidesSubprogramAccessSpecReference("service", Some(ComponentTypeIdentifier(None(), "service_it")))
+                 , None()
+                 , None()
+                 )]
+              )
+            )
+          , None()
+          , None()
+          , None()
+          , "server_process"
+          )
+        , process_implementation(
+            ComponentImplementationName("server_process", "impl")
+          , None()
+          , None()
+          , Some(
+              Subcomponents(
+                [ Thread_Subcomponent(
+                    "server_thread"
+                  , Some(UniqueComponentImplementationReference(None(), ComponentImplementationName("server_thread", "impl")))
+                  , None()
+                  , None()
+                  , None()
+                  )
+                ]
+              )
+            )
+          , None()
+          , None()
+          , None()
+          , None()
+          , None()
+          , ComponentImplementationName("server_process", "impl")
+          )
+        , thread(
+            "server_thread"
+          , None()
+          , Some(
+              Features(
+                [SubcomponentAccessFeatureSpec(
+                   ProvidesSubprogramAccessSpecReference("service", Some(ComponentTypeIdentifier(None(), "service_it")))
+                 , None()
+                 , None()
+                 )]
+              )
+            )
+          , None()
+          , None()
+          , None()
+          , "server_thread"
+          )
+        , thread_implementation(
+            ComponentImplementationName("server_thread", "impl")
+          , None()
+          , None()
+          , None()
+          , None()
+          , None()
+          , None()
+          , None()
+          , Some(
+              Propertiess(
+                [ PropertyAssociation(UniquePropertyIdentifier(None(), "Dispatch_Protocol"), PropertyTerm(None(), "Periodic"), None())
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Period")
+                  , Signed_Aadlinteger(None(), "20", Some("Ms"))
+                  , None()
+                  )
+                , PropertyAssociation(UniquePropertyIdentifier(None(), "Compute_Entrypoint_Source_Text"), StringTerm(["server_thread_func"]), None())
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Source_Text")
+                  , PropertyListValue([StringTerm(["fserver_threadcpp"])])
+                  , None()
+                  )
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(Some("UC"), "POSIX_Scheduling_Policy")
+                  , PropertyTerm(None(), "SCHED_RR")
+                  , None()
+                  )
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(Some("UC"), "Priority")
+                  , Signed_Aadlinteger(None(), "20", None())
+                  , None()
+                  )
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Compute_Execution_Time")
+                  , IntegerRangeTerm(
+                      Signed_Aadlinteger(None(), "4", Some("Ms"))
+                    , Signed_Aadlinteger(None(), "10", Some("Ms"))
+                    , None()
+                    )
+                  , None()
+                  )
+                , PropertyAssociation(UniquePropertyIdentifier(None(), "Initialize_Entrypoint_Source_Text"), StringTerm(["Initialize_server_thread"]), None())
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Initialize_Execution_Time")
+                  , IntegerRangeTerm(
+                      Signed_Aadlinteger(None(), "3", Some("Ms"))
+                    , Signed_Aadlinteger(None(), "6", Some("Ms"))
+                    , None()
+                    )
+                  , None()
+                  )
+                , PropertyAssociation(UniquePropertyIdentifier(None(), "Finalize_Entrypoint_Source_Text"), StringTerm(["Finalize_server_thread"]), None())
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Finalize_Execution_Time")
+                  , IntegerRangeTerm(
+                      Signed_Aadlinteger(None(), "3", Some("Ms"))
+                    , Signed_Aadlinteger(None(), "6", Some("Ms"))
+                    , None()
+                    )
+                  , None()
+                  )
+                ]
+              )
+            )
+          , ComponentImplementationName("server_thread", "impl")
+          )
+        , subprogram("service_it", None(), None(), None(), None(), None(), "service_it")
+        , subprogram_implementation(
+            ComponentImplementationName("service_it", "impl")
+          , None()
+          , None()
+          , None()
+          , None()
+          , None()
+          , None()
+          , None()
+          , None()
+          , ComponentImplementationName("service_it", "impl")
+          )
+        , thread(
+            "Cruise1"
+          , None()
+          , Some(
+              Features(
+                [ PortFeatureSpec(
+                    In_Data_Port("Cruiseactive", Some(ComponentTypeIdentifier(None(), "Bool_Type")))
+                  , None()
+                  , None()
+                  )
+                , PortFeatureSpec(
+                    In_Event_Data_Port("Refspd_Mph", Some(ComponentTypeIdentifier(None(), "Float_Type")))
+                  , None()
+                  , Some(
+                      FeatureContainedPropertyAssociations(
+                        [ PropertyAssociation(
+                            UniquePropertyIdentifier(None(), "Queue_Size")
+                          , Signed_Aadlinteger(None(), "200", None())
+                          , None()
+                          )
+                        , PropertyAssociation(UniquePropertyIdentifier(None(), "Queue_Processing_Protocol"), PropertyTerm(None(), "FIFO"), None())
+                        ]
+                      )
+                    )
+                  )
+                , PortFeatureSpec(
+                    In_Data_Port("Autospd_Mph", Some(ComponentTypeIdentifier(None(), "Float_Type")))
+                  , None()
+                  , None()
+                  )
+                , PortFeatureSpec(
+                    Out_Event_Data_Port("Filautospd_Mph", Some(ComponentTypeIdentifier(None(), "Float_Type")))
+                  , None()
+                  , None()
+                  )
+                , PortFeatureSpec(
+                    Out_Event_Data_Port("Filrefspd_Mph", Some(ComponentTypeIdentifier(None(), "Float_Type")))
+                  , None()
+                  , None()
+                  )
+                ]
+              )
+            )
+          , Some(
+              Flow([FlowPathSpec("fpc1", "Refspd_Mph", "Filrefspd_Mph", None(), None())])
+            )
+          , None()
+          , None()
+          , "Cruise1"
+          )
+        , thread_implementation(
+            ComponentImplementationName("Cruise1", "Simulink")
+          , None()
+          , None()
+          , None()
+          , None()
+          , None()
+          , None()
+          , None()
+          , Some(
+              Propertiess(
+                [ PropertyAssociation(UniquePropertyIdentifier(None(), "Dispatch_Protocol"), PropertyTerm(None(), "Periodic"), None())
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Period")
+                  , Signed_Aadlinteger(None(), "20", Some("Ms"))
+                  , None()
+                  )
+                , PropertyAssociation(UniquePropertyIdentifier(None(), "Compute_Entrypoint_Source_Text"), StringTerm(["Cruise1_func"]), None())
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Source_Text")
+                  , PropertyListValue([StringTerm(["fCruise1cpp"])])
+                  , None()
+                  )
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(Some("UC"), "POSIX_Scheduling_Policy")
+                  , PropertyTerm(None(), "SCHED_RR")
+                  , None()
+                  )
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(Some("UC"), "Priority")
+                  , Signed_Aadlinteger(None(), "20", None())
+                  , None()
+                  )
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Compute_Execution_Time")
+                  , IntegerRangeTerm(
+                      Signed_Aadlinteger(None(), "5", Some("Ms"))
+                    , Signed_Aadlinteger(None(), "10", Some("Ms"))
+                    , None()
+                    )
+                  , None()
+                  )
+                , PropertyAssociation(UniquePropertyIdentifier(None(), "Initialize_Entrypoint_Source_Text"), StringTerm(["Initialize_Cruise1"]), None())
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Initialize_Execution_Time")
+                  , IntegerRangeTerm(
+                      Signed_Aadlinteger(None(), "2", Some("Ms"))
+                    , Signed_Aadlinteger(None(), "5", Some("Ms"))
+                    , None()
+                    )
+                  , None()
+                  )
+                , PropertyAssociation(UniquePropertyIdentifier(None(), "Finalize_Entrypoint_Source_Text"), StringTerm(["Finalize_Cruise1"]), None())
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Finalize_Execution_Time")
+                  , IntegerRangeTerm(
+                      Signed_Aadlinteger(None(), "2", Some("Ms"))
+                    , Signed_Aadlinteger(None(), "5", Some("Ms"))
+                    , None()
+                    )
+                  , None()
+                  )
+                ]
+              )
+            )
+          , ComponentImplementationName("Cruise1", "Simulink")
+          )
+        , thread(
+            "Cruise2"
+          , None()
+          , Some(
+              Features(
+                [ PortFeatureSpec(
+                    In_Event_Data_Port("Filautospd_Mph", Some(ComponentTypeIdentifier(None(), "Float_Type")))
+                  , None()
+                  , Some(
+                      FeatureContainedPropertyAssociations(
+                        [ PropertyAssociation(
+                            UniquePropertyIdentifier(None(), "Queue_Size")
+                          , Signed_Aadlinteger(None(), "40", None())
+                          , None()
+                          )
+                        , PropertyAssociation(UniquePropertyIdentifier(None(), "Queue_Processing_Protocol"), PropertyTerm(None(), "FIFO"), None())
+                        ]
+                      )
+                    )
+                  )
+                , PortFeatureSpec(
+                    In_Event_Data_Port("Filrefspd_Mph", Some(ComponentTypeIdentifier(None(), "Float_Type")))
+                  , None()
+                  , Some(
+                      FeatureContainedPropertyAssociations(
+                        [ PropertyAssociation(
+                            UniquePropertyIdentifier(None(), "Queue_Size")
+                          , Signed_Aadlinteger(None(), "50", None())
+                          , None()
+                          )
+                        , PropertyAssociation(UniquePropertyIdentifier(None(), "Queue_Processing_Protocol"), PropertyTerm(None(), "FIFO"), None())
+                        ]
+                      )
+                    )
+                  )
+                , PortFeatureSpec(
+                    Out_Event_Data_Port("Throttlepos_In", Some(ComponentTypeIdentifier(None(), "Float_Type")))
+                  , None()
+                  , None()
+                  )
+                , SubcomponentAccessFeatureSpec(
+                    RequiresDataAccessSpecReference("access1", UniqueComponentImplementationReference(None(), ComponentImplementationName("class1", "impl")))
+                  , None()
+                  , None()
+                  )
+                , SubcomponentAccessFeatureSpec(RequiresDataAccessSpecReference("access2", ComponentTypeIdentifier(None(), "integer")), None(), None())
+                ]
+              )
+            )
+          , Some(
+              Flow([FlowPathSpec("fpc2", "Filrefspd_Mph", "Throttlepos_In", None(), None())])
+            )
+          , None()
+          , None()
+          , "Cruise2"
+          )
+        , thread_implementation(
+            ComponentImplementationName("Cruise2", "Simulink")
+          , None()
+          , None()
+          , Some(
+              Subcomponents(
+                [ Data_Subcomponent(
+                    "address_1"
+                  , Some(UniqueComponentImplementationReference(None(), ComponentImplementationName("address", "others")))
+                  , None()
+                  , None()
+                  , None()
+                  )
+                ]
+              )
+            )
+          , None()
+          , None()
+          , None()
+          , None()
+          , Some(
+              Propertiess(
+                [ PropertyAssociation(UniquePropertyIdentifier(None(), "Dispatch_Protocol"), PropertyTerm(None(), "Periodic"), None())
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Period")
+                  , Signed_Aadlinteger(None(), "20", Some("Ms"))
+                  , None()
+                  )
+                , PropertyAssociation(UniquePropertyIdentifier(None(), "Compute_Entrypoint_Source_Text"), StringTerm(["Cruise2_func"]), None())
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Source_Text")
+                  , PropertyListValue([StringTerm(["fCruise2cpp"])])
+                  , None()
+                  )
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(Some("UC"), "POSIX_Scheduling_Policy")
+                  , PropertyTerm(None(), "SCHED_RR")
+                  , None()
+                  )
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(Some("UC"), "Priority")
+                  , Signed_Aadlinteger(None(), "20", None())
+                  , None()
+                  )
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Compute_Execution_Time")
+                  , IntegerRangeTerm(
+                      Signed_Aadlinteger(None(), "6", Some("Ms"))
+                    , Signed_Aadlinteger(None(), "10", Some("Ms"))
+                    , None()
+                    )
+                  , None()
+                  )
+                , PropertyAssociation(UniquePropertyIdentifier(None(), "Initialize_Entrypoint_Source_Text"), StringTerm(["Initialize_Cruise2"]), None())
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Initialize_Execution_Time")
+                  , IntegerRangeTerm(
+                      Signed_Aadlinteger(None(), "1", Some("Ms"))
+                    , Signed_Aadlinteger(None(), "4", Some("Ms"))
+                    , None()
+                    )
+                  , None()
+                  )
+                , PropertyAssociation(UniquePropertyIdentifier(None(), "Finalize_Entrypoint_Source_Text"), StringTerm(["Finalize_Cruise2"]), None())
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Finalize_Execution_Time")
+                  , IntegerRangeTerm(
+                      Signed_Aadlinteger(None(), "1", Some("Ms"))
+                    , Signed_Aadlinteger(None(), "4", Some("Ms"))
+                    , None()
+                    )
+                  , None()
+                  )
+                ]
+              )
+            )
+          , ComponentImplementationName("Cruise2", "Simulink")
+          )
+        , process(
+            "Cruisecontrol_Process"
+          , None()
+          , Some(
+              Features(
+                [ PortFeatureSpec(
+                    In_Data_Port("Cruiseactive", Some(ComponentTypeIdentifier(None(), "Bool_Type")))
+                  , None()
+                  , None()
+                  )
+                , PortFeatureSpec(
+                    In_Event_Data_Port("Refspd_Mph", Some(ComponentTypeIdentifier(None(), "Float_Type")))
+                  , None()
+                  , None()
+                  )
+                , PortFeatureSpec(
+                    In_Data_Port("Autospd_Mph", Some(ComponentTypeIdentifier(None(), "Float_Type")))
+                  , None()
+                  , None()
+                  )
+                , PortFeatureSpec(
+                    Out_Event_Data_Port("Throttlepos_In", Some(ComponentTypeIdentifier(None(), "Float_Type")))
+                  , None()
+                  , None()
+                  )
+                ]
+              )
+            )
+          , Some(
+              Flow([FlowPathSpec("fppb", "Refspd_Mph", "Throttlepos_In", None(), None())])
+            )
+          , None()
+          , None()
+          , "Cruisecontrol_Process"
+          )
+        , process_implementation(
+            ComponentImplementationName("Cruisecontrol_Process", "Model")
+          , None()
+          , None()
+          , Some(
+              Subcomponents(
+                [ Thread_Subcomponent(
+                    "Cruise1"
+                  , Some(UniqueComponentImplementationReference(None(), ComponentImplementationName("Cruise1", "Simulink")))
+                  , None()
+                  , None()
+                  , None()
+                  )
+                , Thread_Subcomponent(
+                    "Cruise2"
+                  , Some(UniqueComponentImplementationReference(None(), ComponentImplementationName("Cruise2", "Simulink")))
+                  , None()
+                  , None()
+                  , None()
+                  )
+                , Data_Subcomponent(
+                    "class1"
+                  , Some(UniqueComponentImplementationReference(None(), ComponentImplementationName("class1", "impl")))
+                  , None()
+                  , None()
+                  , None()
+                  )
+                , Data_Subcomponent(
+                    "number1"
+                  , Some(ComponentTypeIdentifier(None(), "integer"))
+                  , None()
+                  , None()
+                  , None()
+                  )
+                ]
+              )
+            )
+          , None()
+          , Some(
+              Connections(
+                [ PortConnection(
+                    "CCruiseactive1"
+                  , PortConnection("Cruiseactive", ComIdentifier("Cruise1", "Cruiseactive"))
+                  , None()
+                  , None()
+                  )
+                , PortConnection(
+                    "Refspd1"
+                  , PortConnection("Refspd_Mph", ComIdentifier("Cruise1", "Refspd_Mph"))
+                  , None()
+                  , None()
+                  )
+                , PortConnection(
+                    "CAutospd_Mph"
+                  , PortConnection("Autospd_Mph", ComIdentifier("Cruise1", "Autospd_Mph"))
+                  , None()
+                  , None()
+                  )
+                , PortConnection(
+                    "CThrottlepos_In"
+                  , PortConnection(ComIdentifier("Cruise2", "Throttlepos_In"), "Throttlepos_In")
+                  , None()
+                  , None()
+                  )
+                , PortConnection(
+                    "Filautospd"
+                  , PortConnection(ComIdentifier("Cruise1", "Filautospd_Mph"), ComIdentifier("Cruise2", "Filautospd_Mph"))
+                  , None()
+                  , None()
+                  )
+                , PortConnection(
+                    "Filrefspd"
+                  , PortConnection(ComIdentifier("Cruise1", "Filrefspd_Mph"), ComIdentifier("Cruise2", "Filrefspd_Mph"))
+                  , None()
+                  , None()
+                  )
+                , AccessConnection(
+                    "C1"
+                  , AccessdataConnection("class1", ComIdentifier("Cruise2", "access1"))
+                  , None()
+                  , None()
+                  )
+                , AccessConnection(
+                    "C2"
+                  , AccessdataConnection("number1", ComIdentifier("Cruise2", "access2"))
+                  , None()
+                  , None()
+                  )
+                ]
+              )
+            )
+          , Some(
+              Flowss(
+                [ FlowImplementation(
+                    FlowPathImplementation(
+                      "fppb"
+                    , "Refspd_Mph"
+                    , Some(
+                        ConnectionIdentifiers(
+                          [ ("Refspd1", SubcomponentFlowIdentifier("Cruise1", "fpc1"))
+                          , ("Filrefspd", SubcomponentFlowIdentifier("Cruise2", "fpc2"))
+                          ]
+                        , "CThrottlepos_In"
+                        )
+                      )
+                    , "Throttlepos_In"
+                    )
+                  , None()
+                  , None()
+                  )
+                ]
+              )
+            )
+          , None()
+          , None()
+          , ComponentImplementationName("Cruisecontrol_Process", "Model")
+          )
+        , data("integer", None(), None(), None(), None(), None(), "integer")
+        , data("character", None(), None(), None(), None(), None(), "character")
+        , data("string", None(), None(), None(), None(), None(), "string")
+        , data("float", None(), None(), None(), None(), None(), "float")
+        , data(
+            "class1"
+          , None()
+          , Some(
+              Features(
+                [ SubcomponentAccessFeatureSpec(
+                    ProvidesSubprogramAccessSpecReference("method", Some(UniqueComponentImplementationReference(None(), ComponentImplementationName("subp3", "impl"))))
+                  , None()
+                  , None()
+                  )
+                ]
+              )
+            )
+          , None()
+          , None()
+          , None()
+          , "class1"
+          )
+        , data_implementation(
+            ComponentImplementationName("class1", "impl")
+          , None()
+          , None()
+          , Some(
+              Subcomponents(
+                [ Data_Subcomponent(
+                    "member1"
+                  , Some(ComponentTypeIdentifier(None(), "integer"))
+                  , None()
+                  , None()
+                  , None()
+                  )
+                , Data_Subcomponent(
+                    "member2"
+                  , Some(ComponentTypeIdentifier(None(), "character"))
+                  , None()
+                  , None()
+                  , None()
+                  )
+                ]
+              )
+            )
+          , None()
+          , None()
+          , None()
+          , None()
+          , None()
+          , ComponentImplementationName("class1", "impl")
+          )
+        , subprogram(
+            "subp3"
+          , None()
+          , Some(
+              Features(
+                [ ParameterFeatureSpec(InParameterSpec("input", ComponentTypeIdentifier(None(), "string")), None(), None())
+                , ParameterFeatureSpec(OutParameterSpec("output", ComponentTypeIdentifier(None(), "float")), None(), None())
+                ]
+              )
+            )
+          , None()
+          , None()
+          , None()
+          , "subp3"
+          )
+        , subprogram_implementation(
+            ComponentImplementationName("subp3", "impl")
+          , None()
+          , None()
+          , None()
+          , None()
+          , None()
+          , None()
+          , None()
+          , Some(
+              Propertiess(
+                [ PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Source_Text")
+                  , PropertyListValue([StringTerm(["subp3cpp"])])
+                  , None()
+                  )
+                ]
+              )
+            )
+          , ComponentImplementationName("subp3", "impl")
+          )
+        , data(
+            "address"
+          , None()
+          , Some(
+              Features(
+                [ SubcomponentAccessFeatureSpec(
+                    ProvidesSubprogramAccessSpecReference("method1", Some(ComponentTypeIdentifier(None(), "subp4_1")))
+                  , None()
+                  , None()
+                  )
+                , SubcomponentAccessFeatureSpec(
+                    ProvidesSubprogramAccessSpecReference("method2", Some(ComponentTypeIdentifier(None(), "subp4_2")))
+                  , None()
+                  , None()
+                  )
+                ]
+              )
+            )
+          , None()
+          , None()
+          , None()
+          , "address"
+          )
+        , data_implementation(
+            ComponentImplementationName("address", "others")
+          , None()
+          , None()
+          , Some(
+              Subcomponents(
+                [ Data_Subcomponent(
+                    "street"
+                  , Some(ComponentTypeIdentifier(None(), "string"))
+                  , None()
+                  , None()
+                  , None()
+                  )
+                , Data_Subcomponent(
+                    "streetnumber"
+                  , Some(ComponentTypeIdentifier(None(), "integer"))
+                  , None()
+                  , None()
+                  , None()
+                  )
+                , Data_Subcomponent(
+                    "city"
+                  , Some(ComponentTypeIdentifier(None(), "string"))
+                  , None()
+                  , None()
+                  , None()
+                  )
+                , Data_Subcomponent(
+                    "zipcode"
+                  , Some(ComponentTypeIdentifier(None(), "integer"))
+                  , None()
+                  , None()
+                  , None()
+                  )
+                ]
+              )
+            )
+          , None()
+          , None()
+          , None()
+          , None()
+          , None()
+          , ComponentImplementationName("address", "others")
+          )
+        , subprogram(
+            "subp4_1"
+          , None()
+          , Some(
+              Features(
+                [ ParameterFeatureSpec(InParameterSpec("tipo", ComponentTypeIdentifier(None(), "character")), None(), None())
+                , SubcomponentAccessFeatureSpec(RequiresDataAccessSpecReference("this", ComponentTypeIdentifier(None(), "address")), None(), None())
+                , ParameterFeatureSpec(OutParameterSpec("total", ComponentTypeIdentifier(None(), "integer")), None(), None())
+                ]
+              )
+            )
+          , None()
+          , None()
+          , None()
+          , "subp4_1"
+          )
+        , subprogram_implementation(
+            ComponentImplementationName("subp4_1", "impl")
+          , None()
+          , None()
+          , None()
+          , None()
+          , None()
+          , None()
+          , None()
+          , Some(
+              Propertiess(
+                [ PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Source_Text")
+                  , PropertyListValue([StringTerm(["subp4_1cpp"])])
+                  , None()
+                  )
+                ]
+              )
+            )
+          , ComponentImplementationName("subp4_1", "impl")
+          )
+        , subprogram(
+            "subp4_2"
+          , None()
+          , Some(
+              Features(
+                [SubcomponentAccessFeatureSpec(RequiresDataAccessSpecReference("this", ComponentTypeIdentifier(None(), "address")), None(), None())]
+              )
+            )
+          , None()
+          , None()
+          , None()
+          , "subp4_2"
+          )
+        , subprogram_implementation(
+            ComponentImplementationName("subp4_2", "impl")
+          , None()
+          , None()
+          , None()
+          , None()
+          , None()
+          , None()
+          , None()
+          , Some(
+              Propertiess(
+                [ PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Source_Text")
+                  , PropertyListValue([StringTerm(["subp4_2cpp"])])
+                  , None()
+                  )
+                ]
+              )
+            )
+          , ComponentImplementationName("subp4_2", "impl")
+          )
+        , system(
+            "Cruisecontrollaws"
+          , None()
+          , Some(
+              Features(
+                [ PortFeatureSpec(
+                    In_Data_Port("Cruiseactive", Some(ComponentTypeIdentifier(None(), "Bool_Type")))
+                  , None()
+                  , None()
+                  )
+                , PortFeatureSpec(
+                    In_Event_Data_Port("Refspd_Mph", Some(ComponentTypeIdentifier(None(), "Float_Type")))
+                  , None()
+                  , None()
+                  )
+                , PortFeatureSpec(
+                    In_Data_Port("Autospd_Mph", Some(ComponentTypeIdentifier(None(), "Float_Type")))
+                  , None()
+                  , None()
+                  )
+                , PortFeatureSpec(
+                    Out_Event_Data_Port("Throttlepos_In", Some(ComponentTypeIdentifier(None(), "Float_Type")))
+                  , None()
+                  , None()
+                  )
+                ]
+              )
+            )
+          , Some(
+              Flow([FlowPathSpec("fpsb", "Refspd_Mph", "Throttlepos_In", None(), None())])
+            )
+          , None()
+          , None()
+          , "Cruisecontrollaws"
+          )
+        , system_implementation(
+            ComponentImplementationName("Cruisecontrollaws", "Model")
+          , None()
+          , None()
+          , Some(
+              Subcomponents(
+                [ Process_Subcomponent(
+                    "P_Cruisecontrol_Process"
+                  , Some(UniqueComponentImplementationReference(None(), ComponentImplementationName("Cruisecontrol_Process", "Model")))
+                  , None()
+                  , None()
+                  , None()
+                  )
+                ]
+              )
+            )
+          , None()
+          , Some(
+              Connections(
+                [ PortConnection(
+                    "CCruiseactive"
+                  , PortConnection("Cruiseactive", ComIdentifier("P_Cruisecontrol_Process", "Cruiseactive"))
+                  , None()
+                  , None()
+                  )
+                , PortConnection(
+                    "Refspd1"
+                  , PortConnection("Refspd_Mph", ComIdentifier("P_Cruisecontrol_Process", "Refspd_Mph"))
+                  , None()
+                  , None()
+                  )
+                , PortConnection(
+                    "CAutospd_Mph"
+                  , PortConnection("Autospd_Mph", ComIdentifier("P_Cruisecontrol_Process", "Autospd_Mph"))
+                  , None()
+                  , None()
+                  )
+                , PortConnection(
+                    "CThrottlepos_In"
+                  , PortConnection(ComIdentifier("P_Cruisecontrol_Process", "Throttlepos_In"), "Throttlepos_In")
+                  , None()
+                  , None()
+                  )
+                ]
+              )
+            )
+          , Some(
+              Flowss(
+                [ FlowImplementation(
+                    FlowPathImplementation(
+                      "fpsb"
+                    , "Refspd_Mph"
+                    , Some(
+                        ConnectionIdentifiers([("Refspd1", SubcomponentFlowIdentifier("P_Cruisecontrol_Process", "fppb"))], "CThrottlepos_In")
+                      )
+                    , "Throttlepos_In"
+                    )
+                  , None()
+                  , None()
+                  )
+                ]
+              )
+            )
+          , None()
+          , None()
+          , ComponentImplementationName("Cruisecontrollaws", "Model")
+          )
+        , bus(
+            "Lan_Type"
+          , None()
+          , None()
+          , None()
+          , None()
+          , Some(
+              properties(
+                [ PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Transmission_Time")
+                  , RecordTerm(
+                      [ ( "Fixed"
+                        , IntegerRangeTerm(
+                            Signed_Aadlinteger(None(), "0", Some("Ns"))
+                          , Signed_Aadlinteger(None(), "10", Some("Ns"))
+                          , None()
+                          )
+                        )
+                      ]
+                    )
+                  , None()
+                  )
+                ]
+              )
+            )
+          , "Lan_Type"
+          )
+        , bus_implementation(
+            ComponentImplementationName("Lan_Type", "i")
+          , None()
+          , None()
+          , None()
+          , None()
+          , None()
+          , None()
+          , None()
+          , None()
+          , ComponentImplementationName("Lan_Type", "i")
+          )
+        , processor(
+            "arm926t"
+          , None()
+          , Some(
+              Features(
+                [SubcomponentAccessFeatureSpec(RequiresBusAccessSpec("B_Lan", ComponentTypeIdentifier(None(), "Lan_Type")), None(), None())]
+              )
+            )
+          , None()
+          , None()
+          , Some(
+              properties(
+                [ PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Assign_Time")
+                  , RecordTerm(
+                      [ ( "Fixed"
+                        , IntegerRangeTerm(
+                            Signed_Aadlinteger(None(), "0", Some("Ns"))
+                          , Signed_Aadlinteger(None(), "8", Some("Ns"))
+                          , None()
+                          )
+                        )
+                      ]
+                    )
+                  , None()
+                  )
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Source_Code_Size")
+                  , Signed_Aadlinteger(None(), "16", Some("KByte"))
+                  , None()
+                  )
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Source_Data_Size")
+                  , Signed_Aadlinteger(None(), "3000", Some("Bytes"))
+                  , None()
+                  )
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Source_Stack_Size")
+                  , Signed_Aadlinteger(None(), "1", Some("KByte"))
+                  , None()
+                  )
+                ]
+              )
+            )
+          , "arm926t"
+          )
+        , processor_implementation(
+            ComponentImplementationName("arm926t", "impl")
+          , None()
+          , None()
+          , None()
+          , None()
+          , None()
+          , None()
+          , None()
+          , None()
+          , ComponentImplementationName("arm926t", "impl")
+          )
+        , memory(
+            "Memory_Card"
+          , None()
+          , Some(
+              Features(
+                [SubcomponentAccessFeatureSpec(RequiresBusAccessSpec("Card_Connector", ComponentTypeIdentifier(None(), "Lan_Type")), None(), None())]
+              )
+            )
+          , None()
+          , None()
+          , Some(
+              properties(
+                [ PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Byte_Count")
+                  , Signed_Aadlinteger(None(), "134217728", None())
+                  , None()
+                  )
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Word_Size")
+                  , Signed_Aadlinteger(None(), "4", Some("Bytes"))
+                  , None()
+                  )
+                , PropertyAssociation(UniquePropertyIdentifier(None(), "Memory_Protocol"), PropertyTerm(None(), "read_write"), None())
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Read_Time")
+                  , RecordTerm(
+                      [ ( "Fixed"
+                        , IntegerRangeTerm(
+                            Signed_Aadlinteger(None(), "10", Some("Ns"))
+                          , Signed_Aadlinteger(None(), "15", Some("Ns"))
+                          , None()
+                          )
+                        )
+                      ]
+                    )
+                  , None()
+                  )
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Write_Time")
+                  , RecordTerm(
+                      [ ( "Fixed"
+                        , IntegerRangeTerm(
+                            Signed_Aadlinteger(None(), "10", Some("Ns"))
+                          , Signed_Aadlinteger(None(), "30", Some("Ns"))
+                          , None()
+                          )
+                        )
+                      ]
+                    )
+                  , None()
+                  )
+                ]
+              )
+            )
+          , "Memory_Card"
+          )
+        , memory_implementation(
+            ComponentImplementationName("Memory_Card", "impl")
+          , None()
+          , None()
+          , None()
+          , None()
+          , None()
+          , None()
+          , None()
+          , None()
+          , ComponentImplementationName("Memory_Card", "impl")
+          )
+        , device(
+            "Engspd_sensor"
+          , None()
+          , Some(
+              Features(
+                [ PortFeatureSpec(
+                    Out_Event_Data_Port("Engspd_Rpm", Some(ComponentTypeIdentifier(None(), "Float_Type")))
+                  , None()
+                  , None()
+                  )
+                , SubcomponentAccessFeatureSpec(RequiresBusAccessSpec("bus_access", ComponentTypeIdentifier(None(), "Lan_Type")), None(), None())
+                ]
+              )
+            )
+          , Some(Flow([FlowSourceSpec("sensor", "Engspd_Rpm", None(), None())]))
+          , None()
+          , Some(
+              properties(
+                [ PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Source_Code_Size")
+                  , Signed_Aadlinteger(None(), "10", Some("KByte"))
+                  , None()
+                  )
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Source_Data_Size")
+                  , Signed_Aadlinteger(None(), "2000", Some("Bytes"))
+                  , None()
+                  )
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Source_Stack_Size")
+                  , Signed_Aadlinteger(None(), "1", Some("KByte"))
+                  , None()
+                  )
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Source_Text")
+                  , PropertyListValue([StringTerm(["engspd_sensorcpp"])])
+                  , None()
+                  )
+                , PropertyAssociation(UniquePropertyIdentifier(None(), "Dispatch_Protocol"), PropertyTerm(None(), "Periodic"), None())
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Period")
+                  , Signed_Aadlinteger(None(), "20", Some("Ms"))
+                  , None()
+                  )
+                ]
+              )
+            )
+          , "Engspd_sensor"
+          )
+        , device_implementation(
+            ComponentImplementationName("Engspd_sensor", "impl")
+          , None()
+          , None()
+          , None()
+          , None()
+          , None()
+          , None()
+          , None()
+          , None()
+          , ComponentImplementationName("Engspd_sensor", "impl")
+          )
+        , device(
+            "Throttlepos"
+          , None()
+          , Some(
+              Features(
+                [ PortFeatureSpec(
+                    In_Event_Data_Port("Throttlepos_In", Some(ComponentTypeIdentifier(None(), "Float_Type")))
+                  , None()
+                  , Some(
+                      FeatureContainedPropertyAssociations(
+                        [ PropertyAssociation(
+                            UniquePropertyIdentifier(None(), "Queue_Size")
+                          , Signed_Aadlinteger(None(), "1", None())
+                          , None()
+                          )
+                        , PropertyAssociation(UniquePropertyIdentifier(None(), "Queue_Processing_Protocol"), PropertyTerm(None(), "FIFO"), None())
+                        ]
+                      )
+                    )
+                  )
+                , SubcomponentAccessFeatureSpec(RequiresBusAccessSpec("bus_access", ComponentTypeIdentifier(None(), "Lan_Type")), None(), None())
+                ]
+              )
+            )
+          , Some(Flow([FlowSinkSpec("throttlepos", "Throttlepos_In", None(), None())]))
+          , None()
+          , Some(
+              properties(
+                [ PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Source_Code_Size")
+                  , Signed_Aadlinteger(None(), "10", Some("KByte"))
+                  , None()
+                  )
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Source_Data_Size")
+                  , Signed_Aadlinteger(None(), "2000", Some("Bytes"))
+                  , None()
+                  )
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Source_Stack_Size")
+                  , Signed_Aadlinteger(None(), "1", Some("KByte"))
+                  , None()
+                  )
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Source_Text")
+                  , PropertyListValue([StringTerm(["throttleposcpp"])])
+                  , None()
+                  )
+                , PropertyAssociation(UniquePropertyIdentifier(None(), "Dispatch_Protocol"), PropertyTerm(None(), "Periodic"), None())
+                , PropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Period")
+                  , Signed_Aadlinteger(None(), "20", Some("Ms"))
+                  , None()
+                  )
+                ]
+              )
+            )
+          , "Throttlepos"
+          )
+        , device_implementation(
+            ComponentImplementationName("Throttlepos", "impl")
+          , None()
+          , None()
+          , None()
+          , None()
+          , None()
+          , None()
+          , None()
+          , None()
+          , ComponentImplementationName("Throttlepos", "impl")
+          )
+        , system(
+            "Cruisecontrol"
+          , None()
+          , Some(
+              Features(
+                [ SubcomponentAccessFeatureSpec(RequiresDataAccessSpecReference("Breakpedalpressed", ComponentTypeIdentifier(None(), "Bool_Type")), None(), None())
+                , PortFeatureSpec(
+                    In_Data_Port("Clutchpedalpressed", Some(ComponentTypeIdentifier(None(), "Bool_Type")))
+                  , None()
+                  , None()
+                  )
+                , PortFeatureSpec(
+                    In_Data_Port("Autospd_Mph", Some(ComponentTypeIdentifier(None(), "Float_Type")))
+                  , None()
+                  , None()
+                  )
+                ]
+              )
+            )
+          , None()
+          , None()
+          , None()
+          , "Cruisecontrol"
+          )
+        , system_implementation(
+            ComponentImplementationName("Cruisecontrol", "Generic")
+          , None()
+          , None()
+          , Some(
+              Subcomponents(
+                [ Bus_Subcomponent(
+                    "Lan"
+                  , Some(UniqueComponentImplementationReference(None(), ComponentImplementationName("Lan_Type", "i")))
+                  , None()
+                  , None()
+                  , None()
+                  )
+                , System_Subcomponent(
+                    "S_Hci"
+                  , Some(UniqueComponentImplementationReference(None(), ComponentImplementationName("Hci", "Model")))
+                  , None()
+                  , None()
+                  , None()
+                  )
+                , System_Subcomponent(
+                    "S_Cruisecontrollaws"
+                  , Some(UniqueComponentImplementationReference(None(), ComponentImplementationName("Cruisecontrollaws", "Model")))
+                  , None()
+                  , None()
+                  , None()
+                  )
+                , Processor_Subcomponent(
+                    "Hci_Processor"
+                  , Some(UniqueComponentImplementationReference(None(), ComponentImplementationName("arm926t", "impl")))
+                  , None()
+                  , None()
+                  , None()
+                  )
+                , Processor_Subcomponent(
+                    "Ccl_Processor"
+                  , Some(UniqueComponentImplementationReference(None(), ComponentImplementationName("arm926t", "impl")))
+                  , None()
+                  , None()
+                  , None()
+                  )
+                , Memory_Subcomponent(
+                    "Hci_Memory"
+                  , Some(UniqueComponentImplementationReference(None(), ComponentImplementationName("Memory_Card", "impl")))
+                  , None()
+                  , Some(
+                      PropertyAssociations(
+                        [ SubcomponentPropertyAssociations(
+                            [PropertyAssociation(
+                               UniquePropertyIdentifier(None(), "Base_Address")
+                             , Signed_Aadlinteger(None(), "80000000", None())
+                             , None()
+                             )]
+                          )
+                        ]
+                      )
+                    )
+                  , None()
+                  )
+                , Memory_Subcomponent(
+                    "Ccl_Memory"
+                  , Some(UniqueComponentImplementationReference(None(), ComponentImplementationName("Memory_Card", "impl")))
+                  , None()
+                  , Some(
+                      PropertyAssociations(
+                        [ SubcomponentPropertyAssociations(
+                            [PropertyAssociation(
+                               UniquePropertyIdentifier(None(), "Base_Address")
+                             , Signed_Aadlinteger(None(), "20000000", None())
+                             , None()
+                             )]
+                          )
+                        ]
+                      )
+                    )
+                  , None()
+                  )
+                , Device_Subcomponent(
+                    "Hci_Engspd_sensor"
+                  , Some(UniqueComponentImplementationReference(None(), ComponentImplementationName("Engspd_sensor", "impl")))
+                  , None()
+                  , Some(
+                      PropertyAssociations(
+                        [ SubcomponentPropertyAssociations(
+                            [PropertyAssociation(
+                               UniquePropertyIdentifier(None(), "Base_Address")
+                             , Signed_Aadlinteger(None(), "90000000", None())
+                             , None()
+                             )]
+                          )
+                        ]
+                      )
+                    )
+                  , None()
+                  )
+                , Device_Subcomponent(
+                    "Ccl_Throttlepos"
+                  , Some(UniqueComponentImplementationReference(None(), ComponentImplementationName("Throttlepos", "impl")))
+                  , None()
+                  , Some(
+                      PropertyAssociations(
+                        [ SubcomponentPropertyAssociations(
+                            [PropertyAssociation(
+                               UniquePropertyIdentifier(None(), "Base_Address")
+                             , Signed_Aadlinteger(None(), "30000000", None())
+                             , None()
+                             )]
+                          )
+                        ]
+                      )
+                    )
+                  , None()
+                  )
+                ]
+              )
+            )
+          , None()
+          , Some(
+              Connections(
+                [ AccessConnection(
+                    "CBreakpedalpressed"
+                  , AccessdataConnection("Breakpedalpressed", ComIdentifier("S_Hci", "Breakpedalpressed"))
+                  , None()
+                  , None()
+                  )
+                , PortConnection(
+                    "CClutchpedalpressed"
+                  , PortConnection("Clutchpedalpressed", ComIdentifier("S_Hci", "Clutchpedalpressed"))
+                  , None()
+                  , None()
+                  )
+                , PortConnection(
+                    "CAutospd_Mph1"
+                  , PortConnection("Autospd_Mph", ComIdentifier("S_Hci", "Autospd_Mph"))
+                  , None()
+                  , None()
+                  )
+                , PortConnection(
+                    "CEngspd_Rpm"
+                  , PortConnection(ComIdentifier("Hci_Engspd_sensor", "Engspd_Rpm"), ComIdentifier("S_Hci", "Engspd_Rpm"))
+                  , None()
+                  , None()
+                  )
+                , PortConnection(
+                    "CAutospd_Mph2"
+                  , PortConnection("Autospd_Mph", ComIdentifier("S_Cruisecontrollaws", "Autospd_Mph"))
+                  , None()
+                  , None()
+                  )
+                , PortConnection(
+                    "CThrottlepos"
+                  , PortConnection(ComIdentifier("S_Cruisecontrollaws", "Throttlepos_In"), ComIdentifier("Ccl_Throttlepos", "Throttlepos_In"))
+                  , None()
+                  , None()
+                  )
+                , PortConnection(
+                    "CCruiseactive"
+                  , PortConnection(ComIdentifier("S_Hci", "Cruiseactive"), ComIdentifier("S_Cruisecontrollaws", "Cruiseactive"))
+                  , Some(
+                      PropertyAssociationes(
+                        [ PropertyAssociation(
+                            UniquePropertyIdentifier(None(), "Allowed_Connection_Binding")
+                          , PropertyListValue([ReferenceTerm(ContainedModelElementPath(["lan"]))])
+                          , None()
+                          )
+                        ]
+                      )
+                    )
+                  , None()
+                  )
+                , PortConnection(
+                    "Refspd1"
+                  , PortConnection(ComIdentifier("S_Hci", "Refspd_Mph"), ComIdentifier("S_Cruisecontrollaws", "Refspd_Mph"))
+                  , Some(
+                      PropertyAssociationes(
+                        [ PropertyAssociation(
+                            UniquePropertyIdentifier(None(), "Allowed_Connection_Binding")
+                          , PropertyListValue([ReferenceTerm(ContainedModelElementPath(["lan"]))])
+                          , None()
+                          )
+                        ]
+                      )
+                    )
+                  , None()
+                  )
+                , AccessConnection(
+                    "HciProcessorbus"
+                  , AccessbusConnection("Lan", ComIdentifier("Hci_Processor", "B_Lan"))
+                  , None()
+                  , None()
+                  )
+                , AccessConnection(
+                    "CclProcessorbus"
+                  , AccessbusConnection("Lan", ComIdentifier("Ccl_Processor", "B_Lan"))
+                  , None()
+                  , None()
+                  )
+                , AccessConnection(
+                    "HciMemorybus"
+                  , AccessbusConnection("Lan", ComIdentifier("Hci_Memory", "Card_Connector"))
+                  , None()
+                  , None()
+                  )
+                , AccessConnection(
+                    "CclMemorybus"
+                  , AccessbusConnection("Lan", ComIdentifier("CclMemory", "_Card_Connector"))
+                  , None()
+                  , None()
+                  )
+                , AccessConnection(
+                    "HciEngspdbus"
+                  , AccessbusConnection("Lan", ComIdentifier("Hci_Engspd_sensor", "bus_access"))
+                  , None()
+                  , None()
+                  )
+                , AccessConnection(
+                    "CclThrottleposbus"
+                  , AccessbusConnection("Lan", ComIdentifier("Ccl_Throttlepos", "bus_access"))
+                  , None()
+                  , None()
+                  )
+                ]
+              )
+            )
+          , Some(
+              Flowss(
+                [ EndToEndFlowSpec(
+                    "system_flow"
+                  , StartSubcomponentFlowOrEtefIdentifier("Hci_Engspd_sensor", "sensor")
+                  , [ ("CEngspd_Rpm", FlowPathSubcomponentFlowOrEtefIdentifier("S_Hci", "fpsf"))
+                    , ("Refspd1", FlowPathSubcomponentFlowOrEtefIdentifier("S_Cruisecontrollaws", "fpsb"))
+                    , ("CThrottlepos", FlowPathSubcomponentFlowOrEtefIdentifier("Ccl_Throttlepos", "throttlepos"))
+                    ]
+                  , Some(
+                      PropertyAssociations(
+                        [ SubcomponentPropertyAssociations(
+                            [ PropertyAssociation(
+                                UniquePropertyIdentifier(None(), "Latency")
+                              , IntegerRangeTerm(
+                                  Signed_Aadlinteger(None(), "0", Some("Ms"))
+                                , Signed_Aadlinteger(None(), "140", Some("Ms"))
+                                , None()
+                                )
+                              , None()
+                              )
+                            ]
+                          )
+                        ]
+                      )
+                    )
+                  , None()
+                  )
+                ]
+              )
+            )
+          , None()
+          , Some(
+              Propertiess(
+                [ ContainedPropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Allowed_Processor_Binding")
+                  , PropertyListValue([ReferenceTerm(ContainedModelElementPath(["hci_processor"]))])
+                  , [ContainedModelElementPath(["S_Hci"])]
+                  , None()
+                  )
+                , ContainedPropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Allowed_Processor_Binding")
+                  , PropertyListValue([ReferenceTerm(ContainedModelElementPath(["ccl_processor"]))])
+                  , [ContainedModelElementPath(["S_Cruisecontrollaws"])]
+                  , None()
+                  )
+                , ContainedPropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Actual_Processor_Binding")
+                  , PropertyListValue([ReferenceTerm(ContainedModelElementPath(["ccl_processor"]))])
+                  , [ContainedModelElementPath(["S_Cruisecontrollaws", "P_Cruisecontrol_Process", "Cruise2"])]
+                  , None()
+                  )
+                , ContainedPropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Allowed_Memory_Binding")
+                  , PropertyListValue([ReferenceTerm(ContainedModelElementPath(["hci_memory"]))])
+                  , [ContainedModelElementPath(["S_Hci"])]
+                  , None()
+                  )
+                , ContainedPropertyAssociation(
+                    UniquePropertyIdentifier(None(), "Allowed_Memory_Binding")
+                  , PropertyListValue([ReferenceTerm(ContainedModelElementPath(["ccl_memory"]))])
+                  , [ContainedModelElementPath(["S_Cruisecontrollaws"])]
+                  , None()
+                  )
+                ]
+              )
+            )
+          , ComponentImplementationName("Cruisecontrol", "Generic")
+          )
+        ]
+      )
+    , None()
+    , None()
+    , PackageNames([], "cruise_control")
+    )
+  ]
+)

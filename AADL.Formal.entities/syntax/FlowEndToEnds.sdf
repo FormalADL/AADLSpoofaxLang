@@ -23,10 +23,11 @@ exports
   	
   	SubcomponentFlowIdentifier              -> SubcomponentFlowOrEtefIdentifier
   	%%EndToEndFlowIdentifier                  -> SubcomponentFlowOrEtefIdentifier
+  	Identifier                                             -> StartSubcomponentFlowOrEtefIdentifier
+  	Identifier "." Identifier                              -> StartSubcomponentFlowOrEtefIdentifier{cons("StartSubcomponentFlowOrEtefIdentifier")}
   	
-  	
-  	
-  	
+  	Identifier                                             -> FlowPathSubcomponentFlowOrEtefIdentifier
+  	Identifier "." Identifier                              -> FlowPathSubcomponentFlowOrEtefIdentifier{cons("FlowPathSubcomponentFlowOrEtefIdentifier")}
   	
   	
   	

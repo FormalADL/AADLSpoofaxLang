@@ -8,7 +8,7 @@ exports
   
 
   context-free syntax
-  	Identifier                     -> PackageIdentifier
+  	%%Identifier                     -> PackageIdentifier
   	Identifier                     -> PropertySetIdentifier
     Identifier                     -> DefiningIdentifier 	
     Identifier                     -> ComponentTypeIdentifier 	

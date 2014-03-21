@@ -41,7 +41,7 @@ exports
   	  "requires" "subprogram" "group" "access"
   	  SubprogramName?      -> SubprogramGroupAccessRefinement{cons("RequiresSubprogramGroupAccessRefinementReference")}
   	  
-  	PrototypeIdentifier                                       -> SubprogramName  
+  	%%PrototypeIdentifier                                       -> SubprogramName  
   	SubprogramGroupUniqueComponentClassifierReference         -> SubprogramName 
   	
   	

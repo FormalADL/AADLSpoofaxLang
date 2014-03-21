@@ -21,8 +21,8 @@ exports
     "subcomponents" Subcomponent+                       -> SubcomponentMediumCom{cons("Subcomponents")}
     "subcomponents" NoneStatement                       -> SubcomponentMediumCom{cons("Subcomponents")}
     
-    "call" SubprogramCallSequence+             -> SubprogramCallSequenceMediumCom{cons("SubprogramCallSequences")}
-    "call" NoneStatement                       -> SubprogramCallSequenceMediumCom{cons("SubprogramCallSequences")}
+    "calls" SubprogramCallSequence+             -> SubprogramCallSequenceMediumCom{cons("SubprogramCallSequences")}
+    "calls" NoneStatement                       -> SubprogramCallSequenceMediumCom{cons("SubprogramCallSequences")}
     
     "connections" Connection+                         -> ConnectionMediumCom{cons("Connections")}
    	"connections" NoneStatement                       -> ConnectionMediumCom{cons("Connections")}
