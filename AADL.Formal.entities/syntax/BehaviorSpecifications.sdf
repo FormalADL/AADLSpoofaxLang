@@ -1,0 +1,129 @@
+module BehaviorSpecifications
+
+imports Lexical Constant TypeIdentifier
+imports Modes
+imports Term
+imports AADLSpecification
+
+exports
+	sorts BehaviorSpecifications
+	
+	context-free syntax
+	"annex" "behavior_specification" "{**"
+            StateVariables?
+            Initialization?
+            States?
+            Transitions?
+            Connection?
+            CompositeDeclarations*
+      "**}" ";"                     -> BehaviorSpecifications{cons("BehaviorSpecifications")}
+      
+    "state" "variables"  (Identifier ":" Identifier ";")+ -> StateVariables{cons("StateVariables")}
+    "initially" {Assignment ";"}+                 -> Initialization{cons("Initialization")}
+      
+    {Identifier ","}* ":" "initial"* "state"     -> BehaviorStates{cons("BehaviorStates")}
+  	{Identifier ","}* ":" "complete"* "state"    -> BehaviorStates{cons("BehaviorStates")}
+    {Identifier ","}* ":" "return"* "state"      -> BehaviorStates{cons("BehaviorStates")}
+    {Identifier ","}* ":" "urgent"* "state"      -> BehaviorStates{cons("BehaviorStates")}
+    {Identifier ","}* ":" "composite"* "state"   -> BehaviorStates{cons("BehaviorStates")}
+    {Identifier ","}* ":" "exit"* "state"        -> BehaviorStates{cons("BehaviorStates")}
+    
+    "states" BehaviorStates+ -> States {cons("States")}
+    
+    (Label ":")? Identifier "-[" Guard? "-]" Identifier Actions ";" -> Transition{cons("Transition")}
+    "transitions" Transition+         -> Transitions{cons("Transitions")}
+    "mode"  "transitions" Transition+ -> Transitions{cons("Transitions")}
+    
+    "{" Action* "}"                                     -> Actions{cons("Actions")}
+    "(" Identifier "in" IntegerRanges ")"               -> Identifiers{cons("Identifiers")}
+    Identifier? ("[" IntegerConstant "]")?              -> Label{cons("Label")}
+    Identifier Identifiers? ("[" IntegerConstant "]")?  -> Label{cons("Label")}
+    
+    Expression -> Guard
+    OnExpression? event WhenExpression? -> Guard{cons("Guard")}
+    "on" Expression "-->"     -> OnExpression{cons("OnExpression")}
+    "when" Expression "-->"   -> WhenExpression{cons("WhenExpression")}
+    
+    "computation" "(" {Expression ","}+ ")" ";"-> BasicAction{cons("BasicAction")}
+    "delay" "(" {Expression ","}+ ")" ";"      -> BasicAction{cons("BasicAction")}
+    Communications ";" -> BasicAction{cons("BasicAction")}
+    Assignments ";"    -> BasicAction{cons("BasicAction")}
+    
+    Expression ":=" Expression -> Assignments{cons("Assignments")}
+    Identifier "?" "(" Expression ")"  -> Communications{cons("Communications")}
+    Identifier "!" "(" Expression ")"  -> Communications{cons("Communications")}
+    Identifier "!"                     -> Communications{cons("Communications")}
+    Identifier "!"  ParameterBinding?  -> Communications{cons("Communications")}
+    
+    Expression ("->" Identifier)? Expressiones* -> ParameterBindings{cons("ParameterBindings")}
+    "(" ParameterBindings ")"                   -> ParameterBinding{cons("ParameterBinding")}
+    "," Expression ("->" Identifier)?           -> Expressiones{cons("Expressiones")}
+    
+    BasicAction -> Action
+     "if" "(" Expression ")" Action+ 
+        Elsif* 
+     "end" "if"                                                         -> Action{cons("Action")}
+     BasicAction -> Action
+     "if" "(" Expression ")" Action+ 
+        Elsif* "else" BehaviorAction
+     "end" "if"                                                         -> Action{cons("Action")}
+    "for" "(" Identifier "in" IntegerRanges ")" "{" Action+ "}"         -> Action{cons("Action")}
+    "for" "(" Identifier "in" DataClassifier ")" "{" Action+ "}"        -> Action{cons("Action")}
+     "elsif" "(" Expression ")" Action+     -> Elsif{cons("Elsif")}
+    
+    Identifier                                    -> ReferenceExpression
+    Identifier "." Identifier                     -> ReferenceExpression{cons("ReferenceExpression")}
+    ReferenceExpression "(" {Expression ","}* ")" -> ReferenceExpression{cons("ReferenceExpression")}
+    
+    ReferenceExpression            -> BasicExpressions
+    Identifier "'"                 -> BasicExpressions{cons("BasicExpressions")}
+    Identifier "'" "fresh"         -> BasicExpressions{cons("BasicExpressions")}
+    Identifier "'" "count"         -> BasicExpressions{cons("BasicExpressions")}
+    "value" "(" Identifier ")"     -> BasicExpressions{cons("BasicExpressions")}
+    IntegerLiteral TimeUnit?       -> BasicExpressions{cons("BasicExpressions")}
+    "all" "(" Identifier "in" IntegerRanges ")" ":" Expression           -> BasicExpressions{cons("BasicExpressions")}
+    "exists" "(" Identifier "in" IntegerRanges ")" ":" Expression        -> BasicExpressions{cons("BasicExpressions")}
+    "all" "(" Identifier "in" DataClassifier ")" ":" Expression          -> BasicExpressions{cons("BasicExpressions")}
+    "exists" "(" Identifier "in" DataClassifier ")" ":" Expression       -> BasicExpressions{cons("BasicExpressions")}
+    
+    Identifier "." SubprogramFeature "(" {Expression ","}* ")"          -> BasicExpressions{cons("BasicExpressions")}
+    Identifier "." SubprogramFeature                                    -> BasicExpressions{cons("BasicExpressions")}
+    Identifier "." SubprogramFeature "?" "(" Expression ")"             -> BasicExpressions{cons("BasicExpressions")}
+    Identifier "." SubprogramFeature "?"                                -> BasicExpressions{cons("BasicExpressions")}
+    Identifier "." SubprogramFeature "'" Identifier "(" Expression ")"  -> BasicExpressions{cons("BasicExpressions")}
+    Identifier  -> SubprogramFeature
+    
+    Expression ".." Expression                       -> IntegerRanges{cons("IntegerRanges")}
+    BasicExpressions "'" "range"                     -> IntegerRanges{cons("IntegerRanges")}
+    BasicExpressions "'" "range" "(" Expression ")"  -> IntegerRanges{cons("IntegerRanges")}
+    
+     "composite" "history" ("state" Identifier)?
+     States
+     Transitions
+     CompositeDeclaration*
+    "end" StateIdentifier ";"   -> CompositeDeclarations{cons("CompositeDeclarations")}
+    
+    "composite"  ("state" Identifier)?
+     States
+     Transitions
+     CompositeDeclaration*
+    "end" StateIdentifier ";"   -> CompositeDeclarations{cons("CompositeDeclarations")}
+    
+     "composite" "history" ("mode" Identifier)?
+     States
+     Transitions
+     CompositeDeclaration*
+    "end" StateIdentifier ";"   -> CompositeDeclarations{cons("CompositeDeclarations")}
+    
+    "composite"  ("mode" Identifier)?
+     States
+     Transitions
+     CompositeDeclaration*
+    "end" StateIdentifier ";"   -> CompositeDeclarations{cons("CompositeDeclarations")}
+    
+    IntegerLiteral -> IntegerConstant
+    
+    
+    
+      
+      

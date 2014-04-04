@@ -22,12 +22,12 @@ exports
   	
   	Identifier ":" DataClassifierReference   -> BehaviorVariableDecl{cons("BehaviorVariableDecl")}
   	
-  	{BehaviorDefiningStateIdentifier ","}* ":" "initial"* "state"     -> BehaviorState{cons("BehaviorState")}
-  	{BehaviorDefiningStateIdentifier ","}* ":" "complete"* "state"    -> BehaviorState{cons("BehaviorState")}
-    {BehaviorDefiningStateIdentifier ","}* ":" "return"* "state"      -> BehaviorState{cons("BehaviorState")}
-    {BehaviorDefiningStateIdentifier ","}* ":" "urgent"* "state"      -> BehaviorState{cons("BehaviorState")}
-    {BehaviorDefiningStateIdentifier ","}* ":" "composite"* "state"   -> BehaviorState{cons("BehaviorState")}
-    {BehaviorDefiningStateIdentifier ","}* ":" "exit"* "state"        -> BehaviorState{cons("BehaviorState")}
+  	{Identifier ","}* ":" "initial"* "state"     -> BehaviorState{cons("BehaviorState")}
+  	{Identifier ","}* ":" "complete"* "state"    -> BehaviorState{cons("BehaviorState")}
+    {Identifier ","}* ":" "return"* "state"      -> BehaviorState{cons("BehaviorState")}
+    {Identifier ","}* ":" "urgent"* "state"      -> BehaviorState{cons("BehaviorState")}
+    {Identifier ","}* ":" "composite"* "state"   -> BehaviorState{cons("BehaviorState")}
+    {Identifier ","}* ":" "exit"* "state"        -> BehaviorState{cons("BehaviorState")}
 
     "(" Identifier "in" DataClassifier ")"            -> DataClassifiers{cons("DataClassifiers")}
     BehaviorTransitionLabel
