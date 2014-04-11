@@ -1,0 +1,69 @@
+module Data
+
+package personnel
+public
+with Base_Types, retep::relief;
+data Person
+end Person;
+
+data Personnel_record
+features
+  update_address: provides subprogram access update_address;
+end Personnel_record;
+
+data implementation Personnel_record.others
+subcomponents
+  Name : data Base_Types::String;
+  Home_address : data retep::relief::Address;
+end Personnel_record.others;
+
+data Personnel_database
+end Personnel_database;
+
+data implementation Personnel_database.oracle
+end Personnel_database.oracle;
+
+subprogram update_address
+features
+  person: in out parameter Personnel_record;
+  street :in parameter Base_Types::String;
+  city: in parameter Base_Types::String;
+end update_address;
+
+
+thread SEI_Personnel_addition
+features
+  new_person: in event data port Personnel_record;
+  SEI_personnel: requires data access Personnel_database.oracle;
+properties
+  Dispatch_Protocol => aperiodic;
+end SEI_Personnel_addition;
+
+end personnel;
+
+package retep::relief
+public
+data Address
+features
+
+  getStreet : provides subprogram access;
+  getCity : provides subprogram access;
+end Address;
+
+data implementation Address.others
+properties
+  Source_Data_Size => 512 Bytes;
+end Address.others;
+end retep::relief;
+
+package retep::relief
+private
+with Base_Types;
+data implementation Address.others
+subcomponents
+  street : data Base_Types::String;
+  streetnumber: data Base_Types::Integer;
+  city: data Base_Types::String;
+  zipcode: data Base_Types::Integer;
+end Address.others;
+end retep::relief;

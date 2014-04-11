@@ -74,7 +74,7 @@ exports
   	 (PropertySetIdentifier "::")? PropertySetIdentifier -> UniquePropertyTypeIdentifier{cons("UniquePropertyTypeIdentifier")}
   	 
   	 "record" "(" RecordField+ ")"  -> RecordType{cons("RecordType")}
-  	 DefiningFieldIdentifier ":" ListOf? PropertyTypeDesignator -> RecordField{cons("RecordField")}
+  	 DefiningFieldIdentifier ":" ListOf? PropertyTypeDesignator ";" -> RecordField{cons("RecordField")}
   	 
   	 UniquePropertyTypeIdentifier        -> PropertyTypeDesignator
   	 PropertyType                        -> PropertyTypeDesignator

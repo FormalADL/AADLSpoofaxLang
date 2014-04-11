@@ -25,7 +25,7 @@ exports
   	INUniqueFeatureGroupTypeReference?
   	FeatureGroupContainedPropertyAssociations?
   	%%AnnexSubclause*
-  	"end" DefiningIdentifier                                -> FeatureGroupType{cons("FeatureGroupType")}
+  	"end" DefiningIdentifier ";"                               -> FeatureGroupType{cons("FeatureGroupType")}
   	
   	"prototypes" Prototype+                       -> Prototypess{cons("Prototypes")}
   	"prototypes" PrototypeRefinement+             -> Prototypess{cons("Prototypes")}
@@ -42,7 +42,7 @@ exports
   	INUniqueFeatureGroupTypeReference?
   	FeatureGroupContainedPropertyAssociations?
   	%%AnnexSubclause*
-  	"end" DefiningIdentifier                                -> FeatureGroupTypeExtension{cons("FeatureGroupTypeExtension")}
+  	"end" DefiningIdentifier ";"                             -> FeatureGroupTypeExtension{cons("FeatureGroupTypeExtension")}
   	
   	"in"      ->Inout{cons("in")}
   	"out"     ->Inout{cons("out")}
@@ -56,10 +56,17 @@ exports
   	Inout? "feature" "group"
   	UniqueFeatureGroupType?       -> FeatureGroupSpec{cons("InFeatureGroupSpecU")}
   	
+  	DefiningFeatureGroupIdentifier ":"
+  	Inout? "feature" "group"
+  	Identifier?       -> FeatureGroupSpec{cons("InFeatureGroupSpecU")}
+  	
   	DefiningFeatureGroupIdentifier ":" "refined" "to"
   	Inout? "feature" "group"
   	UniqueFeatureGroupType?       -> FeatureGroupRefinement{cons("InFeatureGroupRefinementU")}
   	
+  	DefiningFeatureGroupIdentifier ":" "refined" "to"
+  	Inout? "feature" "group"
+  	Identifier?       -> FeatureGroupRefinement{cons("InFeatureGroupRefinementU")}
   	
   	(PackageName "::")? FeatureGroupTypeIdentifier       -> UniqueFeatureGroupTypeReference{cons("UniqueFeatureGroupTypeReference")}
   	

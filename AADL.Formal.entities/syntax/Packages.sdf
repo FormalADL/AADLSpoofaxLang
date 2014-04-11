@@ -21,12 +21,17 @@ exports
   	   PropertyAssociations?
   	"end" PackageName ";"                  -> Packagespec{cons("Packagespec")}
   	
+  	"package" PackageName
+  	   "private" PackDeclarations?
+  	   PropertyAssociations?
+  	"end" PackageName ";"                  -> Packagespec{cons("Packagespec")}
+  	
   	"properties" PropertyAssociation+                           -> PropertyAssociations{cons("PropertyAssociations")}
   	"properties" NoneStatement                                  -> PropertyAssociations{cons("PropertyAssociations")}
   	
   	NameVisibilityDeclaration* AADLDeclaration*    -> PackDeclarations{cons("PackDeclarations")}
   	
-  	{Identifier "::"}* Identifier    -> PackageName{cons("PackageNames")}
+  	{Identifier "::"}+    -> PackageName{cons("PackageNames")}
   	%%PackageName                                    -> DefiningPackageName
   	
   	ClassifierDeclaration                          -> AADLDeclaration
@@ -46,7 +51,7 @@ exports
   	ImportDeclaration                             -> NameVisibilityDeclaration
   	AliasDeclaration                              -> NameVisibilityDeclaration
   	
-  	"with" {Identifier ","}+ ";"                     -> ImportDeclaration{cons("ImportDeclaration")}
+  	"with" {PackageName ","}+ ";"                     -> ImportDeclaration{cons("ImportDeclaration")}
     %%"with" PackageName ","
   	   %%{PropertySetIdentifier ","}* ";"           -> ImportDeclaration{cons("Import_Declaration")}	
     %%"with" PropertySetIdentifier ","

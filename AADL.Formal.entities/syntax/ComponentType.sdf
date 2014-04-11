@@ -54,6 +54,7 @@ exports
     "prototypes" Prototype+                                    -> ComponentPrototypes{cons("Prototypes")}
     "prototypes" NoneStatement                                 -> ComponentPrototypes{cons("Prototypes")}
     "features" Feature+                                        -> ComponentFeatures{cons("Features")}
+    "features" FeatureRefinement                               -> ComponentFeatures{cons("Features")}
     "features" NoneStatement                                   -> ComponentFeatures{cons("Features")}
     "flows" FlowSpec+                                          -> ComponentFlowSpecs{cons("Flow")}
     "flows" NoneStatement                                      -> ComponentFlowSpecs{cons("Flow")}

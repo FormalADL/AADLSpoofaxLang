@@ -1,0 +1,26 @@
+module BusComponentAccess
+
+package Example2
+public
+with Buses;
+system simple
+end simple;
+
+system implementation simple.impl
+subcomponents
+  A: processor PPC;
+  B: device DigCamera;
+connections
+  bus access A.USB1 <-> B.USB2;
+end simple.impl;
+
+processor PPC
+features
+  USB1: provides bus access Buses::USB;
+end PPC;
+
+device DigCamera
+features
+  USB2: requires bus access Buses::USB;
+end DigCamera;
+end Example2;

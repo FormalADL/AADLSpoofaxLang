@@ -34,7 +34,7 @@ exports
   	PropertyAssociations?
   	ComponentInModes? ";"                    -> Subcomponent{cons("Abstract_Subcomponent")}
   	
-  	DefiningSubcomponentIdentifier ":" "refined to" "abstract"
+  	DefiningSubcomponentIdentifier ":" "refined" "to" "abstract"
   	UniqueComponentClassifier?
   	ArrayDimensionses?
   	PropertyAssociations?
@@ -46,7 +46,7 @@ exports
   	PropertyAssociations?
   	ComponentInModes? ";"                    -> Subcomponent{cons("Data_Subcomponent")}
   	
-  	DefiningSubcomponentIdentifier ":" "refined to" "data"
+  	DefiningSubcomponentIdentifier ":" "refined" "to" "data"
   	UniqueComponentClassifier?
   	ArrayDimensionses?
   	PropertyAssociations?
@@ -58,7 +58,7 @@ exports
   	PropertyAssociations?
   	ComponentInModes? ";"                    -> Subcomponent{cons("Subprogram_Subcomponent")}
   	
-  	DefiningSubcomponentIdentifier ":" "refined to" "subprogram"
+  	DefiningSubcomponentIdentifier ":" "refined" "to" "subprogram"
   	UniqueComponentClassifier?
   	ArrayDimensionses?
   	PropertyAssociations?
@@ -70,7 +70,7 @@ exports
   	PropertyAssociations?
   	ComponentInModes? ";"                    -> Subcomponent{cons("Subprogram_Group_Subcomponent")}
   	
-  	DefiningSubcomponentIdentifier ":" "refined to" "subprogram" "group"
+  	DefiningSubcomponentIdentifier ":" "refined" "to" "subprogram" "group"
   	UniqueComponentClassifier?
   	ArrayDimensionses?
   	PropertyAssociations?
@@ -82,7 +82,7 @@ exports
   	PropertyAssociations?
   	ComponentInModes? ";"                    -> Subcomponent{cons("Thread_Subcomponent")}
   	
-  	DefiningSubcomponentIdentifier ":" "refined to" "thread"
+  	DefiningSubcomponentIdentifier ":" "refined" "to" "thread"
   	UniqueComponentClassifier?
   	ArrayDimensionses?
   	PropertyAssociations?
@@ -94,7 +94,7 @@ exports
   	PropertyAssociations?
   	ComponentInModes? ";"                    -> Subcomponent{cons("Thread_Group_Subcomponent")}
   	
-  	DefiningSubcomponentIdentifier ":" "refined to" "thread" "group"
+  	DefiningSubcomponentIdentifier ":" "refined" "to" "thread" "group"
   	UniqueComponentClassifier?
   	ArrayDimensionses?
   	PropertyAssociations?
@@ -106,7 +106,7 @@ exports
   	PropertyAssociations?
   	ComponentInModes? ";"                    -> Subcomponent{cons("Process_Subcomponent")}
   	
-  	DefiningSubcomponentIdentifier ":" "refined to" "process"
+  	DefiningSubcomponentIdentifier ":" "refined" "to" "process"
   	UniqueComponentClassifier?
   	ArrayDimensionses?
   	PropertyAssociations?
@@ -118,7 +118,7 @@ exports
   	PropertyAssociations?
   	ComponentInModes? ";"                    -> Subcomponent{cons("Memory_Subcomponent")}
   	
-  	DefiningSubcomponentIdentifier ":" "refined to" "memory"
+  	DefiningSubcomponentIdentifier ":" "refined" "to" "memory"
   	UniqueComponentClassifier?
   	ArrayDimensionses?
   	PropertyAssociations?
@@ -130,7 +130,7 @@ exports
   	PropertyAssociations?
   	ComponentInModes? ";"                    -> Subcomponent{cons("Processor_Subcomponent")}
   	
-  	DefiningSubcomponentIdentifier ":" "refined to" "processor"
+  	DefiningSubcomponentIdentifier ":" "refined" "to" "processor"
   	UniqueComponentClassifier?
   	ArrayDimensionses?
   	PropertyAssociations?
@@ -142,7 +142,7 @@ exports
   	PropertyAssociations?
   	ComponentInModes? ";"                    -> Subcomponent{cons("Bus_Subcomponent")}
   	
-  	DefiningSubcomponentIdentifier ":" "refined to" "bus"
+  	DefiningSubcomponentIdentifier ":" "refined" "to" "bus"
   	UniqueComponentClassifier?
   	ArrayDimensionses?
   	PropertyAssociations?
@@ -154,7 +154,7 @@ exports
   	PropertyAssociations?
   	ComponentInModes? ";"                    -> Subcomponent{cons("Device_Subcomponent")}
   	
-  	DefiningSubcomponentIdentifier ":" "refined to" "device"
+  	DefiningSubcomponentIdentifier ":" "refined" "to" "device"
   	UniqueComponentClassifier?
   	ArrayDimensionses?
   	PropertyAssociations?
@@ -166,7 +166,7 @@ exports
   	PropertyAssociations?
   	ComponentInModes? ";"                    -> Subcomponent{cons("Virtual_Processor_Subcomponent")}
   	
-  	DefiningSubcomponentIdentifier ":" "refined to" "virtual" "processor"
+  	DefiningSubcomponentIdentifier ":" "refined" "to" "virtual" "processor"
   	UniqueComponentClassifier?
   	ArrayDimensionses?
   	PropertyAssociations?
@@ -178,7 +178,7 @@ exports
   	PropertyAssociations?
   	ComponentInModes? ";"                    -> Subcomponent{cons("Virtual_Bus_Subcomponent")}
   	
-  	DefiningSubcomponentIdentifier ":" "refined to" "virtual" "bus"
+  	DefiningSubcomponentIdentifier ":" "refined" "to" "virtual" "bus"
   	UniqueComponentClassifier?
   	ArrayDimensionses?
   	PropertyAssociations?
@@ -190,7 +190,7 @@ exports
   	PropertyAssociations?
   	ComponentInModes? ";"                    -> Subcomponent{cons("System_Subcomponent")}
   	
-  	DefiningSubcomponentIdentifier ":" "refined to" "system"
+  	DefiningSubcomponentIdentifier ":" "refined" "to" "system"
   	UniqueComponentClassifier?
   	ArrayDimensionses?
   	PropertyAssociations?

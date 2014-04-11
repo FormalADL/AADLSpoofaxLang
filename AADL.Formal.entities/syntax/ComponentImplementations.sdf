@@ -31,9 +31,9 @@ exports
     "flows" EndToEndFlowSpec+                   -> FlowsMediumCom{cons("Flowss")}
    	"flows" NoneStatement                       -> FlowsMediumCom{cons("Flowss")}
    	
-   	 PropertyAssociation                                       -> ComponentPropertys
-     ContainedPropertyAssociation                              -> ComponentPropertys
-     "properties" ComponentPropertys+                          -> PropertiesMediumCom{cons("Propertiess")}
+   	 PropertyAssociation                                       -> ComponentPropertyAssociations
+     ContainedPropertyAssociation                              -> ComponentPropertyAssociations
+     "properties" ComponentPropertyAssociations+               -> PropertiesMediumCom{cons("Propertiess")}
     %%"properties" PropertyAssociation+                -> PropertiesMediumCom{cons("Propertiess")}
     %%"properties" ContainedPropertyAssociation+       -> PropertiesMediumCom{cons("Propertiess")}
    	"properties" NoneStatement                       -> PropertiesMediumCom{cons("Propertiess")}

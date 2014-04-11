@@ -13,12 +13,14 @@ exports
   
 
   context-free syntax
-  	"modes" "(" NoneStatement ")"   -> ModesSubclause{cons("None")}
-  	"modes" "(" Mode+ ")"           -> ModesSubclause{cons("Mode")}
-  	"modes" "(" ModeTransition ")"  -> ModesSubclause{cons("ModeTransition")}
+  	"modes" ModeTN+            -> ModesSubclause{cons("Mode")}
   	
-  	"requires" "modes" "(" NoneStatement ")"   -> RequiresModesSubclause{cons("RequireNone")}
-  	"requires" "modes" "(" Mode+ ")"           -> RequiresSubclause{cons("RequireMode")}
+  	Mode -> ModeTN
+  	ModeTransition -> ModeTN
+  	NoneStatement -> ModeTN
+  	
+  	"requires" "modes"  NoneStatement    -> RequiresModesSubclause{cons("RequireNone")}
+  	"requires" "modes" Mode+            -> RequiresSubclause{cons("RequireMode")}
   	
   	"initial"                          -> Initial{cons("Initial")}
   	"{" PropertyAssociation+ "}"    -> ModePropertyAssciations{cons("ModePropertyAssciations")}
@@ -37,15 +39,14 @@ exports
   	
   	(SubComponentFeatureGroupOrSubProgramCallIdentifier ".")? PortIdentifier  -> UniquePortIdentifier{cons("UniquePortIdentifier")}
   	
-  	"in" "mode" "(" {ModeIdentifier ","}+ ")"  -> InModes{cons("InMode")}
+  	"in" "modes" "(" {ModeIdentifier ","}+ ")"  -> InModes{cons("InMode")}
   	
-  	"in" "mode" "(" {ModeName ","}+ ")"  -> ComponentInModes{cons("Component")}
+  	"in" "modes" "(" {ModeName ","}+ ")"        -> ComponentInModes{cons("Component")}
   	
-  	LocalModeIdentifier ("=>" SubcomponentModeIdentifier)   -> ModeName{cons("ModeName")}
+  	LocalModeIdentifier ("=>" SubcomponentModeIdentifier)?   -> ModeName{cons("ModeName")}
   	
-  	"in" "mode" "(" {ModeOrTransition ","}+ ")"  -> InModesAndTransitions{cons("InModesAndTransitions")}
+  	"in" "modes" "(" {ModeOrTransition ","}+ ")"  -> InModesAndTransitions{cons("InModesAndTransitions")}
   	 
   	ModeIdentifier              -> ModeOrTransition
-  	ModeTransitionIdentifier    -> ModeOrTransition
   	 
   	 
