@@ -100,6 +100,12 @@ rules // Debugging
     with
       filename := <guarantee-extension(|"aterm")> path;
       result   := selected
+  
+  generate-c:
+  	(selected, position, ast, path, project-path) -> (filename, result)
+    with
+      filename := <guarantee-extension(|"c")>;
+      result := <aadl-to-c> selected
       
   // Prints the definition annotated abstract syntax ATerm of a selection.
   debug-generate-deffed:

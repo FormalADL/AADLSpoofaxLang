@@ -9,7 +9,7 @@ exports
   
 
   context-free syntax
-  	Packagespec               -> PackageSetspec
+  	Packagespec               ->  PackageSetspec
   	PropertySet               ->  PackageSetspec
   	
   	PackageSetspec+           -> AADLSpecification{cons("PropertySetAADLSpecification")}

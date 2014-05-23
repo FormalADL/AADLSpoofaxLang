@@ -59,8 +59,6 @@ exports
     "flows" FlowSpec+                                          -> ComponentFlowSpecs{cons("Flow")}
     "flows" NoneStatement                                      -> ComponentFlowSpecs{cons("Flow")}
     "properties" ComponentPropertys+                           -> ComponentPropertyAssociations{cons("properties")}
-    %%"properties" PropertyAssociation+                          -> ComponentPropertyAssociations{cons("properties")}
-    %%"properties" ContainedPropertyAssociation+                 -> ComponentPropertyAssociations{cons("properties")}
      PropertyAssociation                                       -> ComponentPropertys
      ContainedPropertyAssociation                              -> ComponentPropertys
     "properties" NoneStatement                                 -> ComponentPropertyAssociations{cons("properties")}
@@ -98,14 +96,14 @@ exports
     %%AnnexSubclause* 
     "end" DefiningComponentTypeIdentifier ";" -> ComponentType{cons("thread")}
     
-    "thread" DefiningComponentTypeIdentifier 
+    "thread" "group" DefiningComponentTypeIdentifier 
     ComponentPrototypes? 
     ComponentFeatures? 
     ComponentFlowSpecs? 
     Subclause? 
     ComponentPropertyAssociations? 
     %%AnnexSubclause* 
-    "end" DefiningComponentTypeIdentifier ";" -> ComponentType{cons("thread")}
+    "end" DefiningComponentTypeIdentifier ";" -> ComponentType{cons("thread_group")}
     
     "subprogram" DefiningComponentTypeIdentifier 
     ComponentPrototypes? 

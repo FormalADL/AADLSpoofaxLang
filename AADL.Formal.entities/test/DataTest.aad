@@ -3,18 +3,4 @@ module DataTest
 data error_data
 end error_data;
 
-data comm_error
-properties
-Source_data_Size => 6 bits;
-end comm_error;
 
-data processor_error
-properties
-Source_data_Size => 6 bits;
-end processor_error;
-
-data implementation error_data.control
-subcomponents
-Comm_data: data comm_error;
-CPU_data: data processor_error;
-end error_data.control;

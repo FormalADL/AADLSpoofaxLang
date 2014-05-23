@@ -7,15 +7,13 @@ imports Lexical
 imports AADLSpecification
 
 exports
+	sorts Start
 
-  context-free start-symbols
-  
-    Start
+  context-free start-symbols  Start
 
   context-free syntax
   
     "module" Identifier Definition*       -> Start{cons("Module")}
-    %%Definition*       -> Start{cons("Module")}
     ComponentType                         -> Definition
   	ComponentTypeExtension                -> Definition
   	ComponentImplementation               -> Definition
@@ -23,3 +21,4 @@ exports
   	%%AADLSpecification                     -> Definition
     PropertySet                            -> Definition
     Packagespec                            -> Definition
+    Identifier                             -> Definition

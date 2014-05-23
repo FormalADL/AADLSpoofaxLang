@@ -40,7 +40,7 @@ exports
     Identifier Identifiers? ("[" IntegerConstant "]")?  -> Label{cons("Label")}
     
     Expression -> Guard
-    OnExpression? event WhenExpression? -> Guard{cons("Guard")}
+    OnExpression? Event WhenExpression? -> Guard{cons("Guard")}
     "on" Expression "-->"     -> OnExpression{cons("OnExpression")}
     "when" Expression "-->"   -> WhenExpression{cons("WhenExpression")}
     
@@ -122,6 +122,8 @@ exports
     "end" StateIdentifier ";"   -> CompositeDeclarations{cons("CompositeDeclarations")}
     
     IntegerLiteral -> IntegerConstant
+    Identifier     -> Event
+    Identifier     -> TimeUnit
     
     
     

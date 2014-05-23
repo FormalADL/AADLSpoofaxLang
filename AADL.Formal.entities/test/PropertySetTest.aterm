@@ -1,0 +1,53 @@
+Module(
+  "PropertySetTest"
+, [ system_implementation(
+      ComponentImplementationName("data_processing", "accelerometer_data")
+    , None()
+    , None()
+    , None()
+    , None()
+    , None()
+    , None()
+    , None()
+    , Some(
+        Propertiess(
+          [PropertyAssociation(UniquePropertyIdentifier(Some("set_of_faults"), "comm_error_status"), True(), None())]
+        )
+      )
+    , ComponentImplementationName("data_processing", "accelerometer_data")
+    )
+  , Property_Set(
+      "set_of_faults"
+    , []
+    , [ PropertyDefinitionDeclaration(
+          PropertyDefinitionDeclaration(
+            "comm_error_status"
+          , None()
+          , SingleValuedProperty(aadlboolean(), None())
+          , ["system", "device"]
+          )
+        )
+      , PropertyTypeDeclaration(
+          Property_Type_Declaration(
+            "Speed_Range"
+          , RangeType(
+              RangeType(
+                Number_Type(
+                  Some(
+                    Real_Range(
+                      Signed_Aadlreal(None(), "0.0", None())
+                    , Signed_Aadlreal(None(), "150.0", None())
+                    )
+                  )
+                , Some(Units_List("mph", []))
+                )
+              )
+            )
+          )
+        )
+      , PropertyConstant(SingleValuedPropertyConstant("Maximum_Faults", NumberType(Number_Type(None(), None())), "3"))
+      ]
+    , "set_of_faults"
+    )
+  ]
+)

@@ -1,0 +1,64 @@
+module properties
+
+imports
+  libstratego-lib
+  libstratego-gpp
+  libstratego-aterm
+  include/AADLFormalLang
+  lib/editor-common.generated
+  lib/compilation-library.generated
+  generate
+  
+ rules // Transformation the properties to c strings.
+ 	
+ 	properties-to-c:
+ 		None() -> ""
+ 	
+ 	properties-to-c:
+ 		Some(properties(p*))->
+ 		$[
+ 			[p'*]
+ 		]
+ 		with
+ 			p'* := <aadl-to-c> p*
+ 	
+ 	properties-to-c:
+ 		PropertyAssociation(UniquePropertyIdentifier(None(), identifier), Signed_Aadlinteger(None(), value, Some(type)), binding)->
+ 		$[
+ 			[identifier] :: [type]
+ 			[identifier] = [value]
+ 			[binding']
+ 		]
+ 		with
+ 			binding' := <aadl-to-c> binding
+ 	
+ 	properties-to-c:
+ 		PropertyAssociation(UniquePropertyIdentifier(None(), identifier),Signed_Aadlreal(None(), value, Some(type)), binding)->
+ 		$[
+ 			[identifier] :: [type]
+ 			[identifier] = [value]
+ 			[binding']
+ 		]
+ 		with
+ 			binding' := <aadl-to-c> binding
+
+ 	properties-to-c:
+ 		PropertyAssociation(UniquePropertyIdentifier(None(), identifier), True(), binding)->
+ 		$[
+ 			[identifier] :: bool
+ 			[identifier] = ture
+ 			[binding']
+ 		]
+ 		with
+ 			binding' := <aadl-to-c> binding
+ 	
+ 	properties-to-c:
+ 		PropertyAssociation(UniquePropertyIdentifier(None(), identifier), False(), binding)->
+ 		$[
+ 			[identifier] :: bool
+ 			[identifier] = ture
+ 			[binding']
+ 		]
+ 		with
+ 			binding' := <aadl-to-c> binding 			
+ 		

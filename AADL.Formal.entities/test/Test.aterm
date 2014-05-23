@@ -1,9 +1,9 @@
 Module(
   "Test"
 , [ Packagespec(
-      PackageNames([], "cruise_control")
+      PackageNames(["cruise_control"])
     , PackDeclarations(
-        [ImportDeclaration(["UC"])]
+        [ImportDeclaration([PackageNames(["UC"])])]
       , [ data(
             "Bool_Type"
           , None()
@@ -268,19 +268,19 @@ Module(
           , Some(
               Connections(
                 [ ParameterConnection(
-                    "in_valor"
+                    Some("in_valor")
                   , ParameterConnection("Onnotoff", ComIdentifier("llamado", "in_parameter"))
                   , None()
                   , None()
                   )
                 , AccessConnection(
-                    "referencia"
+                    Some("referencia")
                   , AccessdataConnection("Breakpedalpressed", ComIdentifier("llamado", "p1"))
                   , None()
                   , None()
                   )
                 , ParameterConnection(
-                    "out_valor"
+                    Some("out_valor")
                   , ParameterConnection(ComIdentifier("llamado", "out_parameter"), "Cruiseactive")
                   , None()
                   , None()
@@ -685,85 +685,85 @@ Module(
           , Some(
               Connections(
                 [ AccessConnection(
-                    "CBreakpedalpressed"
+                    Some("CBreakpedalpressed")
                   , AccessdataConnection("Breakpedalpressed", ComIdentifier("Drivermodelogic", "Breakpedalpressed"))
                   , None()
                   , None()
                   )
                 , PortConnection(
-                    "CClutchpedalpressed"
+                    Some("CClutchpedalpressed")
                   , PortConnection("Clutchpedalpressed", ComIdentifier("Drivermodelogic", "Clutchpedalpressed"))
                   , None()
                   , None()
                   )
                 , PortConnection(
-                    "CAutospd_Mph"
+                    Some("CAutospd_Mph")
                   , PortConnection("Autospd_Mph", ComIdentifier("Instrumentpanel", "Autospd_Mph"))
                   , None()
                   , None()
                   )
                 , PortConnection(
-                    "CEngspd_Rpm"
+                    Some("CEngspd_Rpm")
                   , PortConnection("Engspd_Rpm", ComIdentifier("Button_Panel", "Engspd_Rpm"))
                   , None()
                   , None()
                   )
                 , PortConnection(
-                    "CCruiseactive1"
+                    Some("CCruiseactive1")
                   , PortConnection(ComIdentifier("Drivermodelogic", "Cruiseactive"), "Cruiseactive")
                   , None()
                   , None()
                   )
                 , PortConnection(
-                    "Refspd1"
+                    Some("Refspd1")
                   , PortConnection(ComIdentifier("Refspd", "Refspd_Mph"), "Refspd_Mph")
                   , None()
                   , None()
                   )
                 , PortConnection(
-                    "CCruiseactive2"
+                    Some("CCruiseactive2")
                   , PortConnection(ComIdentifier("Drivermodelogic", "Cruiseactive"), ComIdentifier("Refspd", "Cruiseactive"))
                   , None()
                   , None()
                   )
                 , PortConnection(
-                    "CActivate1"
+                    Some("CActivate1")
                   , PortConnection(ComIdentifier("Button_Panel", "Activate"), ComIdentifier("Drivermodelogic", "Activate"))
                   , None()
                   , None()
                   )
                 , PortConnection(
-                    "CCancel"
+                    Some("CCancel")
                   , PortConnection(ComIdentifier("Button_Panel", "Cancel"), ComIdentifier("Drivermodelogic", "Cancel"))
                   , None()
                   , None()
                   )
                 , PortConnection(
-                    "COnnotoff"
+                    Some("COnnotoff")
                   , PortConnection(ComIdentifier("Button_Panel", "Onnotoff"), ComIdentifier("Drivermodelogic", "Onnotoff"))
                   , None()
                   , None()
                   )
                 , PortConnection(
-                    "CActivate2"
+                    Some("CActivate2")
                   , PortConnection(ComIdentifier("Button_Panel", "Activate"), ComIdentifier("Refspd", "Activate"))
                   , None()
                   , None()
                   )
                 , PortConnection(
-                    "CIncspeed"
+                    Some("CIncspeed")
                   , PortConnection(ComIdentifier("Button_Panel", "Incspeed"), ComIdentifier("Refspd", "Incspeed"))
                   , None()
                   , None()
                   )
                 , PortConnection(
-                    "CDecspd"
+                    Some("CDecspd")
                   , PortConnection(ComIdentifier("Button_Panel", "Decspd"), ComIdentifier("Refspd", "Decspd"))
                   , None()
                   , None()
                   )
                 , PortConnection(
-                    "Refspd2"
+                    Some("Refspd2")
                   , PortConnection(ComIdentifier("Refspd", "Refspd_Mph"), ComIdentifier("Instrumentpanel", "Refspd_Mph"))
                   , None()
                   , None()
@@ -865,37 +865,37 @@ Module(
           , Some(
               Connections(
                 [ AccessConnection(
-                    "CBreakpedalpressed"
+                    Some("CBreakpedalpressed")
                   , AccessdataConnection("Breakpedalpressed", ComIdentifier("P_Hci_Process", "Breakpedalpressed"))
                   , None()
                   , None()
                   )
                 , PortConnection(
-                    "CClutchpedalpressed"
+                    Some("CClutchpedalpressed")
                   , PortConnection("Clutchpedalpressed", ComIdentifier("P_Hci_Process", "Clutchpedalpressed"))
                   , None()
                   , None()
                   )
                 , PortConnection(
-                    "CAutospd_Mph"
+                    Some("CAutospd_Mph")
                   , PortConnection("Autospd_Mph", ComIdentifier("P_Hci_Process", "Autospd_Mph"))
                   , None()
                   , None()
                   )
                 , PortConnection(
-                    "CEngspd_Rpm"
+                    Some("CEngspd_Rpm")
                   , PortConnection("Engspd_Rpm", ComIdentifier("P_Hci_Process", "Engspd_Rpm"))
                   , None()
                   , None()
                   )
                 , PortConnection(
-                    "CCruiseactive"
+                    Some("CCruiseactive")
                   , PortConnection(ComIdentifier("P_Hci_Process", "Cruiseactive"), "Cruiseactive")
                   , None()
                   , None()
                   )
                 , PortConnection(
-                    "Refspd1"
+                    Some("Refspd1")
                   , PortConnection(ComIdentifier("P_Hci_Process", "Refspd_Mph"), "Refspd_Mph")
                   , None()
                   , None()
@@ -1398,49 +1398,49 @@ Module(
           , Some(
               Connections(
                 [ PortConnection(
-                    "CCruiseactive1"
+                    Some("CCruiseactive1")
                   , PortConnection("Cruiseactive", ComIdentifier("Cruise1", "Cruiseactive"))
                   , None()
                   , None()
                   )
                 , PortConnection(
-                    "Refspd1"
+                    Some("Refspd1")
                   , PortConnection("Refspd_Mph", ComIdentifier("Cruise1", "Refspd_Mph"))
                   , None()
                   , None()
                   )
                 , PortConnection(
-                    "CAutospd_Mph"
+                    Some("CAutospd_Mph")
                   , PortConnection("Autospd_Mph", ComIdentifier("Cruise1", "Autospd_Mph"))
                   , None()
                   , None()
                   )
                 , PortConnection(
-                    "CThrottlepos_In"
+                    Some("CThrottlepos_In")
                   , PortConnection(ComIdentifier("Cruise2", "Throttlepos_In"), "Throttlepos_In")
                   , None()
                   , None()
                   )
                 , PortConnection(
-                    "Filautospd"
+                    Some("Filautospd")
                   , PortConnection(ComIdentifier("Cruise1", "Filautospd_Mph"), ComIdentifier("Cruise2", "Filautospd_Mph"))
                   , None()
                   , None()
                   )
                 , PortConnection(
-                    "Filrefspd"
+                    Some("Filrefspd")
                   , PortConnection(ComIdentifier("Cruise1", "Filrefspd_Mph"), ComIdentifier("Cruise2", "Filrefspd_Mph"))
                   , None()
                   , None()
                   )
                 , AccessConnection(
-                    "C1"
+                    Some("C1")
                   , AccessdataConnection("class1", ComIdentifier("Cruise2", "access1"))
                   , None()
                   , None()
                   )
                 , AccessConnection(
-                    "C2"
+                    Some("C2")
                   , AccessdataConnection("number1", ComIdentifier("Cruise2", "access2"))
                   , None()
                   , None()
@@ -1755,25 +1755,25 @@ Module(
           , Some(
               Connections(
                 [ PortConnection(
-                    "CCruiseactive"
+                    Some("CCruiseactive")
                   , PortConnection("Cruiseactive", ComIdentifier("P_Cruisecontrol_Process", "Cruiseactive"))
                   , None()
                   , None()
                   )
                 , PortConnection(
-                    "Refspd1"
+                    Some("Refspd1")
                   , PortConnection("Refspd_Mph", ComIdentifier("P_Cruisecontrol_Process", "Refspd_Mph"))
                   , None()
                   , None()
                   )
                 , PortConnection(
-                    "CAutospd_Mph"
+                    Some("CAutospd_Mph")
                   , PortConnection("Autospd_Mph", ComIdentifier("P_Cruisecontrol_Process", "Autospd_Mph"))
                   , None()
                   , None()
                   )
                 , PortConnection(
-                    "CThrottlepos_In"
+                    Some("CThrottlepos_In")
                   , PortConnection(ComIdentifier("P_Cruisecontrol_Process", "Throttlepos_In"), "Throttlepos_In")
                   , None()
                   , None()
@@ -2243,43 +2243,43 @@ Module(
           , Some(
               Connections(
                 [ AccessConnection(
-                    "CBreakpedalpressed"
+                    Some("CBreakpedalpressed")
                   , AccessdataConnection("Breakpedalpressed", ComIdentifier("S_Hci", "Breakpedalpressed"))
                   , None()
                   , None()
                   )
                 , PortConnection(
-                    "CClutchpedalpressed"
+                    Some("CClutchpedalpressed")
                   , PortConnection("Clutchpedalpressed", ComIdentifier("S_Hci", "Clutchpedalpressed"))
                   , None()
                   , None()
                   )
                 , PortConnection(
-                    "CAutospd_Mph1"
+                    Some("CAutospd_Mph1")
                   , PortConnection("Autospd_Mph", ComIdentifier("S_Hci", "Autospd_Mph"))
                   , None()
                   , None()
                   )
                 , PortConnection(
-                    "CEngspd_Rpm"
+                    Some("CEngspd_Rpm")
                   , PortConnection(ComIdentifier("Hci_Engspd_sensor", "Engspd_Rpm"), ComIdentifier("S_Hci", "Engspd_Rpm"))
                   , None()
                   , None()
                   )
                 , PortConnection(
-                    "CAutospd_Mph2"
+                    Some("CAutospd_Mph2")
                   , PortConnection("Autospd_Mph", ComIdentifier("S_Cruisecontrollaws", "Autospd_Mph"))
                   , None()
                   , None()
                   )
                 , PortConnection(
-                    "CThrottlepos"
+                    Some("CThrottlepos")
                   , PortConnection(ComIdentifier("S_Cruisecontrollaws", "Throttlepos_In"), ComIdentifier("Ccl_Throttlepos", "Throttlepos_In"))
                   , None()
                   , None()
                   )
                 , PortConnection(
-                    "CCruiseactive"
+                    Some("CCruiseactive")
                   , PortConnection(ComIdentifier("S_Hci", "Cruiseactive"), ComIdentifier("S_Cruisecontrollaws", "Cruiseactive"))
                   , Some(
                       PropertyAssociationes(
@@ -2294,7 +2294,7 @@ Module(
                   , None()
                   )
                 , PortConnection(
-                    "Refspd1"
+                    Some("Refspd1")
                   , PortConnection(ComIdentifier("S_Hci", "Refspd_Mph"), ComIdentifier("S_Cruisecontrollaws", "Refspd_Mph"))
                   , Some(
                       PropertyAssociationes(
@@ -2309,37 +2309,37 @@ Module(
                   , None()
                   )
                 , AccessConnection(
-                    "HciProcessorbus"
+                    Some("HciProcessorbus")
                   , AccessbusConnection("Lan", ComIdentifier("Hci_Processor", "B_Lan"))
                   , None()
                   , None()
                   )
                 , AccessConnection(
-                    "CclProcessorbus"
+                    Some("CclProcessorbus")
                   , AccessbusConnection("Lan", ComIdentifier("Ccl_Processor", "B_Lan"))
                   , None()
                   , None()
                   )
                 , AccessConnection(
-                    "HciMemorybus"
+                    Some("HciMemorybus")
                   , AccessbusConnection("Lan", ComIdentifier("Hci_Memory", "Card_Connector"))
                   , None()
                   , None()
                   )
                 , AccessConnection(
-                    "CclMemorybus"
+                    Some("CclMemorybus")
                   , AccessbusConnection("Lan", ComIdentifier("CclMemory", "_Card_Connector"))
                   , None()
                   , None()
                   )
                 , AccessConnection(
-                    "HciEngspdbus"
+                    Some("HciEngspdbus")
                   , AccessbusConnection("Lan", ComIdentifier("Hci_Engspd_sensor", "bus_access"))
                   , None()
                   , None()
                   )
                 , AccessConnection(
-                    "CclThrottleposbus"
+                    Some("CclThrottleposbus")
                   , AccessbusConnection("Lan", ComIdentifier("Ccl_Throttlepos", "bus_access"))
                   , None()
                   , None()
@@ -2420,7 +2420,7 @@ Module(
       )
     , None()
     , None()
-    , PackageNames([], "cruise_control")
+    , PackageNames(["cruise_control"])
     )
   ]
 )

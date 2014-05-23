@@ -7,7 +7,7 @@ imports
 
 rules
  
-  rename-refactoring:
+   rename-refactoring:
     (newname, oldname{ref}, position, ast, path, project-path) -> 
     (ast-changes, fatal-errors, errors, warnings)
     where

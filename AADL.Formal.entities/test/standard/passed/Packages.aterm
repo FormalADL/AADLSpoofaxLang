@@ -1,0 +1,47 @@
+Module(
+  "Packages"
+, [ Packagespec(
+      PackageNames(["Aircraft", "Cockpit"])
+    , PackDeclarations(
+        [ ImportDeclaration(
+            [PackageNames(["Avionics", "DataTypes"]), PackageNames(["Safety_Properties"])]
+          )
+        , AliasDeclaration(
+            Some("AirData")
+          , data()
+          , ComponentTypeIdentifier(Some(PackageNames(["Avionics", "DataTypes"])), "AirData")
+          )
+        ]
+      , [ system(
+            "MFD"
+          , None()
+          , Some(
+              Features(
+                [PortFeatureSpec(
+                   In_Data_Port("Airdata", Some(ComponentTypeIdentifier(None(), "AirData")))
+                 , None()
+                 , None()
+                 )]
+              )
+            )
+          , None()
+          , None()
+          , Some(
+              properties(
+                [PropertyAssociation(
+                   UniquePropertyIdentifier(Some("Safety_Properties"), "Safety_Criticality")
+                 , PropertyTerm(None(), "high")
+                 , None()
+                 )]
+              )
+            )
+          , "MFD"
+          )
+        ]
+      )
+    , None()
+    , None()
+    , PackageNames(["Aircraft", "Cockpit"])
+    )
+  ]
+)

@@ -1,0 +1,104 @@
+module subcomponents
+
+imports
+  libstratego-lib
+  libstratego-gpp
+  libstratego-aterm
+  include/AADLFormalLang
+  lib/editor-common.generated
+  lib/compilation-library.generated
+  properties
+  generate
+  rules // Transformation the subcomponents to c strings.
+  	
+    subcomponents-to-c:
+    	None() -> ""
+ 	
+ 	subcomponents-to-c:
+ 		Some(Subcomponents(p*))->
+ 		$[
+ 			[p'*]
+ 		]
+ 		with
+ 			p'* := <aadl-to-c> p*
+ 	
+ 	subcomponents-to-c:
+ 		Data_Subcomponent(name, Some(ComponentTypeIdentifier(None(), Subname)), array, property*, cmode)->
+ 		$[
+ 			void [Subname]()
+ 			[array']
+ 			[property*]
+ 			[cmode]
+ 		]
+ 		with 
+ 			array' := <aadl-to-c> array;
+ 			property'* := <aadl-to-c> property*;
+ 			cmode' := <aadl-to-c> cmode
+
+ 	subcomponents-to-c:
+ 		Subprogram_Subcomponent(name, Some(ComponentTypeIdentifier(None(), Subname)), array, property*, cmode)->
+ 		$[
+ 			void [Subname]()
+ 			[array']
+ 			[property*]
+ 			[cmode]
+ 		]
+ 		with 
+ 			array' := <aadl-to-c> array;
+ 			property'* := <aadl-to-c> property*;
+ 			cmode' := <aadl-to-c> cmode 			
+
+ 	subcomponents-to-c:
+ 		Subprogram_Group_Subcomponent(name, Some(ComponentTypeIdentifier(None(), Subname)), array, property*, cmode)->
+ 		$[
+ 			void [Subname]()
+ 			[array']
+ 			[property*]
+ 			[cmode]
+ 		]
+ 		with 
+ 			array' := <aadl-to-c> array;
+ 			property'* := <aadl-to-c> property*;
+ 			cmode' := <aadl-to-c> cmode
+
+ 	subcomponents-to-c:
+ 		Thread_Subcomponent(name, Some(ComponentTypeIdentifier(None(), Subname)), array, property*, cmode)->
+ 		$[
+ 			void [Subname]()
+ 			[array']
+ 			[property*]
+ 			[cmode]
+ 		]
+ 		with 
+ 			array' := <aadl-to-c> array;
+ 			property'* := <aadl-to-c> property*;
+ 			cmode' := <aadl-to-c> cmode
+
+
+ 	subcomponents-to-c:
+ 		Thread_Group_Subcomponent(name, Some(ComponentTypeIdentifier(None(), Subname)), array, property*, cmode)->
+ 		$[
+ 			void [Subname]()
+ 			[array']
+ 			[property*]
+ 			[cmode]
+ 		]
+ 		with 
+ 			array' := <aadl-to-c> array;
+ 			property'* := <aadl-to-c> property*;
+ 			cmode' := <aadl-to-c> cmode
+
+
+ 	subcomponents-to-c:
+ 		Process_Subcomponent(name, Some(ComponentTypeIdentifier(None(), Subname)), array, property*, cmode)->
+ 		$[
+ 			void [Subname]()
+ 			[array']
+ 			[property*]
+ 			[cmode]
+ 		]
+ 		with 
+ 			array' := <aadl-to-c> array;
+ 			property'* := <aadl-to-c> property*;
+ 			cmode' := <aadl-to-c> cmode
+  	

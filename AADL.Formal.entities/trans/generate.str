@@ -7,61 +7,374 @@ imports
   include/AADLFormalLang
   lib/editor-common.generated
   lib/compilation-library.generated
+  properties
+  subcomponents
 
 rules // Incremental code generation of project using compilation library.
-      
-  index-compile-ast(|file, subfile):
-    ast -> None()
+   
+   index-compile-ast(|file, subfile):
+    (selected, position, ast, path, project-path) -> (filename, java)
     with
-      java := <to-java> ast;
+      java := <aadl-to-c> selected;
       full-path := <dirname> file;
-      filename := <guarantee-extension(|"java")> <base-filename> file;
+      filename := <guarantee-extension(|"c")> <base-filename> file;
       writePath := $[[full-path]/];
       writeFile :=  $[[writePath][filename]];
       try(<mkdir> writePath);
       <fclose> <fputs> (java, <fopen> (writeFile, "w"))
 
-rules // Transformation to java strings.
 
-  to-java:
-    [_] -> <concat-strings> <map(to-java)>
-    
-  to-java:
-    () -> ""
+strategies
+  aadl-to-c =
+    bottomup(to-c <+component-to-c <+properties-to-c <+subcomponents-to-c <+ is-string <+ concat-strings <+ aterm-to-string)
+  
+  aterm-to-string =
+    pp-aterm-box; box2text-string(|120)  	
+rules // Transformation the component to c strings.
 
-  to-java:
+   to-c:
     Module(x, d*) ->
-    $[ package [x];
-       
+    $[ 
        [d'*]
      ]
     with
-      d'* := <to-java> d*
-  
-  to-java:
-    Entity(x, p*) ->
-    $[ class [x] {
-           [p'*]
+      d'* := <aadl-to-c> d*
+
+   component-to-c:
+    None() -> ""
+    
+   component-to-c:
+    data(x, None(), None(), None(), None(), None(), x) ->
+    $[ void [x]() {
+       }
+     ]
+
+   component-to-c:
+    data(x, prototypes*, features*, flows*, modes, properties*, x) ->
+    $[ void [x]() {
+           [prototypes'*]
+           [features'*]
+           [flows'*]
+           [modes']
+           [properties'*]
        }
      ]
     with
-      p'* := <to-java> p*
+      prototypes'* := <aadl-to-c> prototypes*;
+      features'* := <aadl-to-c> features*;
+      flows'* := <aadl-to-c> flows*;
+      modes' := <aadl-to-c> modes;
+      properties'* := <aadl-to-c> properties*
+    
+   component-to-c:
+    subprogram(x, None(), None(), None(), None(), None(), x) ->
+    $[ void [x]() {
+       }
+     ]
 
-  to-java:
-    Property(x, Type(t)) -> $[
-      private [t] [x];
+   component-to-c:
+    subprogram(x, prototypes*, features*, flows*, modes, properties*, x) ->
+    $[ void [x]() {
+           [prototypes'*]
+           [features'*]
+           [flows'*]
+           [modes']
+           [properties'*]
+       }
+     ]
+    with
+      prototypes'* := <aadl-to-c> prototypes*;
+      features'* := <aadl-to-c> features*;
+      flows'* := <aadl-to-c> flows*;
+      modes' := <aadl-to-c> modes;
+      properties'* := <aadl-to-c> properties*
       
-      public [t] get_[x]() {
-          return [x];
-      }
-      
-      public void set_[x] ([t] [x]) {
-          this.[x] = [x];    
-      }
-  ]
-  
-  to-java:
-    Type(t) -> t
+   component-to-c:
+    subprogram_group(x, None(), None(), None(), None(), None(), x) ->
+    $[ void [x]() {
+       }
+     ]
 
-  to-java:
-    t* -> <map(to-java)> t*
+   component-to-c:
+    subprogram_group(x, prototypes*, features*, flows*, modes, properties*, x) ->
+    $[ void [x]() {
+           [prototypes'*]
+           [features'*]
+           [flows'*]
+           [modes']
+           [properties'*]
+       }
+     ]
+    with
+      prototypes'* := <aadl-to-c> prototypes*;
+      features'* := <aadl-to-c> features*;
+      flows'* := <aadl-to-c> flows*;
+      modes' := <aadl-to-c> modes;
+      properties'* := <aadl-to-c> properties*      
+      
+   component-to-c:
+    thread(x, None(), None(), None(), None(), None(), x) ->
+    $[ void [x]() {
+       }
+     ]
+
+   component-to-c:
+    thread(x, prototypes*, features*, flows*, modes, properties*, x) ->
+    $[ void [x]() {
+           [prototypes'*]
+           [features'*]
+           [flows'*]
+           [modes']
+           [properties'*]
+       }
+     ]
+    with
+      prototypes'* := <aadl-to-c> prototypes*;
+      features'* := <aadl-to-c> features*;
+      flows'* := <aadl-to-c> flows*;
+      modes' := <aadl-to-c> modes;
+      properties'* := <aadl-to-c> properties*      
+      
+   component-to-c:
+    thread_group(x, None(), None(), None(), None(), None(), x) ->
+    $[ void [x]() {
+       }
+     ]
+
+   component-to-c:
+    thread_group(x, prototypes*, features*, flows*, modes, properties*, x) ->
+    $[ void [x]() {
+           [prototypes'*]
+           [features'*]
+           [flows'*]
+           [modes']
+           [properties'*]
+       }
+     ]
+    with
+      prototypes'* := <aadl-to-c> prototypes*;
+      features'* := <aadl-to-c> features*;
+      flows'* := <aadl-to-c> flows*;
+      modes' := <aadl-to-c> modes;
+      properties'* := <aadl-to-c> properties*      
+      
+   component-to-c:
+    process(x, None(), None(), None(), None(), None(), x) ->
+    $[ void [x]() {
+       }
+     ]
+
+   component-to-c:
+    process(x, prototypes*, features*, flows*, modes, properties*, x) ->
+    $[ void [x]() {
+           [prototypes'*]
+           [features'*]
+           [flows'*]
+           [modes']
+           [properties'*]
+       }
+     ]
+    with
+      prototypes'* := <aadl-to-c> prototypes*;
+      features'* := <aadl-to-c> features*;
+      flows'* := <aadl-to-c> flows*;
+      modes' := <aadl-to-c> modes;
+      properties'* := <aadl-to-c> properties*      
+   
+   component-to-c:
+   	data_implementation(ComponentImplementationName(name, extension), None(), None(), None(), None(), None(), None(), None(), None(), ComponentImplementationName(name, extension)) ->
+   	$[
+   		void [name]_[extension](){
+   			
+   		}
+   	]
+   	
+   component-to-c:
+   	data_implementation(ComponentImplementationName(name, extension), bindings, prototypes*, subcomponents*, calls*, connections*, flows*, modes, properties*, ComponentImplementationName(name, extension)) ->
+   	$[
+   		void [name]_[extension](){
+   		   [bindings']
+   		   [prototypes'*]
+   		   [subcomponents'*]
+   		   [calls'*]
+   		   [connections'*]
+           [flows'*]
+           [modes']
+           [properties'*]
+   			
+   		}
+   	]
+   	with
+   	  bindings' := <aadl-to-c> bindings;
+   	  prototypes'* := <aadl-to-c> prototypes*;
+   	  subcomponents'* := <aadl-to-c> subcomponents*;
+   	  calls'* := <aadl-to-c> calls*;
+   	  connections'* := <aadl-to-c> connections*;
+      flows'* := <aadl-to-c> flows*;
+      modes' := <aadl-to-c> modes;
+      properties'* := <aadl-to-c> properties* 
+
+   component-to-c:
+   	subprogram_implementation(ComponentImplementationName(name, extension), None(), None(), None(), None(), None(), None(), None(), None(), ComponentImplementationName(name, extension)) ->
+   	$[
+   		void [name]_[extension](){
+   			
+   		}
+   	]
+   	
+   component-to-c:
+   	subprogram_implementation(ComponentImplementationName(name, extension), bindings, prototypes*, subcomponents*, calls*, connections*, flows*, modes, properties*, ComponentImplementationName(name, extension)) ->
+   	$[
+   		void [name]_[extension](){
+   		   [bindings']
+   		   [prototypes'*]
+   		   [subcomponents'*]
+   		   [calls'*]
+   		   [connections'*]
+           [flows'*]
+           [modes']
+           [properties'*]
+   			
+   		}
+   	]
+   	with
+   	  bindings' := <aadl-to-c> bindings;
+   	  prototypes'* := <aadl-to-c> prototypes*;
+   	  subcomponents'* := <aadl-to-c> subcomponents*;
+   	  calls'* := <aadl-to-c> calls*;
+   	  connections'* := <aadl-to-c> connections*;
+      flows'* := <aadl-to-c> flows*;
+      modes' := <aadl-to-c> modes;
+      properties'* := <aadl-to-c> properties* 
+
+   component-to-c:
+   	subprogram_group_implementation(ComponentImplementationName(name, extension), None(), None(), None(), None(), None(), None(), None(), None(), ComponentImplementationName(name, extension)) ->
+   	$[
+   		void [name]_[extension](){
+   			
+   		}
+   	]
+   	
+   component-to-c:
+   	subprogram_group_implementation(ComponentImplementationName(name, extension), bindings, prototypes*, subcomponents*, calls*, connections*, flows*, modes, properties*, ComponentImplementationName(name, extension)) ->
+   	$[
+   		void [name]_[extension](){
+   		   [bindings']
+   		   [prototypes'*]
+   		   [subcomponents'*]
+   		   [calls'*]
+   		   [connections'*]
+           [flows'*]
+           [modes']
+           [properties'*]
+   			
+   		}
+   	]
+   	with
+   	  bindings' := <aadl-to-c> bindings;
+   	  prototypes'* := <aadl-to-c> prototypes*;
+   	  subcomponents'* := <aadl-to-c> subcomponents*;
+   	  calls'* := <aadl-to-c> calls*;
+   	  connections'* := <aadl-to-c> connections*;
+      flows'* := <aadl-to-c> flows*;
+      modes' := <aadl-to-c> modes;
+      properties'* := <aadl-to-c> properties* 
+      
+   component-to-c:
+   	thread_implementation(ComponentImplementationName(name, extension), None(), None(), None(), None(), None(), None(), None(), None(), ComponentImplementationName(name, extension)) ->
+   	$[
+   		void [name]_[extension](){
+   			
+   		}
+   	]
+   	
+   component-to-c:
+   	thread_implementation(ComponentImplementationName(name, extension), bindings, prototypes*, subcomponents*, calls*, connections*, flows*, modes, properties*, ComponentImplementationName(name, extension)) ->
+   	$[
+   		void [name]_[extension](){
+   		   [bindings']
+   		   [prototypes'*]
+   		   [subcomponents'*]
+   		   [calls'*]
+   		   [connections'*]
+           [flows'*]
+           [modes']
+           [properties'*]
+   			
+   		}
+   	]
+   	with
+   	  bindings' := <aadl-to-c> bindings;
+   	  prototypes'* := <aadl-to-c> prototypes*;
+   	  subcomponents'* := <aadl-to-c> subcomponents*;
+   	  calls'* := <aadl-to-c> calls*;
+   	  connections'* := <aadl-to-c> connections*;
+      flows'* := <aadl-to-c> flows*;
+      modes' := <aadl-to-c> modes;
+      properties'* := <aadl-to-c> properties*       
+      
+   component-to-c:
+   	thread_group_implementation(ComponentImplementationName(name, extension), None(), None(), None(), None(), None(), None(), None(), None(), ComponentImplementationName(name, extension)) ->
+   	$[
+   		void [name]_[extension](){
+   			
+   		}
+   	]
+   	
+   component-to-c:
+   	thread_group_implementation(ComponentImplementationName(name, extension), bindings, prototypes*, subcomponents*, calls*, connections*, flows*, modes, properties*, ComponentImplementationName(name, extension)) ->
+   	$[
+   		void [name]_[extension](){
+   		   [bindings']
+   		   [prototypes'*]
+   		   [subcomponents'*]
+   		   [calls'*]
+   		   [connections'*]
+           [flows'*]
+           [modes']
+           [properties'*]
+   			
+   		}
+   	]
+   	with
+   	  bindings' := <aadl-to-c> bindings;
+   	  prototypes'* := <to-c> prototypes*;
+   	  subcomponents'* := <aadl-to-c> subcomponents*;
+   	  calls'* := <aadl-to-c> calls*;
+   	  connections'* := <aadl-to-c> connections*;
+      flows'* := <aadl-to-c> flows*;
+      modes' := <aadl-to-c> modes;
+      properties'* := <aadl-to-c> properties*       
+
+   component-to-c:
+   	process_implementation(ComponentImplementationName(name, extension), None(), None(), None(), None(), None(), None(), None(), None(), ComponentImplementationName(name, extension)) ->
+   	$[
+   		void [name]_[extension](){
+   			
+   		}
+   	]
+   	
+   component-to-c:
+   	process_implementation(ComponentImplementationName(name, extension), bindings, prototypes*, subcomponents*, calls*, connections*, flows*, modes, properties*, ComponentImplementationName(name, extension)) ->
+   	$[
+   		void [name]_[extension](){
+   		   [bindings']
+   		   [prototypes'*]
+   		   [subcomponents'*]
+   		   [calls'*]
+   		   [connections'*]
+           [flows'*]
+           [modes']
+           [properties'*]
+   			
+   		}
+   	]
+   	with
+   	  bindings' := <aadl-to-c> bindings;
+   	  prototypes'* := <aadl-to-c> prototypes*;
+   	  subcomponents'* := <aadl-to-c> subcomponents*;
+   	  calls'* := <aadl-to-c> calls*;
+   	  connections'* := <aadl-to-c> connections*;
+      flows'* := <aadl-to-c> flows*;
+      modes' := <aadl-to-c> modes;
+      properties'* := <aadl-to-c> properties*          		
